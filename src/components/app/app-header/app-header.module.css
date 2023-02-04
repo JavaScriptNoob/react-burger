@@ -1,10 +1,15 @@
 ul {
     list-style-type: none;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul>li{
+    display: flex;
 }
 a{
     color: white;
-    font-family: 'JetBrains Mono';
+    font-family: 'Jet Brains Mono';
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -13,6 +18,13 @@ a{
     /* identical to box height, or 150% */
     display: flex;
     align-items: center;
+    text-decoration:none;
+}
 
+.navbarList > li > a> svg{
+ margin: 5px;
 
 }
+logo{
+    height: 40px;
+ }

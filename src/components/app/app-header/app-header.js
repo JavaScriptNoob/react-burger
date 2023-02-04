@@ -17,10 +17,10 @@ class AppHeader extends React.Component {
         return (
             <div className="pl-5 pr-5 pb-5 pt-5">
                 <ul className="navbarList">
-                    <li><a href=""> <BurgerIcon type="primary"/>Конструктор</a></li>
-                    <li><a href=""> <ListIcon type="primary"/>Лента Заказов</a></li>
-                    <li><a href=""><Logo/></a></li>
-                    <li><a href=""><ProfileIcon type="primary"/>Личный кабинет</a></li>
+                    <li className="pl-5 pr-5 pb-5 pt-5 "><BurgerIcon  type="primary"/> <a  href="" className="pl-1" > Конструктор</a></li>
+                    <li className="pl-5 pr-5 pb-5 pt-5"><ListIcon type="primary"/><a href="" className="pl-1">Лента Заказов</a></li>
+                    <li style={{marginLeft: 112} } ><a href=""  ><Logo className="logo"/></a></li>
+                    <li className="" style={{marginLeft: 288} }><ProfileIcon type="primary" /><a href="" className="pl-1">Личный кабинет</a></li>
                 </ul>
 
             </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import AppHeader from './app-header/app-header'
 import Data from "../utils/data";
+import BurgerIngredients from "./burger-ingredients/burger-ingredients";
 class  App extends React.Component {
 
     state = {
@@ -14,6 +15,7 @@ class  App extends React.Component {
         return (
             <div className="App">
                 <AppHeader/>
+                <BurgerIngredients/>
             </div>
         );
     }

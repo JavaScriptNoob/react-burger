@@ -1,0 +1,58 @@
+.containerGeneral{
+    width: 600px;
+
+
+}
+
+.containerMain{
+
+}
+
+
+.containerSub{
+
+}
+.scrollContainer{
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+    max-height: calc(100vh - 400px);
+
+}
+.scrollContainer::-webkit-scrollbar{
+    width: 12px;
+}
+.scrollContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.containerTitle{
+    padding-top: 40px;
+    padding-bottom: 20px;
+    }
+.containerSubTitle{
+display: flex;
+
+
+}
+.containerSubTitle > div>p{
+    padding: 20px 0 20px 0;
+    width: 200px;
+    text-align: center;
+    border: cornflowerblue 1px dashed;
+}
+.counterRelative {
+    position: relative;
+}
+.price{
+    text-align: center;
+}
+.currency{
+
+}

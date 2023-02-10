@@ -1,21 +1,32 @@
-import React from 'react'
-
+import React, {useState} from 'react'
+import Modal from "../modal/modal";
 import {Tab,
     ConstructorElement,
     Counter, CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-ingrediens.module.css'
+import data from "../../utils/data";
 
 const BurgerIngredients =(props)=> {
 
-console.log(props.data.data)
+
+    const[modal, setModal]=useState(false)
+    const [itemsData,setItemsData] = useState([]);
+    const targetHandling  =(currenItem,e)=>{
+
+
+        console.log(currenItem)
+        setModal(true)
+        setItemsData(currenItem)
+    }
 
 
         return (
 
             <div className={styles.containerGeneral}>
 
-                <div className={styles.containerMain}>
+                <div className={styles.containerMain} style={{position:"relative"}}>
+                        <Modal data={itemsData}/>
                     <div className={styles.containerSub}>
                         <div className={styles.containerTitle}>
                             <h1 className="text text_type_main-large">Соберите бургер</h1>
@@ -33,9 +44,10 @@ console.log(props.data.data)
 
                                 </Tab>
                             </div> <h2>Булки</h2>
-                                <div style={{display:"flex", flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('bun')).map(bunItem => (
-                                    <div key={bunItem.id}>
+                                <div style={{display:"flex", flexWrap:"wrap"}}>{props.data.filter((item) => item.type ===('bun')).map((bunItem,index) => (
+                                    <div key={index} onClick={(e) => targetHandling(bunItem, e)}>
                                         <div>
+
                                             <div className= {"pl-4 pr-4 pb-1 pt-6 " +styles.counterRelative}>
                                                 <img src={bunItem.image} alt=""/>
                                                 <Counter count={1} size="default" extraClass="m-1" />
@@ -51,8 +63,8 @@ console.log(props.data.data)
                                 ))}</div>
 
                                 <h2>Соусы</h2>
-                                <div style={{display:"flex",flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('sauce')).map(sauceItem => (
-                                    <div key={sauceItem.id}>
+                                <div style={{display:"flex",flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('sauce')).map((sauceItem,index) => (
+                                    <div key={index+1}>
                                         <div>
                                             <div className= {"pl-4 pr-4 pb-1 pt-6 " +styles.counterRelative}>
                                                 <img src={sauceItem.image} alt=""/>
@@ -68,8 +80,8 @@ console.log(props.data.data)
                                     </div>
                                 ))}</div>
                                 <h2>Начинки</h2>
-                                <div style={{display:"flex",flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('main')).map(mainItem => (
-                                    <div key={mainItem.id}>
+                                <div style={{display:"flex",flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('main')).map((mainItem,index) => (
+                                    <div key={index+1}>
                                         <div>
                                             <div className= {"pl-4 pr-4 pb-1 pt-6 " +styles.counterRelative}>
                                                 <img src={mainItem.image} alt=""/>

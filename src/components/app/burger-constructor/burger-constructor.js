@@ -15,8 +15,8 @@ class BurgerConstructor extends React.Component {
         return (
             <aside className={ styles.scrollContainer } >
                 <ul style={{display:"flex", flexWrap: "wrap", margin: "auto",width:'100%'}}>
-                    {this.props.data.map(item => (
-                        <li className="mt-4" key={item.id}>
+                    {this.props.data.map((item,index) => (
+                        <li className="mt-4" key={index+10}>{console.log(item.id)}
                             <div className={styles.constructorElement}>
                                 <i className="pr-3">
                                     <DragIcon type='primary' />

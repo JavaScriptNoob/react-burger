@@ -6,15 +6,13 @@ import {Tab,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-ingrediens.module.css'
 
-class BurgerIngredients extends React.Component {
+const BurgerIngredients =(props)=> {
 
+console.log(props.data.data)
 
-    render() {
-        console.log(this.props.data)
-        // const  data =[...this.props]
-        // console.log(data)
 
         return (
+
             <div className={styles.containerGeneral}>
 
                 <div className={styles.containerMain}>
@@ -35,8 +33,8 @@ class BurgerIngredients extends React.Component {
 
                                 </Tab>
                             </div> <h2>Булки</h2>
-                                <div style={{display:"flex", flexWrap:"wrap"}}>{this.props.data.filter(item => item.type ===('bun')).map(bunItem => (
-                                    <div>
+                                <div style={{display:"flex", flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('bun')).map(bunItem => (
+                                    <div key={bunItem.id}>
                                         <div>
                                             <div className= {"pl-4 pr-4 pb-1 pt-6 " +styles.counterRelative}>
                                                 <img src={bunItem.image} alt=""/>
@@ -53,8 +51,8 @@ class BurgerIngredients extends React.Component {
                                 ))}</div>
 
                                 <h2>Соусы</h2>
-                                <div style={{display:"flex",flexWrap:"wrap"}}>{this.props.data.filter(item => item.type ===('sauce')).map(sauceItem => (
-                                    <div>
+                                <div style={{display:"flex",flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('sauce')).map(sauceItem => (
+                                    <div key={sauceItem.id}>
                                         <div>
                                             <div className= {"pl-4 pr-4 pb-1 pt-6 " +styles.counterRelative}>
                                                 <img src={sauceItem.image} alt=""/>
@@ -70,16 +68,16 @@ class BurgerIngredients extends React.Component {
                                     </div>
                                 ))}</div>
                                 <h2>Начинки</h2>
-                                <div style={{display:"flex",flexWrap:"wrap"}}>{this.props.data.filter(item => item.type ===('main')).map(sauceItem => (
-                                    <div>
+                                <div style={{display:"flex",flexWrap:"wrap"}}>{props.data.filter(item => item.type ===('main')).map(mainItem => (
+                                    <div key={mainItem.id}>
                                         <div>
                                             <div className= {"pl-4 pr-4 pb-1 pt-6 " +styles.counterRelative}>
-                                                <img src={sauceItem.image} alt=""/>
+                                                <img src={mainItem.image} alt=""/>
                                                 <Counter count={1} size="default" extraClass="m-1" />
                                             </div>
 
                                             <div className={styles.price}><p style={{display:"flex", justifyContent:"center"}}>
-                                                {sauceItem.price}
+                                                {mainItem.price}
                                                 <i className="pl-2"><CurrencyIcon className="pl-3" type='primary'/></i>
                                             </p>
                                             </div>
@@ -96,6 +94,6 @@ class BurgerIngredients extends React.Component {
             </div>
         )
     }
-}
+
 
 export default BurgerIngredients;

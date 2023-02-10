@@ -32,6 +32,7 @@ class BurgerIngredients extends React.Component {
                                 </Tab>
                                 <Tab value="mainS" >
                                    Начинки
+
                                 </Tab>
                             </div> <h2>Булки</h2>
                                 <div style={{display:"flex", flexWrap:"wrap"}}>{this.props.data.filter(item => item.type ===('bun')).map(bunItem => (

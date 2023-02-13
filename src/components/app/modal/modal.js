@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from './modal.module.css'
+import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const Modal = (props) => {
     const [state, setState] = useState()
@@ -11,14 +12,13 @@ const Modal = (props) => {
         console.log(state)
     }
     return (
-        <div>
-            <div className={styles.modal}>
 
-                <h1 style={{color: "black"}}>{props.data._id}</h1>
+        <div className={styles.modal}>
 
-            </div>
 
         </div>
+
+
     )
 
 }

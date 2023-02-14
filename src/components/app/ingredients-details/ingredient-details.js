@@ -1,30 +1,53 @@
-import React from "react";
-import styles from "../modal/modal.module.css";
+import React,{useEffect} from "react";
+import styles from "./ingredient-details.module.css" ;
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import propTypes from "../../utils/prop-types";
+import PropTypes from "prop-types";
+import dataTypeValidation from "../../utils/prop-types";
 
-const ingredientDetails=(props)=>{
+const IngredientDetails=({closeModal, ...props})=>{
 
 
+    useEffect(() => {
+        const handleEsc = (event) => {
+            if (event.keyCode === 27) {
+               closeModal()
+            }
+        };
+        window.addEventListener('keydown', handleEsc);
+
+        return () => {
+            window.removeEventListener('keydown', handleEsc);
+        };
+    }, []);
+console.log('gfhfhfhfhfgh')
     return(
         <div>
             <div className={styles.modalHeader}>
-
         <h1 className="text text_type_main-large">Детали ингридиента</h1>
-        <span><CloseIcon type="primary" /></span>
+        <span><CloseIcon type="primary" onClick={()=> closeModal()} /></span>
     </div>
     <div className={styles.imageContainer}>
-        <img src={props.data.image} className={styles.image} alt=""/>
+        <img src={props.items.image} className={styles.image} alt=""/>
     </div>
     <div className={styles.nutrition}>
-        <h2 style={{fontSize:"26px"}}>{props.data.name}</h2>
+        <h2 style={{fontSize:"26px"}}>{props.items.name}</h2>
         <ul className={styles.nutritionDescription}>
-            <li className="text text_type_main-default text_color_inactive">Калории, ккал  <p>{props.data.calories}</p></li>
-            <li className="text text_type_main-default text_color_inactive">Углеводы, г<p>{props.data.carbohydrates}</p></li>
-            <li className="text text_type_main-default text_color_inactive">Белки, г<p>{props.data.proteins}</p></li>
-            <li className="text text_type_main-default text_color_inactive">Жиры, г <p>{props.data.fat}</p></li>
+            <li className="text text_type_main-default text_color_inactive">Калории, ккал  <p>{props.items.calories}</p></li>
+            <li className="text text_type_main-default text_color_inactive">Углеводы, г<p>{props.items.carbohydrates}</p></li>
+            <li className="text text_type_main-default text_color_inactive">Белки, г<p>{props.items.proteins}</p></li>
+            <li className="text text_type_main-default text_color_inactive">Жиры, г <p>{props.items.fat}</p></li>
         </ul>
     </div>
     </div>
 )
 }
-export default ingredientDetails
+
+
+export default IngredientDetails
+
+IngredientDetails.propTypes={
+    props:PropTypes.arrayOf(dataTypeValidation),
+    closeModal:PropTypes.func.isRequired
+
+}

@@ -1,21 +1,33 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {
-    Tab,
+    Button,
     ConstructorElement,
-    Counter, DragIcon
+    Counter, CurrencyIcon, DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css'
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
+import IngredientDetails from "../ingredients-details/ingredient-details";
 
-class BurgerConstructor extends React.Component {
+const BurgerConstructor =(props)=> {
+
+    const [modal, openModal] = useState(false);
+    const enter = () => openModal(true);
+    const closeModal = ()=>{
+        openModal(false)
+    }
 
 
-    render() {
 
         return (
-            <aside className={ styles.scrollContainer } >
+            <div>
+                {modal&&<Modal confirm={modal}>
+                    <OrderDetails closeModal={closeModal} />
+                </Modal>}
+            <div className={ styles.scrollContainer } >
                 <ul style={{display:"flex", flexWrap: "wrap", margin: "auto",width:'100%'}}>
-                    {this.props.data.map((item,index) => (
+                    {props.data.map((item,index) => (
                         <li className="mt-4" key={index+10}>{console.log(item.id)}
                             <div className={styles.constructorElement}>
                                 <i className="pr-3">
@@ -33,9 +45,20 @@ class BurgerConstructor extends React.Component {
 
                     ))}
                 </ul>
-            </aside>
+            </div>
+               <div className={styles.orderStats}>
+                   <div  ><span className="text text_type_main-large">
+                      610
+                       <i className="pl-2"><CurrencyIcon  type='primary'/></i>
+                   </span>
+                   </div>
+                   <Button htmlType="button" type="primary" size="large" onClick={(e)=>openModal(true)} >Оформить заказ</Button>
+
+               </div>
+    </div>
+
         )
-    }
+
 }
 
 export default BurgerConstructor;

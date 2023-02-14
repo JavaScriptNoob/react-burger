@@ -17,7 +17,7 @@
     overflow-y: scroll;
     overflow-x: hidden;
     flex-wrap: wrap;
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 350px);
 
 }
 .scrollContainer::-webkit-scrollbar{

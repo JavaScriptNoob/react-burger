@@ -1,25 +1,28 @@
 import React, {useEffect, useState} from "react";
-import styles from './modal.module.css'
-import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-
+import styles from './modal.module.css';
+import ModalOverlay from "../modal-overlay/modal-overlay";
+import ReactDOM from 'react-dom';
+import PropTypes from "prop-types";
 const Modal = (props) => {
-    const [state, setState] = useState()
+    const [state, setState] = useState(false)
     useEffect(() => {
-        setState(props.data)
-    }, {state})
-    const act = () => {
-
-        console.log(state)
-    }
-    return (
-
-        <div className={styles.modal}>
+        setState(props.confirm)
+        console.log(props)
+    })
 
 
-        </div>
+    return ReactDOM.createPortal(
+        <> <ModalOverlay/>
+            <div className={styles.modal}>
+                {props.children}
 
-
+            </div>
+        </>,
+        document.getElementById("portal")
     )
 
 }
 export default Modal
+Modal.propTypes = {
+    confirm: PropTypes.bool.isRequired,
+}

@@ -20,7 +20,7 @@ const IngredientDetails=({closeModal, ...props})=>{
             window.removeEventListener('keydown', handleEsc);
         };
     }, []);
-console.log('gfhfhfhfhfgh')
+
     return(
         <div>
             <div className={styles.modalHeader}>

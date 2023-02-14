@@ -24,7 +24,7 @@ const BurgerIngredients = (props) => {
         setModal(false)
     }
 
-    console.log(itemsData)
+
 
     return (
 

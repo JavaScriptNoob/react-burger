@@ -28,7 +28,7 @@ const BurgerConstructor =(props)=> {
             <div className={ styles.scrollContainer } >
                 <ul style={{display:"flex", flexWrap: "wrap", margin: "auto",width:'100%'}}>
                     {props.data.map((item,index) => (
-                        <li className="mt-4" key={index+10}>{console.log(item.id)}
+                        <li className="mt-4" key={index+10}>
                             <div className={styles.constructorElement}>
                                 <i className="pr-3">
                                     <DragIcon type='primary' />

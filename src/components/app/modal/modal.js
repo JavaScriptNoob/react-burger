@@ -7,7 +7,7 @@ const Modal = (props) => {
     const [state, setState] = useState(false)
     useEffect(() => {
         setState(props.confirm)
-        console.log(props)
+
     })
 
 

@@ -38,7 +38,7 @@ const App = () => {
             })
 
     }
-    console.log(state.data)
+
 
     return (
 

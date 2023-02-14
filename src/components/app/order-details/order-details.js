@@ -55,7 +55,7 @@ const OrderDetails = ({closeModal}) => {
         </div>)
 }
 export default OrderDetails
-IngredientDetails.propTypes = {
+OrderDetails.propTypes = {
     closeModal:PropTypes.func.isRequired
 
 

@@ -63,7 +63,7 @@ const App = () => {
 }
 
 export default App;
-IngredientDetails.propTypes = {
+App.propTypes = {
     data: PropTypes.arrayOf(dataTypeValidation)
 
 

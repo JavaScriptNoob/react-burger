@@ -128,9 +128,11 @@ const BurgerIngredients = (props) => {
     )
 }
 
-IngredientDetails.propTypes = {
-    props: PropTypes.arrayOf(dataTypeValidation)
 
 
-}
+
 export default BurgerIngredients;
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(dataTypeValidation)
+}

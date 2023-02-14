@@ -9,6 +9,9 @@ import styles from './burger-constructor.module.css'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import IngredientDetails from "../ingredients-details/ingredient-details";
+import PropTypes from "prop-types";
+import dataTypeValidation from "../../utils/prop-types";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 
 const BurgerConstructor =(props)=> {
 
@@ -62,3 +65,6 @@ const BurgerConstructor =(props)=> {
 }
 
 export default BurgerConstructor;
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(dataTypeValidation)
+}

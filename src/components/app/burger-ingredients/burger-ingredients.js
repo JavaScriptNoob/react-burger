@@ -24,6 +24,7 @@ class BurgerIngredients extends React.Component {
                         </div>
                         <div className={styles.containerSubTitle}>
                             <div  className={styles.scrollContainer}> <div style={{ display: 'flex' }}>
+
                                 <Tab value="bun"  >
                                    Булки
                                 </Tab>
@@ -32,6 +33,7 @@ class BurgerIngredients extends React.Component {
                                 </Tab>
                                 <Tab value="mainS" >
                                    Начинки
+
                                 </Tab>
                             </div> <h2>Булки</h2>
                                 <div style={{display:"flex", flexWrap:"wrap"}}>{this.props.data.filter(item => item.type ===('bun')).map(bunItem => (
@@ -42,9 +44,11 @@ class BurgerIngredients extends React.Component {
                                                 <Counter count={1} size="default" extraClass="m-1" />
                                             </div>
 
+
                                             <div style={{display:"flex", justifyContent:"center"}}><p>
                                                 {bunItem.price}
                                                 <i className="pl-2"><CurrencyIcon className="pl-3" type='primary'/></i>
+
                                             </p>
                                             </div>
                                         </div>
@@ -60,15 +64,19 @@ class BurgerIngredients extends React.Component {
                                                 <Counter count={1} size="default" extraClass="m-1" />
                                             </div>
 
+
                                             <div className={styles.price}><p style={{display:"flex", justifyContent:"center"}}>
                                                 {sauceItem.price}
                                                 <i className="pl-2"><CurrencyIcon  type='primary'/></i>
+
                                             </p>
                                             </div>
                                         </div>
                                     </div>
                                 ))}</div>
+
                                 <h2>Начинки</h2>
+
                                 <div style={{display:"flex",flexWrap:"wrap"}}>{this.props.data.filter(item => item.type ===('main')).map(sauceItem => (
                                     <div>
                                         <div>
@@ -80,6 +88,7 @@ class BurgerIngredients extends React.Component {
                                             <div className={styles.price}><p style={{display:"flex", justifyContent:"center"}}>
                                                 {sauceItem.price}
                                                 <i className="pl-2"><CurrencyIcon className="pl-3" type='primary'/></i>
+
                                             </p>
                                             </div>
                                         </div>
@@ -89,6 +98,8 @@ class BurgerIngredients extends React.Component {
                             </div>
 
                         </div>
+
+
                     </div>
                 </div>
 

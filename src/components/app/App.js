@@ -31,8 +31,10 @@ const App = () => {
     const getProductData = async () => {
         setState({...state, error: false, confirmation: false});
         fetch(query)
-            .then(res => {if(!res.ok) throw new Error(res.status);
-                else  return res.json()})
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error(res.status);
+                } return res.json()})
             .then(item => setState({...state, data: item.data, confirmation: true}))
             .catch(e => {
                 setState({...state, error: true, confirmation: false});

@@ -5,10 +5,10 @@ import AppHeader from './app-header/app-header'
 
 import BurgerIngredients from "./burger-ingredients/burger-ingredients";
 import BurgerConstructor from "./burger-constructor/burger-constructor";
-import Modal from "./modal/modal";
-import IngredientDetails from "./ingredients-details/ingredient-details";
+
 import PropTypes from "prop-types";
 import dataTypeValidation from "../utils/prop-types";
+import data from "../utils/data";
 
 const App = () => {
 
@@ -31,7 +31,8 @@ const App = () => {
     const getProductData = async () => {
         setState({...state, error: false, confirmation: false});
         fetch(query)
-            .then(res => res.json())
+            .then(res => {if(!res.ok) throw new Error(res.status);
+                else  return res.json()})
             .then(item => setState({...state, data: item.data, confirmation: true}))
             .catch(e => {
                 setState({...state, error: true, confirmation: false});
@@ -48,7 +49,7 @@ const App = () => {
             <AppHeader/>
             <div style={{display: "flex"}}>
                 {state.confirmation
-                    ? <><BurgerIngredients data={state.data} ></BurgerIngredients>
+                    ? <><BurgerIngredients data={state.data} />
                         <BurgerConstructor data={state.data}/></>
                         :<BurgerConstructor data={state.data}/>
                         }
@@ -63,8 +64,9 @@ const App = () => {
 }
 
 export default App;
-App.propTypes = {
-    data: PropTypes.arrayOf(dataTypeValidation)
 
-
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(dataTypeValidation).isRequired
 }
+
+

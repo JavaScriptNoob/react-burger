@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react'
 import {
     Button,
     ConstructorElement,
-    Counter, CurrencyIcon, DragIcon
+    Counter, CurrencyIcon, DragIcon, LockIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css'
 import Modal from "../modal/modal";
@@ -25,16 +25,16 @@ const BurgerConstructor =(props)=> {
 
         return (
             <div>
-                {modal&&<Modal confirm={modal}>
+                {modal&&<Modal confirm={modal} closeModal={closeModal}>
                     <OrderDetails closeModal={closeModal} />
                 </Modal>}
             <div className={ styles.scrollContainer } >
                 <ul style={{display:"flex", flexWrap: "wrap", margin: "auto",width:'100%'}}>
-                    {props.data.map((item,index) => (
-                        <li className="mt-4" key={index+10}>
+                    {props.data.map((item) => (
+                        <li className="mt-4" key={item._id}>
                             <div className={styles.constructorElement}>
                                 <i className="pr-3">
-                                    <DragIcon type='primary' />
+                                    {item.type==="bun"?<LockIcon type="primary"/>:<DragIcon type='primary' />}
                                 </i>
 
 
@@ -66,5 +66,5 @@ const BurgerConstructor =(props)=> {
 
 export default BurgerConstructor;
 BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(dataTypeValidation)
+    props: PropTypes.arrayOf(dataTypeValidation).isRequired
 }

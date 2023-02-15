@@ -9,18 +9,7 @@ import dataTypeValidation from "../../utils/prop-types";
 
 const OrderDetails = ({closeModal}) => {
 
-    useEffect(() => {
-        const handleEsc = (event) => {
-            if (event.keyCode === 27) {
-                closeModal()
-            }
-        };
-        window.addEventListener('keydown', handleEsc);
 
-        return () => {
-            window.removeEventListener('keydown', handleEsc);
-        };
-     }, [closeModal]);
 
     return (
         <div className={styles.container}>

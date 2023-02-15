@@ -8,18 +8,7 @@ import dataTypeValidation from "../../utils/prop-types";
 const IngredientDetails=({closeModal, ...props})=>{
 
 
-    useEffect(() => {
-        const handleEsc = (event) => {
-            if (event.keyCode === 27) {
-               closeModal()
-            }
-        };
-        window.addEventListener('keydown', handleEsc);
 
-        return () => {
-            window.removeEventListener('keydown', handleEsc);
-        };
-    }, []);
 
     return(
         <div>
@@ -47,7 +36,7 @@ const IngredientDetails=({closeModal, ...props})=>{
 export default IngredientDetails
 
 IngredientDetails.propTypes={
-    props:PropTypes.arrayOf(dataTypeValidation),
+    props:PropTypes.arrayOf(dataTypeValidation).isRequired,
     closeModal:PropTypes.func.isRequired
 
 }

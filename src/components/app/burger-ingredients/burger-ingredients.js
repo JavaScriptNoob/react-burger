@@ -14,7 +14,7 @@ const BurgerIngredients = (props) => {
 
 
     const [modal, setModal] = useState(false)
-    const [itemsData, setItemsData] = useState(null);
+    const [itemsData, setItemsData] = useState([]);
     const openModalIngredients = (data) => {
         setModal(true);
         setItemsData(data);
@@ -29,7 +29,7 @@ const BurgerIngredients = (props) => {
     return (
 
         <div className={styles.containerGeneral}>
-            {modal && <Modal confirm={modal}>
+            {modal && <Modal confirm={modal} closeModal={closeModal}>
                 <IngredientDetails closeModal={closeModal} items={itemsData}/>
             </Modal>}
 
@@ -134,5 +134,8 @@ const BurgerIngredients = (props) => {
 export default BurgerIngredients;
 
 BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(dataTypeValidation)
+
+       data: PropTypes.arrayOf(dataTypeValidation).isRequired
+
+
 }

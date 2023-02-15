@@ -21,8 +21,6 @@ const BurgerConstructor =(props)=> {
         openModal(false)
     }
 
-
-
         return (
             <div>
                 {modal&&<Modal confirm={modal} closeModal={closeModal}>

@@ -37,7 +37,6 @@ const App = () => {
             .catch(e => {
                 setState({...state, error: true, confirmation: false});
             })
-
     }
 
 

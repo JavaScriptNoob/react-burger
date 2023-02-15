@@ -5,6 +5,7 @@
 .modalHeader{
     text-align: right;
     margin-top: 60px;
+    padding-right:60px;
 }
 .image{
     min-width: 100px;

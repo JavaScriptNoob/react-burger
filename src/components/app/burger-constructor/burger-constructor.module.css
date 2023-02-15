@@ -1,0 +1,33 @@
+.mainContainer{
+
+}
+.constructorElement{
+
+    display: flex;
+    min-width: 600px;
+    flex-direction: row;
+    height: 100%;
+    box-sizing: border-box;
+    align-items: baseline;
+
+}
+
+.scrollContainer{
+    margin-top:100px ;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+    max-height: calc(100vh - 250px);
+
+}
+.scrollContainer::-webkit-scrollbar{
+    width: 12px;
+}
+.scrollContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(47, 47, 55, 1);
+    border-radius: 10px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(133, 133, 173, 1);}

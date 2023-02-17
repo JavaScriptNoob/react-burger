@@ -21,11 +21,27 @@ const BurgerConstructor = () => {
         openModal(false)
     }
     let totalPrice = 0;
-    state.data.map((items) => {
-        totalPrice += items.price
+
+    let arrBun = []
+    let arrFilling = []
+    let up = " (верх)"
+    let down = " (низ)"
+    let prices=[]
+    let joined =[]
+    state.data.map((item) => {
+        if (item.type === "bun" && !arrBun.some(e => e.type === "bun")) {
+            arrBun.push(item)
+            totalPrice += item.price
+            prices.push(item.price)
+        } else if (item.type !== "bun") {
+            arrFilling.push(item)
+            totalPrice += item.price
+            prices.push(item.price)
+        }
+        joined =[...arrBun, ...arrFilling]
     })
 
-    console.log(totalPrice)
+    console.log(joined)
     return (
         <div>
             <BurgerConstructorDataContext.Provider value={{state, setState}}>
@@ -34,31 +50,51 @@ const BurgerConstructor = () => {
                 </Modal>}
                 <div className={styles.scrollContainer}>
                     <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                        {state.data.map((item) => (
-
+                        {arrBun.map((item) => (
                             <li className="mt-4" key={item._id}>
-
                                 <div className={styles.constructorElement}>
                                     <i className="pr-3">
                                         {item.type === "bun" ? <LockIcon type="primary"/> : <DragIcon type='primary'/>}
                                     </i>
-
-
+                                    <ConstructorElement
+                                        text={`${item.name}${up}`}
+                                        thumbnail={item.image}
+                                        price={item.price}/>
+                                </div>
+                            </li>
+                        ))}
+                        {arrFilling.map((item) => (
+                            <li className="mt-4" key={item._id}>
+                                <div className={styles.constructorElement}>
+                                    <i className="pr-3">
+                                        {item.type === "bun" ? <LockIcon type="primary"/> : <DragIcon type='primary'/>}
+                                    </i>
                                     <ConstructorElement
                                         text={item.name}
                                         thumbnail={item.image}
                                         price={item.price}/>
                                 </div>
                             </li>
-
-
+                        ))}
+                        {arrBun.map((item) => (
+                            <li className="mt-4" key={item._id}>
+                                <div className={styles.constructorElement}>
+                                    <i className="pr-3">
+                                        {item.type === "bun" ? <LockIcon type="primary"/> : <DragIcon type='primary'/>}
+                                    </i>
+                                    <ConstructorElement
+                                        text={`${item.name}${down}`}
+                                        thumbnail={item.image}
+                                        price={item.price}/>
+                                </div>
+                            </li>
                         ))}
                     </ul>
                 </div>
                 <div className={styles.orderStats}>
                     <div><span className="text text_type_main-large">
                       {totalPrice}
-                       <i className="pl-2"><CurrencyIcon type='primary'/></i>
+                        <i className="pl-2"><CurrencyIcon type='primary'/></i>
                    </span>
                     </div>
                     <Button htmlType="button" type="primary" size="large" onClick={(e) => openModal(true)}>Оформить

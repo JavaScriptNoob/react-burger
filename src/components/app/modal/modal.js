@@ -19,7 +19,6 @@ const Modal = ({closeModal, ...props}) => {
             }
         };
         window.addEventListener('keydown', handleEsc);
-
         return () => {
             window.removeEventListener('keydown', handleEsc);
         };
@@ -37,7 +36,6 @@ const Modal = ({closeModal, ...props}) => {
         </>,
         document.getElementById("portal")
     )
-
 }
 export default Modal
 Modal.propTypes = {

@@ -31,7 +31,7 @@ const BurgerConstructor = () => {
     const [modal, openModal] = useState(false);
     const {state, setState} = useContext(BurgerConstructorDataContext)
     const [mess, setMess] = useState(null);
-    const [err, setErr] = useState(null);
+
     const [totalPrice, dispatchTotalPrice] =
         useReducer(reducer, initialPrice);
 //Creating a new variabe for mutating data  independently from context
@@ -83,12 +83,12 @@ const BurgerConstructor = () => {
                 objQuery.ingredients.push(e._id)
 
         })
-        const res = postProductData(objQuery, setMess, setErr)
+        const res = postProductData(objQuery, setMess)
     }
 
     useEffect(() => {
         request()
-    }, [err])
+    }, [])
 
     return (
         <div>

@@ -11,13 +11,22 @@ import OrderDetails from "../order-details/order-details";
 import {BurgerConstructorDataContext} from "../../servicies/prices";
 import PropTypes from "prop-types";
 import dataTypeValidation from "../../utils/prop-types";
-
+import {_INGREDIENTS, getProductData, postProductData} from "../../servicies/api";
+import {_QUERY,_ORDERS} from "../../servicies/api";
 const BurgerConstructor = () => {
 
     const [modal, openModal] = useState(false);
     const {state, setState} = useContext(BurgerConstructorDataContext)
-    const enter = () => openModal(true);
+    const [mess, setMess] = useState(null);
+    const [err, setErr] = useState(null);
+
+    const enter = (val) => {
+       console.log(request())
+        openModal(val)
+    };
     const closeModal = () => {
+
+
         openModal(false)
     }
     let totalPrice = 0;
@@ -28,7 +37,10 @@ const BurgerConstructor = () => {
     let down = " (низ)"
     let prices=[]
     let joined =[]
-    state.data.map((item) => {
+    let error
+    let response
+    const objQuery = {"ingredients": []}
+    state.data.map(function (item) {
         if (item.type === "bun" && !arrBun.some(e => e.type === "bun")) {
             arrBun.push(item)
             totalPrice += item.price
@@ -38,10 +50,30 @@ const BurgerConstructor = () => {
             totalPrice += item.price
             prices.push(item.price)
         }
-        joined =[...arrBun, ...arrFilling]
+       return  joined = [...arrBun, ...arrFilling]
+
+
     })
 
-    console.log(joined)
+    const request =()=> {
+        joined.map((e) => {
+            objQuery.ingredients.length>1?objQuery.ingredients.slice(0,14):
+            objQuery.ingredients.push(e._id)
+
+            console.log(objQuery)
+        })
+
+        const res =postProductData(objQuery,setMess,setErr)
+
+
+    }
+    useEffect(() => {
+     request()
+
+    }, [err])
+
+
+
     return (
         <div>
             <BurgerConstructorDataContext.Provider value={{state, setState}}>
@@ -72,7 +104,9 @@ const BurgerConstructor = () => {
                                     <ConstructorElement
                                         text={item.name}
                                         thumbnail={item.image}
-                                        price={item.price}/>
+                                        price={item.price}
+                                    />
+
                                 </div>
                             </li>
                         ))}
@@ -97,7 +131,7 @@ const BurgerConstructor = () => {
                         <i className="pl-2"><CurrencyIcon type='primary'/></i>
                    </span>
                     </div>
-                    <Button htmlType="button" type="primary" size="large" onClick={(e) => openModal(true)}>Оформить
+                    <Button htmlType="button" type="primary" size="large" onClick={(e) => enter(true)}>Оформить
                         заказ</Button>
 
                 </div>

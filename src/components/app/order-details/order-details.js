@@ -7,7 +7,7 @@ import IngredientDetails from "../ingredients-details/ingredient-details";
 import PropTypes from "prop-types";
 import dataTypeValidation from "../../utils/prop-types";
 
-const OrderDetails = ({closeModal}) => {
+const OrderDetails = ({closeModal, orderNumber}) => {
 
 
 
@@ -23,7 +23,7 @@ const OrderDetails = ({closeModal}) => {
                 <ul className={styles.list}>
                     <li className="text ">
                         <h1
-                        className="text text_type_main-large mt-15">034536
+                        className="text text_type_main-large mt-15">{orderNumber}
                         </h1>
                     </li>
                     <li className="text text_type_main-default  mt-8">

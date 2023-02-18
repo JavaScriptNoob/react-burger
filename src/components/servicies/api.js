@@ -33,7 +33,7 @@ export const postProductData = async (arr, setter, errSetter) => {
             return res.json();
         }).then((item) => {
             console.log(item, "mghjmhjmhjmjhm")
-            setter(item)
+            setter(item.order.number)
         })
         .catch(e => {
             console.log(e)

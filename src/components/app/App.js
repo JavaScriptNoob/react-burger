@@ -16,6 +16,7 @@ const App = () => {
         confirmation: false
     })
 
+
     useEffect(() => {
         getProductData(_QUERY, setState, state, _INGREDIENTS)
 
@@ -27,16 +28,14 @@ const App = () => {
 
 
                 <div style={{display: "flex"}}>
-                    {state.confirmation
-                        ? <><BurgerIngredients data={state.data}/>
+
+                        <><BurgerIngredients data={state.data}/>
                             <BurgerConstructorDataContext.Provider value={{state, setState}}>
                                 <BurgerConstructor />
                             </BurgerConstructorDataContext.Provider>
                         </>
-                        :  <BurgerConstructorDataContext.Provider value={{state, setState}}>
-                            <BurgerConstructor />
-                        </BurgerConstructorDataContext.Provider>
-                    }
+
+
                 </div>
 
 

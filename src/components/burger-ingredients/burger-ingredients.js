@@ -8,7 +8,7 @@ import {
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import PropTypes from "prop-types";
-import dataTypeValidation from "../../utils/prop-types";
+import dataTypeValidation from "../utils/prop-types";
 const BurgerIngredients = (props) => {
 
 

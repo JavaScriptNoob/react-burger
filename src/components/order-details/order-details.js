@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
-import Data from "../../utils/data";
-import styles from "../order-details/order-details.module.css";
+import Data from "../utils/data";
+import styles from "./order-details.module.css";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import image from "../../img/done.png"
+import image from "../img/done.png"
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import PropTypes from "prop-types";
-import dataTypeValidation from "../../utils/prop-types";
+import dataTypeValidation from "../utils/prop-types";
 
 const OrderDetails = ({closeModal, orderNumber}) => {
 

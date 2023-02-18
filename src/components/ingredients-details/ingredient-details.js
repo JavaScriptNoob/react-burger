@@ -1,9 +1,9 @@
 import React,{useEffect} from "react";
 import styles from "./ingredient-details.module.css" ;
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import propTypes from "../../utils/prop-types";
+import propTypes from "../utils/prop-types";
 import PropTypes from "prop-types";
-import dataTypeValidation from "../../utils/prop-types";
+import dataTypeValidation from "../utils/prop-types";
 
 const IngredientDetails=({closeModal, ...props})=>{
 

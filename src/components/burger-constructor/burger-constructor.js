@@ -10,10 +10,10 @@ import {
 import styles from './burger-constructor.module.css'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import {BurgerConstructorDataContext} from "../../servicies/prices";
+import {BurgerConstructorDataContext} from "../servicies/prices";
 import PropTypes from "prop-types";
-import dataTypeValidation from "../../utils/prop-types";
-import {postProductData} from "../../servicies/api";
+import dataTypeValidation from "../utils/prop-types";
+import {postProductData} from "../servicies/api";
 import {getSpaceUntilMaxLength} from "@testing-library/user-event/dist/utils";
 //Use reducer is able to decrement value. I dont know how  implement increment due to constructor element
 const initialPrice = {curPrice: 0};

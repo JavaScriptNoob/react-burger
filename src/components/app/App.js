@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useContext} from 'react';
 import './App.css';
-import AppHeader from './app-header/app-header'
-import BurgerIngredients from "./burger-ingredients/burger-ingredients";
-import BurgerConstructor from "./burger-constructor/burger-constructor";
+import AppHeader from '../app-header/app-header'
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 import PropTypes from "prop-types";
 import dataTypeValidation from "../utils/prop-types";
 import {_QUERY, _ORDERS, _INGREDIENTS, getProductData} from "../servicies/api";

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useReducer} from 'react'
-
+//Я буду раж если вы мне дадите советы по улучшению компонента так как я начинаю теряться и путаться. В частности как можно бы разделить данный ужас
 import {
     Button,
     ConstructorElement,

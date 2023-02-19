@@ -25,15 +25,11 @@ const App = () => {
         <div className="App">
             <div id="portal">
                 <AppHeader/>
-
-
                 <div style={{display: "flex"}}>
-
                     <BurgerConstructorDataContext.Provider value={{state, setState}}>
                         <BurgerIngredients />
-
-                                <BurgerConstructor />
-                            </BurgerConstructorDataContext.Provider>
+                        <BurgerConstructor />
+                    </BurgerConstructorDataContext.Provider>
 
 
 

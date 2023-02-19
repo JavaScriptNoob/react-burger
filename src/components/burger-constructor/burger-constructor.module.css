@@ -13,11 +13,11 @@
 }
 
 .scrollContainer{
-    margin-top:100px ;
+    margin-top:0 ;
     overflow-y: scroll;
     overflow-x: hidden;
     flex-wrap: wrap;
-    max-height: calc(100vh - 350px);
+    max-height: calc(100vh - 550px);
 
 }
 .scrollContainer::-webkit-scrollbar{
@@ -39,4 +39,14 @@
     justify-content: flex-end;
     gap: 25px;
 
+}
+.bunTop{
+    padding-top:80px;
+    padding-bottom: 0;
+}
+.bunDown{
+    padding-top: 0;
+}
+.bunTop>ul>li,.bunDown>ul>li{
+    align-items: baseline;
 }

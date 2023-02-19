@@ -20,7 +20,7 @@ const initialPrice = {curPrice: 0};
 const reducer = (state, action) => {
     switch (action.type) {
         case "decrement":
-            return {curPrice: initialPrice.curPrice -action.payload};
+            return {curPrice: initialPrice.curPrice - action.payload};
         default:
             throw new Error(`Wrong type of action: ${action.type}`);
     }
@@ -45,7 +45,7 @@ const BurgerConstructor = () => {
     const dec = (currentId) => {
 
         const newCartData = currentConstructorState.data.filter((prev) => prev._id !== currentId);
-        currentConstructorState.data =newCartData ;
+        currentConstructorState.data = newCartData;
         console.log(newCartData)
         console.log(state, state.data)
 
@@ -80,7 +80,7 @@ const BurgerConstructor = () => {
     const request = () => {
         joined.map((e) => {
 
-                objQuery.ingredients.push(e._id)
+            objQuery.ingredients.push(e._id)
 
         })
         const res = postProductData(objQuery, setMess)
@@ -96,23 +96,24 @@ const BurgerConstructor = () => {
                 {modal && <Modal confirm={modal} closeModal={closeModal}>
                     <OrderDetails closeModal={closeModal} orderNumber={mess}/>
                 </Modal>}
+                {arrBun.map((item) => (
+                    <div className={styles.bunTop}>
+                        <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
+                        <li className="mt-4" key={item._id}>
+                            <i className="pr-3">
+                            <LockIcon type="primary"/>
+                        </i>
+                        <ConstructorElement
+                            isLocked={true}
+                            text={`${item.name}${up}`}
+                            thumbnail={item.image}
+                            price={item.price}/>
+                        </li>
+                            </ul>
+                    </div>
+                ))}
                 <div className={styles.scrollContainer}>
                     <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                        {arrBun.map((item) => (
-                            <li className="mt-4" key={item._id}>
-                                <div className={styles.constructorElement}>
-                                    <i className="pr-3">
-                                        {item.type === "bun" ?
-                                            <LockIcon type="primary"/>
-                                            : <DragIcon type='primary'/>}
-                                    </i>
-                                    <ConstructorElement
-                                        text={`${item.name}${up}`}
-                                        thumbnail={item.image}
-                                        price={item.price}/>
-                                </div>
-                            </li>
-                        ))}
                         {arrFilling.map((item) => (
                             <li className="mt-4" key={item._id}>
                                 <div className={styles.constructorElement}
@@ -136,24 +137,25 @@ const BurgerConstructor = () => {
                                 </div>
                             </li>
                         ))}
-                        {arrBun.map((item) => (
-                            <li className="mt-4" key={item._id}>
-                                <div className={styles.constructorElement}>
-                                    <i className="pr-3">
-                                        {
-                                            item.type === "bun"?
-                                                <LockIcon type="primary"/>
-                                                : <DragIcon type='primary'/>}
-                                    </i>
-                                    <ConstructorElement
-                                        text={`${item.name}${down}`}
-                                        thumbnail={item.image}
-                                        price={item.price}/>
-                                </div>
-                            </li>
-                        ))}
+
                     </ul>
                 </div>
+                {arrBun.map((item) => (
+                    <div className={styles.bunDown}>
+                        <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
+                            <li className="mt-2" key={item._id}>
+                                <i className="pr-3">
+                                    <LockIcon type="primary"/>
+                                </i>
+                                <ConstructorElement
+                                    isLocked={true}
+                                    text={`${item.name}${up}`}
+                                    thumbnail={item.image}
+                                    price={item.price}/>
+                            </li>
+                        </ul>
+                    </div>
+                ))}
                 <div className={styles.orderStats}>
                     <div><span className="text text_type_main-large">
                         {initialPrice.curPrice}
@@ -164,8 +166,8 @@ const BurgerConstructor = () => {
                             type="primary"
                             size="large"
                             onClick={
-                        (e) => enter(true)
-                    }>
+                                (e) => enter(true)
+                            }>
                         Оформить заказ
                     </Button>
                 </div>

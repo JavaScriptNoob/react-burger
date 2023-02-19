@@ -15,8 +15,6 @@ const App = () => {
         error: true,
         confirmation: false
     })
-
-
     useEffect(() => {
         getProductData(_QUERY, setState, state, _INGREDIENTS)
 

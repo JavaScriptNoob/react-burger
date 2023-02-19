@@ -54,7 +54,7 @@ const BurgerIngredients = () => {
                                 display: "flex",
                                 flexWrap: "wrap"
                             }}>{state.data.filter((item) => item.type === ('bun')).map((bunItem, index) => (
-                                <div key={state.data._id} onClick={(e) => openModalIngredients(bunItem)}>
+                                <div key={bunItem._id} onClick={(e) => openModalIngredients(bunItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
                                             <img src={bunItem.image} alt=""/>
@@ -73,7 +73,7 @@ const BurgerIngredients = () => {
                                 display: "flex",
                                 flexWrap: "wrap"
                             }}>{state.data.filter(item => item.type === ('sauce')).map((sauceItem, index) => (
-                                <div key={state.data._id} onClick={(e) => openModalIngredients(sauceItem)}>
+                                <div key={sauceItem._id} onClick={(e) => openModalIngredients(sauceItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
                                             <img src={sauceItem.image} alt=""/>
@@ -93,7 +93,7 @@ const BurgerIngredients = () => {
                                 display: "flex",
                                 flexWrap: "wrap"
                             }}>{state.data.filter(item => item.type === ('main')).map((mainItem) => (
-                                <div key={state.data._id} onClick={(e) => openModalIngredients(mainItem)}>
+                                <div key={mainItem._id} onClick={(e) => openModalIngredients(mainItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
                                             <img src={mainItem.image} alt=""/>

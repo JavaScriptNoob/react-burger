@@ -91,15 +91,13 @@ const BurgerConstructor = () => {
     }, [])
 
     return (
-        <div>
-
-                {modal && <Modal confirm={modal} closeModal={closeModal}>
+        <div>{modal && <Modal confirm={modal} closeModal={closeModal}>
                     <OrderDetails closeModal={closeModal} orderNumber={mess}/>
                 </Modal>}
                 {arrBun.map((item) => (
-                    <div className={styles.bunTop}>
+                    <div className={styles.bunTop} key={item._id+"1"}>
                         <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                        <li className="mt-4" key={item._id}>
+                        <li className="mt-4" >
                             <i className="pr-3">
                             <LockIcon type="primary"/>
                         </i>
@@ -141,9 +139,9 @@ const BurgerConstructor = () => {
                     </ul>
                 </div>
                 {arrBun.map((item) => (
-                    <div className={styles.bunDown}>
+                    <div className={styles.bunDown} key={item._id+"3"}>
                         <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                            <li className="mt-2" key={item._id}>
+                            <li className="mt-2" >
                                 <i className="pr-3">
                                     <LockIcon type="primary"/>
                                 </i>

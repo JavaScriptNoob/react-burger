@@ -28,12 +28,7 @@ const App = () => {
                         <BurgerIngredients />
                         <BurgerConstructor />
                     </BurgerConstructorDataContext.Provider>
-
-
-
                 </div>
-
-
             </div>
         </div>
     );

@@ -29,8 +29,15 @@ const reducer = (state, action) => {
 const BurgerConstructor = () => {
 
     const [modal, openModal] = useState(false);
-    const {state, setState} = useContext(BurgerConstructorDataContext)
-    const [mess, setMess] = useState(null);
+    const {state, setState} = useContext(BurgerConstructorDataContext);
+    const [mess, setMess] = useState(0);
+    const arrBun = []
+    const arrFilling = []
+    const up = " (верх)"
+    const down = " (низ)"
+    const prices = []
+    let joined = []
+    const objQuery = {"ingredients": []}
 
     const [totalPrice, dispatchTotalPrice] =
         useReducer(reducer, initialPrice);
@@ -38,6 +45,7 @@ const BurgerConstructor = () => {
     const currentConstructorState = state;
     const enter = (val) => {
         openModal(val)
+        request()
     };
     const closeModal = () => {
         openModal(false)
@@ -46,42 +54,27 @@ const BurgerConstructor = () => {
 
         const newCartData = currentConstructorState.data.filter((prev) => prev._id !== currentId);
         currentConstructorState.data = newCartData;
-        console.log(newCartData)
-        console.log(state, state.data)
+
 
     };
-
-    let arrBun = []
-    let arrFilling = []
-    let up = " (верх)"
-    let down = " (низ)"
-    let prices = []
-    let joined = []
-    const objQuery = {"ingredients": []}
-
     currentConstructorState.data.map(function (item) {
         if (item.type === "bun" && !arrBun.some(e => e.type === "bun")) {
             arrBun.push(item)
-            prices.push(item.price)
+            prices.push(item.price+item.price)
         } else if (item.type !== "bun") {
             arrFilling.push(item)
             prices.push(item.price)
-            console.log(prices)
+
         }
 
         joined = [...arrBun, ...arrFilling]
         let sum = prices.reduce((a, b) => a + b, 0)
-        console.log(sum)
         initialPrice.curPrice = sum;
-        console.log(initialPrice, joined)
-
     })
     // All code in app executes two times so i decided to slice request  it each time
     const request = () => {
         joined.map((e) => {
-
             objQuery.ingredients.push(e._id)
-
         })
         const res = postProductData(objQuery, setMess)
     }
@@ -142,12 +135,12 @@ const BurgerConstructor = () => {
                     <div className={styles.bunDown} key={item._id+"3"}>
                         <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
                             <li className="mt-2" >
-                                <i className="pr-3">
+                                <i className="pr-3" >
                                     <LockIcon type="primary"/>
                                 </i>
                                 <ConstructorElement
                                     isLocked={true}
-                                    text={`${item.name}${up}`}
+                                    text={`${item.name}${down}`}
                                     thumbnail={item.image}
                                     price={item.price}/>
                             </li>
@@ -174,6 +167,3 @@ const BurgerConstructor = () => {
     )
 }
 export default BurgerConstructor;
-BurgerConstructor.propTypes = {
-    context: PropTypes.arrayOf(dataTypeValidation).isRequired
-}

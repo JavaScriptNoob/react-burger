@@ -45,7 +45,9 @@ const OrderDetails = ({closeModal, orderNumber}) => {
 }
 export default OrderDetails
 OrderDetails.propTypes = {
-    closeModal:PropTypes.func.isRequired
+    closeModal:PropTypes.func.isRequired,
+    orderNumber:PropTypes.number.isRequired
+
 
 
 }

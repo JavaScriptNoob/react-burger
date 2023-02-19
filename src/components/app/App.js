@@ -34,6 +34,3 @@ const App = () => {
     );
 }
 export default App;
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(dataTypeValidation).isRequired
-}

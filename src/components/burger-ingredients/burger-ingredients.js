@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useContext} from 'react'
 import Modal from "../modal/modal";
 import {
     Tab,
@@ -9,9 +9,12 @@ import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import PropTypes from "prop-types";
 import dataTypeValidation from "../utils/prop-types";
-const BurgerIngredients = (props) => {
+import {BurgerConstructorDataContext} from "../servicies/prices";
 
 
+const BurgerIngredients = () => {
+
+    const {state, setState} = useContext(BurgerConstructorDataContext)
     const [modal, setModal] = useState(false)
     const [itemsData, setItemsData] = useState([]);
     const openModalIngredients = (data) => {
@@ -50,8 +53,8 @@ const BurgerIngredients = (props) => {
                             <div style={{
                                 display: "flex",
                                 flexWrap: "wrap"
-                            }}>{props.data.filter((item) => item.type === ('bun')).map((bunItem, index) => (
-                                <div key={props.data._id} onClick={(e) => openModalIngredients(bunItem)}>
+                            }}>{state.data.filter((item) => item.type === ('bun')).map((bunItem, index) => (
+                                <div key={state.data._id} onClick={(e) => openModalIngredients(bunItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
                                             <img src={bunItem.image} alt=""/>
@@ -69,8 +72,8 @@ const BurgerIngredients = (props) => {
                             <div style={{
                                 display: "flex",
                                 flexWrap: "wrap"
-                            }}>{props.data.filter(item => item.type === ('sauce')).map((sauceItem, index) => (
-                                <div key={props.data._id} onClick={(e) => openModalIngredients(sauceItem)}>
+                            }}>{state.data.filter(item => item.type === ('sauce')).map((sauceItem, index) => (
+                                <div key={state.data._id} onClick={(e) => openModalIngredients(sauceItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
                                             <img src={sauceItem.image} alt=""/>
@@ -89,8 +92,8 @@ const BurgerIngredients = (props) => {
                             <div style={{
                                 display: "flex",
                                 flexWrap: "wrap"
-                            }}>{props.data.filter(item => item.type === ('main')).map((mainItem) => (
-                                <div key={props.data._id} onClick={(e) => openModalIngredients(mainItem)}>
+                            }}>{state.data.filter(item => item.type === ('main')).map((mainItem) => (
+                                <div key={state.data._id} onClick={(e) => openModalIngredients(mainItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
                                             <img src={mainItem.image} alt=""/>

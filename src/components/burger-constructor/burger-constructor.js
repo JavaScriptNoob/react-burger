@@ -92,7 +92,7 @@ const BurgerConstructor = () => {
 
     return (
         <div>
-            <BurgerConstructorDataContext.Provider value={{state, setState}}>
+
                 {modal && <Modal confirm={modal} closeModal={closeModal}>
                     <OrderDetails closeModal={closeModal} orderNumber={mess}/>
                 </Modal>}
@@ -171,7 +171,7 @@ const BurgerConstructor = () => {
                         Оформить заказ
                     </Button>
                 </div>
-            </BurgerConstructorDataContext.Provider>
+
         </div>
     )
 }

@@ -29,11 +29,12 @@ const App = () => {
 
                 <div style={{display: "flex"}}>
 
-                        <><BurgerIngredients data={state.data}/>
-                            <BurgerConstructorDataContext.Provider value={{state, setState}}>
+                    <BurgerConstructorDataContext.Provider value={{state, setState}}>
+                        <BurgerIngredients />
+
                                 <BurgerConstructor />
                             </BurgerConstructorDataContext.Provider>
-                        </>
+
 
 
                 </div>

@@ -21,7 +21,7 @@ export const getProductData = async (query, setter, state, endpoint) => {
         })
 }
 
-export const postProductData = async (arr, setter) => {
+export const postProductData = async (arr, setter, openModal) => {
 
     await fetch("https://norma.nomoreparties.space/api/orders", {
         method: "post", headers: {"Content-Type": 'application/json'}, body: JSON.stringify(arr)
@@ -29,14 +29,16 @@ export const postProductData = async (arr, setter) => {
         .then(res => {
             if (!res.ok) {
                 throw new Error(res.status);
+
             }
             return res.json();
         }).then((item) => {
-            console.log(item, "mghjmhjmhjmjhm")
+
             setter(item.order.number)
+            openModal(true)
         })
         .catch(e => {
-            console.log(e)
 
+        alert(e)
         })
 }

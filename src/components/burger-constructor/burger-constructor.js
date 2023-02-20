@@ -43,8 +43,8 @@ const BurgerConstructor = () => {
         useReducer(reducer, initialPrice);
 //Creating a new variabe for mutating data  independently from context
     const currentConstructorState = state;
-    const enter = (val) => {
-        openModal(val)
+    const enter = () => {
+
         request()
     };
     const closeModal = () => {
@@ -76,12 +76,10 @@ const BurgerConstructor = () => {
         joined.map((e) => {
             objQuery.ingredients.push(e._id)
         })
-        const res = postProductData(objQuery, setMess)
+        const res = postProductData(objQuery, setMess, openModal)
     }
 
-    useEffect(() => {
-        request()
-    }, [])
+
 
     return (
         <div>{modal && <Modal confirm={modal} closeModal={closeModal}>
@@ -157,7 +155,7 @@ const BurgerConstructor = () => {
                             type="primary"
                             size="large"
                             onClick={
-                                (e) => enter(true)
+                                (e) => enter()
                             }>
                         Оформить заказ
                     </Button>

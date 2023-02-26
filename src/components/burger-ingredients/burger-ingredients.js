@@ -7,12 +7,15 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
-import {BurgerConstructorDataContext} from "../servicies/prices";
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+
 
 
 const BurgerIngredients = () => {
+    const dispatch = useDispatch();
+    const data = useSelector(state1 => state1.productsData.productsData)
 
-    const {state, setState} = useContext(BurgerConstructorDataContext)
+
     const [modal, setModal] = useState(false)
     const [itemsData, setItemsData] = useState([]);
     const openModalIngredients = (data) => {
@@ -51,7 +54,7 @@ const BurgerIngredients = () => {
                             <div style={{
                                 display: "flex",
                                 flexWrap: "wrap"
-                            }}>{state.data.filter((item) => item.type === ('bun')).map((bunItem, index) => (
+                            }}>{data.filter((item) => item.type === ('bun')).map((bunItem, index) => (
                                 <div key={bunItem._id} onClick={(e) => openModalIngredients(bunItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
@@ -70,7 +73,7 @@ const BurgerIngredients = () => {
                             <div style={{
                                 display: "flex",
                                 flexWrap: "wrap"
-                            }}>{state.data.filter(item => item.type === ('sauce')).map((sauceItem, index) => (
+                            }}>{data.filter(item => item.type === ('sauce')).map((sauceItem, index) => (
                                 <div key={sauceItem._id} onClick={(e) => openModalIngredients(sauceItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>
@@ -90,7 +93,7 @@ const BurgerIngredients = () => {
                             <div style={{
                                 display: "flex",
                                 flexWrap: "wrap"
-                            }}>{state.data.filter(item => item.type === ('main')).map((mainItem) => (
+                            }}>{data.filter(item => item.type === ('main')).map((mainItem) => (
                                 <div key={mainItem._id} onClick={(e) => openModalIngredients(mainItem)}>
                                     <div>
                                         <div className={"pl-4 pr-4 pb-1 pt-6 " + styles.counterRelative}>

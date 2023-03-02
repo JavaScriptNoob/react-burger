@@ -25,10 +25,10 @@ const App = () => {
                 <div style={{display: "flex"}}>
                     <DndProvider backend={HTML5Backend}>
                     { confirmed?(<><BurgerIngredients />
-                        <BurgerConstructor data={data}/></>):<BurgerIngredients/>
+                        <BurgerConstructor data={data}/></>) :<BurgerIngredients/>
 
                     }
-                    </DndProvider >)
+                    </DndProvider >
                 </div>
             </div>
         </div>

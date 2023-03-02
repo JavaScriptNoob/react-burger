@@ -26,13 +26,12 @@ import {useDrop} from "react-dnd";
 import ConstructorItems from "./constructor-items";
 
 
-
 const BurgerConstructor = (props) => {
     const dispatch = useDispatch();
 
     const currentList = useSelector(state => (
         state.currentList.currentConstructorList))
-    const bun = useSelector(state=> state.currentList.bun)
+    const bun = useSelector(state => state.currentList.bun)
 
     const openModal = useSelector(state => (
         state.orderNumber.openModal))
@@ -48,12 +47,12 @@ const BurgerConstructor = (props) => {
         accept: 'item',
         drop(item) {
 
-            if (item.type ==='bun'){
+            if (item.type === 'bun') {
                 dispatch({
                     type: ADD_BUN,
                     payload: item,
                 });
-            }else{
+            } else {
                 dispatch({
                     type: ADD_ITEM_TO_CURRENT_LIST,
                     payload: item
@@ -77,17 +76,17 @@ const BurgerConstructor = (props) => {
             afterDrag: updated,
         })
 
-    },[currentList,dispatch])
-     const removeIngredientFromCurrentList =(id,currentlist)=> {
+    }, [currentList, dispatch])
+    const removeIngredientFromCurrentList = (id, currentlist) => {
 
-         return function (dispatch) {
+        return function (dispatch) {
             let found = false;
             const arr = currentList.filter(v => found || !(found = v._id === id));
 
-             return dispatch({
-                 type:DECREMENT_CURRENT_CONSTRUCTOR_LIST,
-                 payload:arr
-             })
+            return dispatch({
+                type: DECREMENT_CURRENT_CONSTRUCTOR_LIST,
+                payload: arr
+            })
         }
     }
 
@@ -95,32 +94,32 @@ const BurgerConstructor = (props) => {
         dispatch(removeIngredientFromCurrentList(id, currentList));
     }, [currentList]);
 
-    useEffect(() => { setCurrentPrice(0)}, [currentPrice] )
+    useEffect(() => {
+        setCurrentPrice(0)
+    }, [currentPrice])
 
     const enter = () => {
         request()
     };
 
     useEffect(() => {
-        joined =[...currentList]
+        joined = [...currentList]
         joined.push(bun);
         console.log(joined)
-        let prices =  joined.reduce((sum,item)=>{
-            if (item.type==='bun'){
-                return sum+=item.price*2
-            }else {
-                return  sum += item.price
+        let prices = joined.reduce((sum, item) => {
+            if (item.type === 'bun') {
+                return sum += item.price * 2
+            } else {
+                return sum += item.price
             }
-        },0)
-       setCurrentPrice(prices)
+        }, 0)
+        setCurrentPrice(prices)
 
-    }, [bun, currentList,currentPrice]);
+    }, [bun, currentList, currentPrice]);
 
-if (isNaN(currentPrice)){
-    setCurrentPrice(0)
-}
-
-
+    if (isNaN(currentPrice)) {
+        setCurrentPrice(0)
+    }
 
 
     const request = () => {
@@ -138,54 +137,57 @@ if (isNaN(currentPrice)){
 
 
     return (
-        <div role={'Dustbin'} ref={dropTarget}>
-            {bun.name&&<div className={styles.bunDown} key={bun._id+"3"}>
-                <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                    <li className="mt-2" >
-                        <i className="pr-3" >
-                            <LockIcon type="primary"/>
-                        </i>
-                        <ConstructorElement
-                            isLocked={true}
-                            text={`${bun.name}${up}`}
-                            thumbnail={bun.image}
-                            price={bun.price}/>
-                    </li>
-                </ul>
-            </div>}
-            <div style={{width: '800px', height: '800px'}}>
-                <ul>
-                {
-                    currentList&&currentList.map((item,index) => (
-                        <ConstructorItems
-                            handleClose={handleClose}
-                            key={item._id+index}
-                            data={item} index={index}
-                            moveItemInsideContainer={moveItemInsideContainer}
-                            id={item._id}
-                        />))
-                }
-                </ul>
-                {bun.name&&<div className={styles.bunDown} key={bun._id+"3"}>
+        <div className="mt-30">
+            <div role={'Dustbin'}  ref={dropTarget}>
+                {bun.name && <div className={styles.bunDown} key={bun._id + "3"}>
                     <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                        <li className="mt-2" >
-                            <i className="pr-3" >
+                        <li className="mt-2">
+                            <i className="pr-3">
                                 <LockIcon type="primary"/>
                             </i>
                             <ConstructorElement
                                 isLocked={true}
-                                text={`${bun.name}${down}`}
+                                text={`${bun.name}${up}`}
                                 thumbnail={bun.image}
                                 price={bun.price}/>
                         </li>
                     </ul>
                 </div>}
-            </div>{openModal && <Modal>
-                <OrderDetails/>
-            </Modal>}
+                <div style={{width: '800px', height: '600px'}}>
+                    <ul className={styles.scrollContainer}>
+                        {
+                            currentList && currentList.map((item, index) => (
+                                <ConstructorItems
+                                    handleClose={handleClose}
+                                    key={item._id + index}
+                                    data={item} index={index}
+                                    moveItemInsideContainer={moveItemInsideContainer}
+                                    id={item._id}
+                                />))
+                        }
+                    </ul>
+                    {bun.name && <div className={styles.bunDown} key={bun._id + "3"}>
+                        <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
+                            <li className="mt-2">
+                                <i className="pr-3">
+                                    <LockIcon type="primary"/>
+                                </i>
+                                <ConstructorElement
+                                    isLocked={true}
+                                    text={`${bun.name}${down}`}
+                                    thumbnail={bun.image}
+                                    price={bun.price}/>
+                            </li>
+                        </ul>
+                    </div>}
+                </div>
+                {openModal && <Modal>
+                    <OrderDetails/>
+                </Modal>}
+            </div>
             <div className={styles.orderStats}>
                 <div><span className="text text_type_main-large">
-                        {currentPrice }
+                        {currentPrice}
                     <i className="pl-2"><CurrencyIcon type='primary'/></i>
                    </span>
                 </div>
@@ -198,8 +200,6 @@ if (isNaN(currentPrice)){
                     Оформить заказ
                 </Button>
             </div>
-
-
 
 
         </div>

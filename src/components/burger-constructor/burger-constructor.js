@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext, useReducer} from 'react'
-//Я буду раж если вы мне дадите советы по улучшению компонента так как я начинаю теряться и путаться. В частности как можно бы разделить данный ужас
+import React, {useEffect, useState, useContext, useReducer, useCallback} from 'react'
 import {
     Button,
     ConstructorElement,
@@ -10,12 +9,22 @@ import {
 import styles from './burger-constructor.module.css'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import {BurgerConstructorDataContext} from "../servicies/prices";
-import PropTypes from "prop-types";
-import dataTypeValidation from "../utils/prop-types";
-import {postProductData} from "../servicies/api";
-import {getSpaceUntilMaxLength} from "@testing-library/user-event/dist/utils";
-//Use reducer is able to decrement value. I dont know how  implement increment due to constructor element
+import {
+    postProductData,
+    closeModal,
+    CURRENT_CONSTRUCTOR_LIST,
+    DECREMENT_CURRENT_CONSTRUCTOR_LIST,
+    ADD_ITEM_TO_CURRENT_LIST,
+    ADD_BUN,
+    REQUEST_FAILED,
+    removeObjectWithId,
+    removeIngredientFromCurrentList,
+    DRAG_INSIDE_CONTAINER
+} from "../servicies/actions/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {useDrop} from "react-dnd";
+import ConstructorItems from "./constructor-items";
+
 const initialPrice = {curPrice: 0};
 const reducer = (state, action) => {
     switch (action.type) {
@@ -26,11 +35,15 @@ const reducer = (state, action) => {
     }
 }
 
-const BurgerConstructor = () => {
+const BurgerConstructor = (props) => {
+    const dispatch = useDispatch();
 
-    const [modal, openModal] = useState(false);
-    const {state, setState} = useContext(BurgerConstructorDataContext);
-    const [mess, setMess] = useState(0);
+    const currentList = useSelector(state => (
+        state.currentList.currentConstructorList))
+    const bun = useSelector(state=> state.currentList.bun)
+
+    const openModal = useSelector(state => (
+        state.orderNumber.openModal))
     const arrBun = []
     const arrFilling = []
     const up = " (верх)"
@@ -38,128 +51,143 @@ const BurgerConstructor = () => {
     const prices = []
     let joined = []
     const objQuery = {"ingredients": []}
+    const [, dropTarget] = useDrop({
+        accept: 'item',
+        drop(item) {
+
+            if (item.type ==='bun'){
+                dispatch({
+                    type: ADD_BUN,
+                    payload: item
+                });
+            }else{
+                dispatch({
+                    type: ADD_ITEM_TO_CURRENT_LIST,
+                    payload: item
+                });
+            }
+        },
+        collect: (monitor) => ({
+            isOver: monitor.isOver()
+        })
+    })
+
+    const moveItemInsideContainer = useCallback((dragIndex, hoverIndex) => {
+
+        const dragSubject = currentList[dragIndex]
+        const updated = [...currentList]
+        updated.splice(dragIndex, 1)
+        updated.splice(hoverIndex, 0, dragSubject)
+        dispatch({
+            type: DRAG_INSIDE_CONTAINER,
+            afterDrag: updated,
+        })
+
+    },[currentList,dispatch])
+     const removeIngredientFromCurrentList =(id,currentlist)=> {
+
+         return function (dispatch) {
+            let found = false;
+            const arr = currentList.filter(v => found || !(found = v._id === id));
+
+             return dispatch({
+                 type:DECREMENT_CURRENT_CONSTRUCTOR_LIST,
+                 payload:arr
+             })
+        }
+    }
+
+    const handleClose = useCallback((id) => {
+        dispatch(removeIngredientFromCurrentList(id, currentList));
+    }, [currentList]);
 
     const [totalPrice, dispatchTotalPrice] =
         useReducer(reducer, initialPrice);
-//Creating a new variabe for mutating data  independently from context
-    const currentConstructorState = state;
-    const enter = () => {
 
+
+    const enter = () => {
         request()
     };
-    const closeModal = () => {
-        openModal(false)
-    }
-    const dec = (currentId) => {
-
-        const newCartData = currentConstructorState.data.filter((prev) => prev._id !== currentId);
-        currentConstructorState.data = newCartData;
 
 
-    };
-    currentConstructorState.data.map(function (item) {
-        if (item.type === "bun" && !arrBun.some(e => e.type === "bun")) {
-            arrBun.push(item)
-            prices.push(item.price+item.price)
-        } else if (item.type !== "bun") {
-            arrFilling.push(item)
-            prices.push(item.price)
 
-        }
 
-        joined = [...arrBun, ...arrFilling]
-        let sum = prices.reduce((a, b) => a + b, 0)
-        initialPrice.curPrice = sum;
-    })
-    // All code in app executes two times so i decided to slice request  it each time
+
+
+
     const request = () => {
+
+        joined =[...currentList]
+        joined.push(bun);
+        console.log(joined)
         joined.map((e) => {
             objQuery.ingredients.push(e._id)
         })
-        const res = postProductData(objQuery, setMess, openModal)
+        console.log(objQuery)
+        dispatch(
+            postProductData(objQuery)
+        )
+
     }
 
 
-
     return (
-        <div>{modal && <Modal confirm={modal} closeModal={closeModal}>
-                    <OrderDetails closeModal={closeModal} orderNumber={mess}/>
-                </Modal>}
-                {arrBun.map((item) => (
-                    <div className={styles.bunTop} key={item._id+"1"}>
-                        <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                        <li className="mt-4" >
-                            <i className="pr-3">
+        <div role={'Dustbin'} ref={dropTarget}>
+            {bun.name&&<div className={styles.bunDown} key={bun._id+"3"}>
+                <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
+                    <li className="mt-2" >
+                        <i className="pr-3" >
                             <LockIcon type="primary"/>
                         </i>
                         <ConstructorElement
                             isLocked={true}
-                            text={`${item.name}${up}`}
-                            thumbnail={item.image}
-                            price={item.price}/>
-                        </li>
-                            </ul>
-                    </div>
-                ))}
-                <div className={styles.scrollContainer}>
+                            text={`${bun.name}${up}`}
+                            thumbnail={bun.image}
+                            price={bun.price}/>
+                    </li>
+                </ul>
+            </div>}
+            <div style={{width: '800px', height: '800px'}}>
+                <ul>
+                {
+                    currentList&&currentList.map((item,index) => (
+                        <ConstructorItems
+                            handleClose={handleClose}
+                            key={item._id+index}
+                            data={item} index={index}
+                            moveItemInsideContainer={moveItemInsideContainer}
+                            id={item._id}
+                        />))
+                }
+                </ul>
+                {bun.name&&<div className={styles.bunDown} key={bun._id+"3"}>
                     <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                        {arrFilling.map((item) => (
-                            <li className="mt-4" key={item._id}>
-                                <div className={styles.constructorElement}
-                                     onClick={(e) => {
-                                         dec(item._id);
-                                         dispatchTotalPrice(
-                                             {type: 'decrement', payload: item.price}
-                                         )
-                                     }}>
-                                    <i className="pr-3">
-                                        {
-                                            item.type === "bun" ?
-                                                <LockIcon type="primary"/>
-                                                : <DragIcon type='primary'/>}
-                                    </i>
-                                    <ConstructorElement
-                                        text={item.name}
-                                        thumbnail={item.image}
-                                        price={item.price}
-                                    />
-                                </div>
-                            </li>
-                        ))}
-
+                        <li className="mt-2" >
+                            <i className="pr-3" >
+                                <LockIcon type="primary"/>
+                            </i>
+                            <ConstructorElement
+                                isLocked={true}
+                                text={`${bun.name}${down}`}
+                                thumbnail={bun.image}
+                                price={bun.price}/>
+                        </li>
                     </ul>
-                </div>
-                {arrBun.map((item) => (
-                    <div className={styles.bunDown} key={item._id+"3"}>
-                        <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                            <li className="mt-2" >
-                                <i className="pr-3" >
-                                    <LockIcon type="primary"/>
-                                </i>
-                                <ConstructorElement
-                                    isLocked={true}
-                                    text={`${item.name}${down}`}
-                                    thumbnail={item.image}
-                                    price={item.price}/>
-                            </li>
-                        </ul>
-                    </div>
-                ))}
-                <div className={styles.orderStats}>
-                    <div><span className="text text_type_main-large">
-                        {initialPrice.curPrice}
-                        <i className="pl-2"><CurrencyIcon type='primary'/></i>
-                   </span>
-                    </div>
-                    <Button htmlType="button"
-                            type="primary"
-                            size="large"
-                            onClick={
-                                (e) => enter()
-                            }>
-                        Оформить заказ
-                    </Button>
-                </div>
+                </div>}
+            </div>{openModal && <Modal>
+                <OrderDetails/>
+            </Modal>}
+
+                <Button htmlType="button"
+                        type="primary"
+                        size="large"
+                        onClick={
+                            (e) => enter()
+                        }>
+                    Оформить заказ
+                </Button>
+
+
 
         </div>
     )

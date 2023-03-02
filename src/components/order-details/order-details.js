@@ -6,16 +6,27 @@ import image from "../img/done.png"
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import PropTypes from "prop-types";
 import dataTypeValidation from "../utils/prop-types";
+import {closeModal} from "../servicies/actions/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {CLEAR_CURRENT_LIST} from "../servicies/actions/actions";
 
-const OrderDetails = ({closeModal, orderNumber}) => {
 
 
+const OrderDetails = () => {
+const orderNumber = useSelector(state => state.orderNumber.orderNumber)
+const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(closeModal())
+
+
+
+    }
 
     return (
         <div className={styles.container}>
             <div className={styles.modalHeader}>
 
-                <span><CloseIcon type="primary" onClick={() => closeModal()}/></span>
+                <span><CloseIcon type="primary" onClick={ handleClick}/></span>
             </div>
 
             <div className={styles.container}>
@@ -44,10 +55,3 @@ const OrderDetails = ({closeModal, orderNumber}) => {
         </div>)
 }
 export default OrderDetails
-OrderDetails.propTypes = {
-    closeModal:PropTypes.func.isRequired,
-    orderNumber:PropTypes.number.isRequired
-
-
-
-}

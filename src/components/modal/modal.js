@@ -3,29 +3,32 @@ import styles from './modal.module.css';
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
+import {closeModal} from "../servicies/actions/actions";
+import {useDispatch, useSelector} from "react-redux";
 
-const Modal = ({closeModal, ...props}) => {
-    const [state, setState] = useState(false)
+const Modal = (props) => {
+    const modal = useSelector(state =>state.orderNumber.openModal)
     const [overlayIsOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(open => !open);
-    useEffect(() => {
-        setState(props.confirm)
-
-    })
+    const dispatch =useDispatch()
+    const close =()=>{
+        dispatch(
+            closeModal()
+        )
+    }
     useEffect(() => {
         const handleEsc = (event) => {
-            if (event.keyCode === 27 || state === false) {
-                closeModal()
+            if (event.keyCode === 27 || modal === false) {
+               close()
             }
         };
         window.addEventListener('keydown', handleEsc);
         return () => {
             window.removeEventListener('keydown', handleEsc);
         };
-    }, [closeModal]);
+    }, []);
 
     return ReactDOM.createPortal(
-        <> <ModalOverlay onClick={closeModal}/>
+        <> <ModalOverlay/>
             <div className={styles.centerContainer}>
                 <div className={styles.modal}>
                     {props.children}
@@ -38,7 +41,3 @@ const Modal = ({closeModal, ...props}) => {
     )
 }
 export default Modal
-Modal.propTypes = {
-    confirm: PropTypes.bool.isRequired,
-    children: PropTypes.node.isRequired
-}

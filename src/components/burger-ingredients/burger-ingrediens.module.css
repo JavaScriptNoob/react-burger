@@ -1,5 +1,6 @@
 .containerGeneral{
-    width: 600px;
+    width: 100%;
+    max-width: 600px;
 }
 .containerMain{
     position: relative;
@@ -31,16 +32,32 @@
 }
 .containerSubTitle{
     display: flex;
+    flex-direction: column;
 }
-.containerSubTitle > div>p{
-    padding: 20px 0 20px 0;
-    width: 200px;
-    text-align: center;
-    border: cornflowerblue 1px dashed;
+.containerSubTitle>div{
+    display: flex;
+}
+.wrapper{
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
 }
 .counterRelative {
     position: relative;
+    text-align: center;
 }
 .price{
     text-align: center;
+}
+.element{
+    width: 280px;
+}
+.alignText{
+    text-align: center;
+}
+.centered{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-direction: column;
 }

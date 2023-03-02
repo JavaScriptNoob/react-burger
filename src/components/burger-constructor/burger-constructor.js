@@ -25,15 +25,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import ConstructorItems from "./constructor-items";
 
-const initialPrice = {curPrice: 0};
-const reducer = (state, action) => {
-    switch (action.type) {
-        case "decrement":
-            return {curPrice: initialPrice.curPrice - action.payload};
-        default:
-            throw new Error(`Wrong type of action: ${action.type}`);
-    }
-}
+
 
 const BurgerConstructor = (props) => {
     const dispatch = useDispatch();
@@ -48,7 +40,8 @@ const BurgerConstructor = (props) => {
     const arrFilling = []
     const up = " (верх)"
     const down = " (низ)"
-    const prices = []
+    const [currentPrice, setCurrentPrice] = useState(0);
+
     let joined = []
     const objQuery = {"ingredients": []}
     const [, dropTarget] = useDrop({
@@ -58,7 +51,7 @@ const BurgerConstructor = (props) => {
             if (item.type ==='bun'){
                 dispatch({
                     type: ADD_BUN,
-                    payload: item
+                    payload: item,
                 });
             }else{
                 dispatch({
@@ -71,6 +64,7 @@ const BurgerConstructor = (props) => {
             isOver: monitor.isOver()
         })
     })
+
 
     const moveItemInsideContainer = useCallback((dragIndex, hoverIndex) => {
 
@@ -101,25 +95,37 @@ const BurgerConstructor = (props) => {
         dispatch(removeIngredientFromCurrentList(id, currentList));
     }, [currentList]);
 
-    const [totalPrice, dispatchTotalPrice] =
-        useReducer(reducer, initialPrice);
-
+    useEffect(() => { setCurrentPrice(0)}, [currentPrice] )
 
     const enter = () => {
         request()
     };
 
+    useEffect(() => {
+        joined =[...currentList]
+        joined.push(bun);
+        console.log(joined)
+        let prices =  joined.reduce((sum,item)=>{
+            if (item.type==='bun'){
+                return sum+=item.price*2
+            }else {
+                return  sum += item.price
+            }
+        },0)
+       setCurrentPrice(prices)
 
+    }, [bun, currentList,currentPrice]);
 
+if (isNaN(currentPrice)){
+    setCurrentPrice(0)
+}
 
 
 
 
     const request = () => {
 
-        joined =[...currentList]
-        joined.push(bun);
-        console.log(joined)
+
         joined.map((e) => {
             objQuery.ingredients.push(e._id)
         })
@@ -177,7 +183,12 @@ const BurgerConstructor = (props) => {
             </div>{openModal && <Modal>
                 <OrderDetails/>
             </Modal>}
-
+            <div className={styles.orderStats}>
+                <div><span className="text text_type_main-large">
+                        {currentPrice }
+                    <i className="pl-2"><CurrencyIcon type='primary'/></i>
+                   </span>
+                </div>
                 <Button htmlType="button"
                         type="primary"
                         size="large"
@@ -186,6 +197,8 @@ const BurgerConstructor = (props) => {
                         }>
                     Оформить заказ
                 </Button>
+            </div>
+
 
 
 

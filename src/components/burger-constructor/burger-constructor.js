@@ -1,46 +1,42 @@
-import React, {useEffect, useState, useContext, useReducer, useCallback} from 'react'
+import React, {useEffect, useState, useCallback} from 'react'
 import {
     Button,
     ConstructorElement,
     CurrencyIcon,
-    DragIcon,
+    DragIcon, InfoIcon,
     LockIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import {
-    postProductData,
-    closeModal,
-    CURRENT_CONSTRUCTOR_LIST,
+    OPEN_MODAL,
     DECREMENT_CURRENT_CONSTRUCTOR_LIST,
     ADD_ITEM_TO_CURRENT_LIST,
     ADD_BUN,
-    REQUEST_FAILED,
-    removeObjectWithId,
-    removeIngredientFromCurrentList,
     DRAG_INSIDE_CONTAINER
-} from "../servicies/actions/actions";
+} from "../servicies/reducers/index-reducer";
+import {postProductData} from "../servicies/actions/order-actions"
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import ConstructorItems from "./constructor-items";
+import {
+    selectorBun,
+    selectorCurrentConstructoorList,
+    selectorCurrentList,
+    selectorModal
+} from "../servicies/reducers/selectors";
 
 
 const BurgerConstructor = (props) => {
     const dispatch = useDispatch();
-
-    const currentList = useSelector(state => (
-        state.currentList.currentConstructorList))
-    const bun = useSelector(state => state.currentList.bun)
-
-    const openModal = useSelector(state => (
-        state.orderNumber.openModal))
-    const arrBun = []
-    const arrFilling = []
+    const priceListener = useSelector(selectorCurrentList)
+    const currentList = useSelector(selectorCurrentConstructoorList)
+    const bun = useSelector(selectorBun)
+    const openModal = useSelector(selectorModal)
     const up = " (верх)"
     const down = " (низ)"
     const [currentPrice, setCurrentPrice] = useState(0);
-
     let joined = []
     const objQuery = {"ingredients": []}
     const [, dropTarget] = useDrop({
@@ -51,11 +47,15 @@ const BurgerConstructor = (props) => {
                 dispatch({
                     type: ADD_BUN,
                     payload: item,
+
+
                 });
             } else {
                 dispatch({
                     type: ADD_ITEM_TO_CURRENT_LIST,
-                    payload: item
+                    payload: item,
+
+
                 });
             }
         },
@@ -92,7 +92,7 @@ const BurgerConstructor = (props) => {
 
     const handleClose = useCallback((id) => {
         dispatch(removeIngredientFromCurrentList(id, currentList));
-    }, [currentList]);
+    }, [currentList, bun]);
 
     useEffect(() => {
         setCurrentPrice(0)
@@ -103,28 +103,28 @@ const BurgerConstructor = (props) => {
     };
 
     useEffect(() => {
-        joined = [...currentList]
-        joined.push(bun);
-        console.log(joined)
+        if (currentList.length > 0 || bun.name) {
+            joined = [...currentList]
+            if (bun.name) {
+                joined.push(bun)
+            }
+        }
         let prices = joined.reduce((sum, item) => {
+            console.log(joined)
             if (item.type === 'bun') {
+                console.log("I am here")
                 return sum += item.price * 2
-            } else {
+            } else if (item.type !== bun) {
                 return sum += item.price
             }
         }, 0)
         setCurrentPrice(prices)
-
-    }, [bun, currentList, currentPrice]);
+    }, [priceListener, currentPrice]);
 
     if (isNaN(currentPrice)) {
         setCurrentPrice(0)
     }
-
-
     const request = () => {
-
-
         joined.map((e) => {
             objQuery.ingredients.push(e._id)
         })
@@ -132,13 +132,14 @@ const BurgerConstructor = (props) => {
         dispatch(
             postProductData(objQuery)
         )
+        dispatch({
+            type: OPEN_MODAL
+        })
 
     }
-
-
     return (
         <div className="mt-30">
-            <div role={'Dustbin'}  ref={dropTarget}>
+            <div role={'Dustbin'} ref={dropTarget}>
                 {bun.name && <div className={styles.bunDown} key={bun._id + "3"}>
                     <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
                         <li className="mt-2">
@@ -154,6 +155,12 @@ const BurgerConstructor = (props) => {
                     </ul>
                 </div>}
                 <div style={{width: '800px', height: '600px'}}>
+                    {currentPrice === 0 && <div className={styles.hint}>
+
+                        <p className="text text_type_main-medium"><InfoIcon type="primary"/> Создайте свой собственный
+                            бургер </p>
+                        <p className="text text_type_main-medium"> перетащив понравившиеся ингридиенты</p>
+                    </div>}
                     <ul className={styles.scrollContainer}>
                         {
                             currentList && currentList.map((item, index) => (
@@ -166,25 +173,26 @@ const BurgerConstructor = (props) => {
                                 />))
                         }
                     </ul>
-                    {bun.name && <div className={styles.bunDown} key={bun._id + "3"}>
-                        <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
-                            <li className="mt-2">
-                                <i className="pr-3">
-                                    <LockIcon type="primary"/>
-                                </i>
-                                <ConstructorElement
-                                    isLocked={true}
-                                    text={`${bun.name}${down}`}
-                                    thumbnail={bun.image}
-                                    price={bun.price}/>
-                            </li>
-                        </ul>
-                    </div>}
+
                 </div>
                 {openModal && <Modal>
                     <OrderDetails/>
                 </Modal>}
             </div>
+            {bun.name && <div className={styles.bunDown} key={bun._id + "3"}>
+                <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
+                    <li className="mt-2">
+                        <i className="pr-3">
+                            <LockIcon type="primary"/>
+                        </i>
+                        <ConstructorElement
+                            isLocked={true}
+                            text={`${bun.name}${down}`}
+                            thumbnail={bun.image}
+                            price={bun.price}/>
+                    </li>
+                </ul>
+            </div>}
             <div className={styles.orderStats}>
                 <div><span className="text text_type_main-large">
                         {currentPrice}
@@ -194,6 +202,7 @@ const BurgerConstructor = (props) => {
                 <Button htmlType="button"
                         type="primary"
                         size="large"
+                        disabled={currentPrice < 1}
                         onClick={
                             (e) => enter()
                         }>

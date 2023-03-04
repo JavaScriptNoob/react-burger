@@ -1,14 +1,12 @@
 import React, {useEffect} from "react";
-import Data from "../utils/data";
 import styles from "./order-details.module.css";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import image from "../img/done.png"
-import IngredientDetails from "../ingredients-details/ingredient-details";
-import PropTypes from "prop-types";
-import dataTypeValidation from "../utils/prop-types";
-import {closeModal} from "../servicies/actions/actions";
+
 import {useDispatch, useSelector} from "react-redux";
-import {CLEAR_CURRENT_LIST} from "../servicies/actions/actions";
+import {CLEAR_CURRENT_LIST, CLOSE_MODAL} from "../servicies/reducers/index-reducer";
+import {closeOrderModal} from "../servicies/actions/order-actions";
+
 
 
 
@@ -16,9 +14,9 @@ const OrderDetails = () => {
 const orderNumber = useSelector(state => state.orderNumber.orderNumber)
 const dispatch = useDispatch();
     const handleClick = () => {
-        dispatch(closeModal())
-
-
+    dispatch(
+        closeOrderModal()
+    )
 
     }
 
@@ -26,7 +24,7 @@ const dispatch = useDispatch();
         <div className={styles.container}>
             <div className={styles.modalHeader}>
 
-                <span><CloseIcon type="primary" onClick={ handleClick}/></span>
+                <span><CloseIcon type="primary" onClick={ ()=>handleClick()}/></span>
             </div>
 
             <div className={styles.container}>

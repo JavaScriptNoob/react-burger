@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef} from 'react'
+import React, {useState, useContext, useRef, useCallback, useEffect} from 'react'
 import Modal from "../modal/modal";
 import {
     Tab,
@@ -8,29 +8,28 @@ import {
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
-import {useDrag} from "react-dnd";
+import {closePopUP,openPopUp} from "../servicies/actions/ingredient-modal-action";
 import {IngredientItem} from "./ingredient-item";
 import {coordAxel} from "../utils/coordAxel";
+import {selectorModalIngredients,selectorProducts} from "../servicies/reducers/selectors";
+
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch();
-    const data = useSelector(state1 => state1.productsData.productsData)
+    const data = useSelector(selectorProducts)
+    const modal = useSelector(selectorModalIngredients)
     const [current, setCurrent] = React.useState('bun')
 
-    const refBun = useRef(null);
-    const refSauce = useRef(null);
-    const refMain = useRef(null);
+    const dispatch =useDispatch()
 
-
-    const [modal, setModal] = useState(false)
     const [itemsData, setItemsData] = useState([]);
     const openModalIngredients = (data) => {
-        setModal(true);
-        setItemsData(data);
+         dispatch(
+            openPopUp()
+        )
+
+         setItemsData(data);
     }
-    const closeModal = () => {
-        setModal(false)
-    }
+
 
     const scrollHandler = (evt) => {
         evt.target.addEventListener('scroll', function () {
@@ -42,11 +41,14 @@ const BurgerIngredients = () => {
         document.querySelector(`#${type}`).scrollIntoView({block: "start", behavior: "smooth"})
     }
 
+
+
+
     return (
 
         <div className={styles.containerGeneral}>
-            {modal && <Modal confirm={modal} closeModal={closeModal}>
-                <IngredientDetails closeModal={closeModal} items={itemsData}/>
+            {modal && <Modal confirm={modal} >
+                <IngredientDetails  items={itemsData}/>
             </Modal>}
 
             <div className={styles.containerMain} style={{position: "relative"}}>
@@ -75,7 +77,7 @@ const BurgerIngredients = () => {
                             <div className={styles.wrapper}>
 
                                 {data.map((item) => (item.type === 'bun' &&
-                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item}/>))
+                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item} />))
 
                                 }</div>
                             <h2 id="sauce" className="mb-6 text text_type_main-medium">
@@ -84,7 +86,8 @@ const BurgerIngredients = () => {
                             <div className={styles.wrapper}>
 
                                 {data.map((item) => (item.type === 'sauce' &&
-                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item}/>))
+
+                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item} />))
 
                                 }</div>
                             <h2 id="main" className="mb-6 text text_type_main-medium">
@@ -92,7 +95,7 @@ const BurgerIngredients = () => {
                             </h2>
                             <div className={styles.wrapper}>
                                 {data.map((item) => (item.type === 'main' &&
-                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item}/>))
+                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item}  />))
 
                                 }</div>
                         </div>

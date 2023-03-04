@@ -1,12 +1,18 @@
 import React,{useEffect} from "react";
 import styles from "./ingredient-details.module.css" ;
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import propTypes from "../utils/prop-types";
-import PropTypes from "prop-types";
-import dataTypeValidation from "../utils/prop-types";
+import {closePopUp} from "../servicies/actions/ingredient-modal-action";
+import {useDispatch} from "react-redux";
 
-const IngredientDetails=({closeModal, ...props})=>{
 
+const IngredientDetails=({ ...props})=>{
+   const dispatch =useDispatch();
+const close=()=>{
+   dispatch(closePopUp())
+
+
+
+}
 
 
 
@@ -14,7 +20,7 @@ const IngredientDetails=({closeModal, ...props})=>{
         <div>
             <div className={styles.modalHeader}>
         <h1 className="text text_type_main-large">Детали ингридиента</h1>
-        <span><CloseIcon type="primary" onClick={()=> closeModal()} /></span>
+        <span><CloseIcon type="primary" onClick={()=>close()} /></span>
     </div>
     <div className={styles.imageContainer}>
         <img src={props.items.image} className={styles.image} alt=""/>
@@ -35,8 +41,3 @@ const IngredientDetails=({closeModal, ...props})=>{
 
 export default IngredientDetails
 
-IngredientDetails.propTypes={
-    props:PropTypes.arrayOf(dataTypeValidation).isRequired,
-    closeModal:PropTypes.func.isRequired
-
-}

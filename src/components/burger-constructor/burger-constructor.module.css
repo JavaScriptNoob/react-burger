@@ -39,14 +39,17 @@
     align-items: center;
     justify-content: flex-end;
     gap: 25px;
+    width: 600px;
+    margin-top:20px ;
 
 }
-.bunTop{
-    padding-top:80px;
+.bunTop {
+    padding-top: 80px;
     padding-bottom: 0;
     display: flex;
     justify-content: center;
 }
+
 .bunDown{
     padding-top: 0;
     display: flex;
@@ -54,4 +57,14 @@
 }
 .bunTop>ul>li,.bunDown>ul>li{
     align-items: baseline;
+}
+.hint{
+    display: flex;
+
+    width: 550px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 10%;
+    position: absolute;
 }

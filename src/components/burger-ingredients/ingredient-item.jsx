@@ -14,14 +14,14 @@ export const IngredientItem = ({openModal,data}) => {
         item: data,
 
     })
-    let arr =[...currentConstructorList, bun]
+
 
  const occurrence=   (id) => (
         [...currentConstructorList, bun].filter(function (item) {
-            console.log(item,id)
+
             return item._id === id;
         }).length)
-console.log(occurrence(data._id),'jklkl');
+
         return (
         <div className={styles.element}    onClick={(e) => openModal(data)}>
             <div className={styles.centered} ref={ref} >

@@ -21,7 +21,7 @@ export  const CLEAR_CURRENT_LIST = 'CLEAR_CURRENT_LIST'
 export const OPEN_MODAL ='OPEN_MODAL'
 export const OPEN_INGREDIENTS_POP_UP='OPEN_INGREDIENS_POP_UP'
 export const CLOSE_INGREDIENTS_POP_UP='CLOSE_INGREDIENTS_POP_UP'
-
+export const ORDER_NUMBER_CLEAR ='ORDER_NUMBER_CLEAR:'
 export const rootReducer = combineReducers({
     productsData: productsReducer,
     orderNumber:orderNumberReducer,

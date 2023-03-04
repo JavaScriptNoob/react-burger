@@ -17,7 +17,7 @@ export const getProductsData = () => {
             .then(item => {
                 dispatch({
                     type: REQUEST_SUCCESS,
-                    productsData: item.data
+                    orders: item.data
 
                 })
             })

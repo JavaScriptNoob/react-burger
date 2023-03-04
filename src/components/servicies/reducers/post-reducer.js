@@ -1,4 +1,4 @@
-import { POST_SUCCESS, POST_FAILED, POST_ORDER_REQUEST} from "../reducers/index-reducer";
+import { POST_SUCCESS, ORDER_NUMBER_CLEAR, POST_FAILED, POST_ORDER_REQUEST} from "../reducers/index-reducer";
 const initialState ={
 
     orderNumber:null,
@@ -25,11 +25,17 @@ export const orderNumberReducer = (state = initialState, action) => {
                 postRequest: false,
 
             }
-        case POST_FAILED:
+        case 'POST_FAILED':
             return {
                 ...state,
                 postErrBody: action.postFailed,
-                postRequestFailed: true
+                postRequestFailed: true,
+                orderNumber: null
+            }
+        case ORDER_NUMBER_CLEAR:
+            return {
+                ...state,
+                orderNumber: null
             }
 
         default:

@@ -3,7 +3,7 @@ const initialState ={
     productsHaveBeenRecieved:false,
     productsRequestConfirmed:false,
     productsRequest:false,
-    productsData:[],
+    orders:[],
     productsRequestFailed:false,
     productErrBody:[],
 
@@ -21,7 +21,7 @@ export const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 productsHaveBeenRecieved: true,
-                productsData: action.productsData,
+                orders: action.orders,
                 productsRequest: false
             }
         case REQUEST_FAILED:

@@ -110,9 +110,9 @@ const BurgerConstructor = (props) => {
             }
         }
         let prices = joined.reduce((sum, item) => {
-            console.log(joined)
+
             if (item.type === 'bun') {
-                console.log("I am here")
+
                 return sum += item.price * 2
             } else if (item.type !== bun) {
                 return sum += item.price
@@ -128,7 +128,7 @@ const BurgerConstructor = (props) => {
         joined.map((e) => {
             objQuery.ingredients.push(e._id)
         })
-        console.log(objQuery)
+
         dispatch(
             postProductData(objQuery)
         )

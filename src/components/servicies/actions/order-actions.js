@@ -3,7 +3,8 @@ import {
     POST_FAILED,
     POST_ORDER_REQUEST,
     CLOSE_MODAL,
-    CLEAR_CURRENT_LIST
+    CLEAR_CURRENT_LIST,
+    ORDER_NUMBER_CLEAR
 } from "../reducers/index-reducer";
 
 export const postProductData =  (arr) => {
@@ -23,7 +24,7 @@ export const postProductData =  (arr) => {
                 }
                 return res.json();
             }).then((item) => {
-            console.log(item)
+
             dispatch({
                 type:POST_SUCCESS,
                 text:'open modal and show number of order',
@@ -32,11 +33,12 @@ export const postProductData =  (arr) => {
             })
         })
             .catch(e => {
-                console.log(e)
+
                 dispatch({
                     type:POST_FAILED,
                     text:'post failed',
-                    postFailed:e
+                    postFailed:e,
+                    orderNumber: null
                 })
             })}
 }
@@ -44,7 +46,11 @@ export const closeOrderModal=()=>{
     return function (dispatch){
     dispatch({
         type:CLOSE_MODAL,
-        openModal: false
+        openModal: false,
+        orderNumber: null
+    })
+    dispatch({
+        type:ORDER_NUMBER_CLEAR
     })
     dispatch({
         type:CLEAR_CURRENT_LIST

@@ -1,73 +1,37 @@
-import React, {useEffect, useState} from 'react';
-
+import React, {useEffect, useState, useContext} from 'react';
 import './App.css';
-import AppHeader from './app-header/app-header'
-
-import BurgerIngredients from "./burger-ingredients/burger-ingredients";
-import BurgerConstructor from "./burger-constructor/burger-constructor";
-
-import PropTypes from "prop-types";
-import dataTypeValidation from "../utils/prop-types";
-import data from "../utils/data";
+import AppHeader from '../app-header/app-header'
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import { useSelector, useDispatch } from 'react-redux';
+import {getProductsData} from '../servicies/actions/get-ingredient-actions'
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
 
-    const query = "https://norma.nomoreparties.space/api/ingredients"
 
-    const [state, setState] = useState({
-        data: [],
-        error: true,
-        confirmation: false
-    })
-    const [clickedItem,setClickeckedItem]= useState("")
-
-
-
+    const dispatch = useDispatch();
+    const confirmed = useSelector(state => state.productsData.productsHaveBeenRecieved)
+    const data= useSelector(state => state.productsData.productsData)
     useEffect(() => {
-        getProductData()
 
+        dispatch(getProductsData())
     }, [])
-
-    const getProductData = async () => {
-        setState({...state, error: false, confirmation: false});
-        fetch(query)
-            .then(res => {
-                if(!res.ok) {
-                    throw new Error(res.status);
-                } return res.json()})
-            .then(item => setState({...state, data: item.data, confirmation: true}))
-            .catch(e => {
-                setState({...state, error: true, confirmation: false});
-            })
-    }
-
-
     return (
-
-
         <div className="App">
-        <div id="portal">
-            <AppHeader/>
-            <div style={{display: "flex"}}>
-                {state.confirmation
-                    ? <><BurgerIngredients data={state.data} />
-                        <BurgerConstructor data={state.data}/></>
-                        :<BurgerConstructor data={state.data}/>
-                        }
+            <div id="portal">
+                <AppHeader/>
+                <div style={{display: "flex"}}>
+                    <DndProvider backend={HTML5Backend}>
+                    { confirmed?(<><BurgerIngredients />
+                        <BurgerConstructor data={data}/></>) :<BurgerIngredients/>
 
+                    }
+                    </DndProvider >
+                </div>
             </div>
         </div>
-
-        </div>
     );
-
-
 }
-
 export default App;
-
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(dataTypeValidation).isRequired
-}
-
-

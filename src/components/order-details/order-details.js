@@ -1,21 +1,30 @@
 import React, {useEffect} from "react";
-import Data from "../../utils/data";
-import styles from "../order-details/order-details.module.css";
+import styles from "./order-details.module.css";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import image from "../../img/done.png"
-import IngredientDetails from "../ingredients-details/ingredient-details";
-import PropTypes from "prop-types";
-import dataTypeValidation from "../../utils/prop-types";
+import image from "../img/done.png"
 
-const OrderDetails = ({closeModal}) => {
+import {useDispatch, useSelector} from "react-redux";
+import {CLEAR_CURRENT_LIST, CLOSE_MODAL} from "../servicies/reducers/index-reducer";
+import {closeOrderModal} from "../servicies/actions/order-actions";
 
 
+
+
+const OrderDetails = () => {
+const orderNumber = useSelector(state => state.orderNumber.orderNumber)
+const dispatch = useDispatch();
+    const handleClick = () => {
+    dispatch(
+        closeOrderModal()
+    )
+
+    }
 
     return (
         <div className={styles.container}>
             <div className={styles.modalHeader}>
 
-                <span><CloseIcon type="primary" onClick={() => closeModal()}/></span>
+                <span><CloseIcon type="primary" onClick={ ()=>handleClick()}/></span>
             </div>
 
             <div className={styles.container}>
@@ -23,7 +32,7 @@ const OrderDetails = ({closeModal}) => {
                 <ul className={styles.list}>
                     <li className="text ">
                         <h1
-                        className="text text_type_main-large mt-15">034536
+                        className="text text_type_main-large mt-15">{orderNumber}
                         </h1>
                     </li>
                     <li className="text text_type_main-default  mt-8">
@@ -44,8 +53,3 @@ const OrderDetails = ({closeModal}) => {
         </div>)
 }
 export default OrderDetails
-OrderDetails.propTypes = {
-    closeModal:PropTypes.func.isRequired
-
-
-}

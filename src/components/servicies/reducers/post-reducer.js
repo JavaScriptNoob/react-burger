@@ -5,7 +5,7 @@ const initialState ={
     postHaveBeenRecieved:false,
     postRequestConfirmed:false,
     postRequest:false,
-    postRequestFailed:false,
+    postRequestFailed:false ,
 
 }
 export const orderNumberReducer = (state = initialState, action) => {

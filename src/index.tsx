@@ -1,14 +1,13 @@
 import React from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import thunk from 'redux-thunk';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
-
+import {BrowserRouter as Router} from "react-router-dom";
 import {Provider} from "react-redux";
 import {rootReducer} from "./components/servicies/reducers/index-reducer";
-
 
 
 declare global {
@@ -24,14 +23,17 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const store = createStore(rootReducer, enhancer);
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
+
 root.render(
-  <React.StrictMode>
-      <Provider store={store}>
-    <App />
-          </Provider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Provider store={store}>
+            <Router>
+                <App/>
+            </Router>
+        </Provider>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

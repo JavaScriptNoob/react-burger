@@ -6,6 +6,7 @@ import {
     CLEAR_CURRENT_LIST,
     ORDER_NUMBER_CLEAR
 } from "../reducers/index-reducer";
+import {errorHandling} from "../api";
 
 export const postProductData =  (arr) => {
     return function (dispatch){
@@ -17,13 +18,7 @@ export const postProductData =  (arr) => {
         fetch("https://norma.nomoreparties.space/api/orders", {
             method: "post", headers: {"Content-Type": 'application/json'}, body: JSON.stringify(arr)
         })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(res.status);
-
-                }
-                return res.json();
-            }).then((item) => {
+            .then(errorHandling).then((item) => {
 
             dispatch({
                 type:POST_SUCCESS,

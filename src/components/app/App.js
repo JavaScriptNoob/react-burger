@@ -1,35 +1,31 @@
 import React, {useEffect, useState, useContext} from 'react';
 import './App.css';
 import AppHeader from '../app-header/app-header'
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import { useSelector, useDispatch } from 'react-redux';
-import {getProductsData} from '../servicies/actions/get-ingredient-actions'
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+
+import Main from "../../pages/main";
+import {Routes, Link, Route, NavLink} from "react-router-dom";
+import Register from "../../pages/register";
+import Login from "../../pages/login";
+import ForgotPassword from "../../pages/forgot-password";
+import ResetPassword from "../../pages/reset-password";
+
 
 const App = () => {
 
 
-    const dispatch = useDispatch();
-    const confirmed = useSelector(state => state.productsData.productsHaveBeenRecieved)
-    const data= useSelector(state => state.productsData.productsData)
-    useEffect(() => {
-
-        dispatch(getProductsData())
-    }, [])
     return (
         <div className="App">
             <div id="portal">
                 <AppHeader/>
-                <div style={{display: "flex"}}>
-                    <DndProvider backend={HTML5Backend}>
-                    { confirmed?(<><BurgerIngredients />
-                        <BurgerConstructor data={data}/></>) :<BurgerIngredients/>
+                <Routes >
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                    <Route path="/reset-password" element={<ResetPassword/>}/>
+                    <Route path="/" element={<Main/>}/>
 
-                    }
-                    </DndProvider >
-                </div>
+
+                </Routes>
             </div>
         </div>
     );

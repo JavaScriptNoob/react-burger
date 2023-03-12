@@ -1,4 +1,4 @@
-import {_QUERY} from "../api";
+import {_QUERY, errorHandling} from "../api";
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "../reducers/index-reducer";
 
 export const getProductsData = () => {
@@ -8,12 +8,7 @@ export const getProductsData = () => {
             text: 'my fetch'
         });
         fetch(`${_QUERY}ingredients`)
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(res.status);
-                }
-                return res.json()
-            })
+            .then(errorHandling)
             .then(item => {
                 dispatch({
                     type: REQUEST_SUCCESS,

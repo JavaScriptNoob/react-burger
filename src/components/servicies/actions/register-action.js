@@ -1,5 +1,6 @@
 import {REGISTER_REQUEST_FAILED, REGISTER_REQUEST_SUCCESS, REGISTER_USER_REQUEST} from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
+import {setToken} from "../jwt";
 
 export function register(name, email, password) {
     return function (dispatch) {
@@ -28,7 +29,7 @@ export function register(name, email, password) {
                     name: res.user.name
 
                 }); console.log(res)
-                // setTokens(res.accessToken, res.refreshToken)
+                setToken(res.accessToken, res.refreshToken)
             })
             .catch(err => {
 

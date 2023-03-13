@@ -1,4 +1,6 @@
 import {
+    CHANGE_DETAILS_FAILED,
+    CHANGE_DETAILS_REQUEST, CHANGE_DETAILS_SUCCESS,
     LOGIN_REQUEST_FAILED,
     LOGIN_REQUEST_SUCCESS,
     LOGIN_USER_REQUEST,
@@ -73,6 +75,28 @@ export const userReducer = (state = initialState, action) => {
                 loginRequest: false,
                 loginFailed: true
             }
+        case CHANGE_DETAILS_REQUEST:
+                return {
+                    ...state,
+                    loginSuccess:false,
+                    loginRequest: false,
+                    loginFailed: true
+                }
+        case CHANGE_DETAILS_SUCCESS:
+            return {
+                ...state,
+                loginSuccess:false,
+                loginRequest: false,
+                loginFailed: true
+            }
+        case CHANGE_DETAILS_FAILED:
+            return {
+                ...state,
+                loginSuccess:false,
+                loginRequest: false,
+                loginFailed: true
+            }
+
 
         default:
             return state

@@ -8,8 +8,8 @@ import Register from "../../pages/register";
 import Login from "../../pages/login";
 import ForgotPassword from "../../pages/forgot-password";
 import ResetPassword from "../../pages/reset-password";
-
-
+import Profile from "../../pages/profile";
+import PrivateRoute from "../../pages/private-route";
 const App = () => {
 
 
@@ -23,7 +23,10 @@ const App = () => {
                     <Route path="/forgot-password" element={<ForgotPassword/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
                     <Route path="/" element={<Main/>}/>
+                    <Route path="/profile" element={<PrivateRoute/>}>
 
+                        <Route path="/profile" element={<Profile/>}/>
+                    </Route>
 
                 </Routes>
             </div>

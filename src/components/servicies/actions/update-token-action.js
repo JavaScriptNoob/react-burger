@@ -42,7 +42,7 @@ export function getUser() {
             });
     }
 };
-const refreshToken = (afterRefresh) => (dispatch) => {
+export const refreshToken = (afterRefresh) => (dispatch) => {
     fetch(`${_QUERY}auth/token`, {
         method: 'POST',
         headers: {

@@ -1,19 +1,18 @@
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {reset} from "../components/servicies/actions/reset-password-action";
+import {useNavigate} from "react-router-dom";
 
 const ResetPassword=()=>{
     const dispatch =  useDispatch();
+    const navigate =useNavigate();
     const [resetDetails, setResetDetails] = useState({
         newPassword: '',
         token: ''
 
     })
-
-
-
-
+ const   resetStatus= useSelector(state => state.user.resetSuccess)
     const handleChange = (e) => {
         const value = e.target.value;
         console.log(resetDetails)
@@ -22,14 +21,19 @@ const ResetPassword=()=>{
             [e.target.name]: value
         });
     }
-    const onSubmit =(e)=>{
+    const onSubmit =(e)=> {
         console.log('hej')
         e.preventDefault();
         dispatch(reset(resetDetails.newPassword, resetDetails.token));
+    }
+
+
+               if (resetStatus){
+                   navigate('/login')
+               }
 
 
 
-}
     return (
         <div>
             <h4>Обновите пароль</h4>
@@ -54,16 +58,6 @@ const ResetPassword=()=>{
                     Нажми на меня
                 </Button>
             </form>
-            <div>
-                <a href="/register"><p>Вы - новый пользователь <Button htmlType="button" type="secondary" size="small">
-                    Зарегистрироваться
-                </Button></p> </a>
-            </div>
-            <div>
-                <a href="/forgot-password"><p>Вы Забыли пароль - востановите его <Button htmlType="button" type="secondary" size="small">
-                    Зарегистрироваться
-                </Button></p> </a>
-            </div>
 
         </div>
     )

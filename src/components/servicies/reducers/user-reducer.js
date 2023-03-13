@@ -105,16 +105,28 @@ export const userReducer = (state = initialState, action) => {
         case RESET_REQUEST:
             return {
                 ...state,
+                resetRequest:true,
+                resetSuccess:false,
+                resetFailed:false,
+
 
             }
         case RESET_SUCCESS:
             return {
                 ...state,
+                resetRequest:false,
+                resetSuccess:true,
+                resetFailed:false,
+
 
             }
         case RESET_FAILED:
             return {
                 ...state,
+                resetRequest:false,
+                resetSuccess:false,
+                resetFailed:true,
+
 
             }
 

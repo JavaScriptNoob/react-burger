@@ -1,17 +1,26 @@
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 import {forgotPassword} from "../components/servicies/actions/forgot-password-action";
 
 const ForgotPassword = () => {
 
     const dispatch =  useDispatch();
     const [forgotten,setForgotten] = useState('');
+    const success = useSelector( state => state.forgottenPassword.forgotPasswordSuccess )
+    let navigate = useNavigate();
     const onSubmit = (e) =>{
         e.preventDefault();
         dispatch(forgotPassword(forgotten))
     }
+
+
+    useEffect(() => {
+        if (success){
+            return navigate("/reset-password");
+        }
+    },[success]);
     console.log(forgotten)
     return (
         <div>

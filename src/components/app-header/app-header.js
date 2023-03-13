@@ -37,7 +37,7 @@ class AppHeader extends React.Component {
                         <Logo className="logo"/>
                     </span>
                 </li>
-                <NavLink to="/register" className={({isActive, isPendling}) =>
+                <NavLink to="/profile" className={({isActive, isPendling}) =>
                     isPendling ? "pendling" : isActive ? "active" : ""
                 }>
                     <li className="pl-3" style={{marginLeft: 288}}>

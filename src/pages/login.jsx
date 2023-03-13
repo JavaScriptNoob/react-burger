@@ -18,16 +18,16 @@ const Login = () => {
             [e.target.name]: value
         });
     }
-    const onSubmit = (e) =>{
+    const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(authDetails.login,authDetails.password))
+        dispatch(login(authDetails.login, authDetails.password))
     }
 
     return (
         <div>
             <h4>Вход</h4>
 
-            <form action="" onSubmit={e=>onSubmit(e)}>
+            <form action="" onSubmit={e => onSubmit(e)}>
                 <EmailInput
                     onChange={e => handleChange(e)}
                     value={authDetails.login}
@@ -46,6 +46,16 @@ const Login = () => {
                     Нажми на меня
                 </Button>
             </form>
+            <div>
+                <a href="/register"><p>Вы - новый пользователь <Button htmlType="button" type="secondary" size="small">
+                    Зарегистрироваться
+                </Button></p> </a>
+            </div>
+            <div>
+                <a href="/forgot-password"><p>Вы Забыли пароль - востановите его <Button htmlType="button" type="secondary" size="small">
+                    Зарегистрироваться
+                </Button></p> </a>
+            </div>
 
         </div>
 

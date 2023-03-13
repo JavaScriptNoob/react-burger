@@ -6,7 +6,10 @@ import {
     LOGIN_USER_REQUEST,
     REGISTER_REQUEST_FAILED,
     REGISTER_REQUEST_SUCCESS,
-    REGISTER_USER_REQUEST
+    REGISTER_USER_REQUEST,
+    RESET_REQUEST,
+    RESET_SUCCESS,
+    RESET_FAILED
 } from "./index-reducer";
 
 
@@ -22,7 +25,10 @@ const initialState = {
     loginRequest: false,
     loginSuccess: false,
     loginFailed: false,
-    refreshToken:''
+    refreshToken:'',
+    resetRequest:false,
+    resetSuccess:false,
+    resetFailed:false,
 
 
 }
@@ -95,6 +101,21 @@ export const userReducer = (state = initialState, action) => {
                 loginSuccess:false,
                 loginRequest: false,
                 loginFailed: true
+            }
+        case RESET_REQUEST:
+            return {
+                ...state,
+
+            }
+        case RESET_SUCCESS:
+            return {
+                ...state,
+
+            }
+        case RESET_FAILED:
+            return {
+                ...state,
+
             }
 
 

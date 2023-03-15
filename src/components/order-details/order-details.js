@@ -24,7 +24,7 @@ const dispatch = useDispatch();
         <div className={styles.container}>
             <div className={styles.modalHeader}>
 
-                <span><CloseIcon type="primary" onClick={ ()=>handleClick()}/></span>
+
             </div>
 
             <div className={styles.container}>

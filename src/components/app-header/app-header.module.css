@@ -30,3 +30,6 @@ a{
 logo{
     height: 40px;
  }
+.text_color_inactive>li>span{
+    color: gray;
+}

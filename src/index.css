@@ -25,3 +25,6 @@ code {
 .App {
   margin: auto;
 }
+#portal {
+  width: 100%;
+}

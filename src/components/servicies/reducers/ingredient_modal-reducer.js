@@ -1,14 +1,16 @@
 import {OPEN_INGREDIENTS_POP_UP, CLOSE_INGREDIENTS_POP_UP} from "./index-reducer";
 
 const initialState={
-    ingredientsModal:false
+    ingredientsModal:false,
+    currentIngredient:[]
 }
 export const ingredientModalReducer = (state = initialState, action) => {
     switch (action.type) {
         case OPEN_INGREDIENTS_POP_UP:
             return {
                 ...state,
-                ingredientsModal: true
+                ingredientsModal: true,
+                currentIngredient: action.payload
             }
 
 
@@ -16,7 +18,8 @@ export const ingredientModalReducer = (state = initialState, action) => {
         case CLOSE_INGREDIENTS_POP_UP:
             return {
                 ...state,
-                ingredientsModal: false
+                ingredientsModal: false,
+                currentIngredient: []
             }
         default:
             return state

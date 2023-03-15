@@ -18,13 +18,11 @@ const BurgerIngredients = () => {
     const data = useSelector(selectorProducts)
     const modal = useSelector(selectorModalIngredients)
     const [current, setCurrent] = React.useState('bun')
-
     const dispatch =useDispatch()
-
     const [itemsData, setItemsData] = useState([]);
     const openModalIngredients = (data) => {
          dispatch(
-            openPopUp()
+            openPopUp(data)
         )
 
          setItemsData(data);

@@ -7,10 +7,17 @@ export const closePopUp = () => {
 
         });
     }}
-export const openPopUp=()=>{
+export const openPopUp=(data)=>{
     return function(dispatch){
         dispatch({
             type:OPEN_INGREDIENTS_POP_UP,
+            payload:data
+
+
+        })
+        dispatch({
+            type:OPEN_INGREDIENTS_POP_UP,
+            payload:data
 
 
         })

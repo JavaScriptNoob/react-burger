@@ -38,3 +38,11 @@
 
 
 }
+.modalTop{
+display: flex;
+    justify-content: space-between;
+    padding-right: 30px;
+    padding-left: 20px;
+    padding-top: 20px;
+    align-items: baseline;
+}

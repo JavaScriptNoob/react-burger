@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectorModal, selectorModalIngredients} from "../servicies/reducers/selectors";
 import {closeOrderModal} from "../servicies/actions/order-actions";
 
-const ModalOverlay = () => {
+const ModalOverlay = ({handler}) => {
     const order =useSelector(selectorModal)
     const ingredients =useSelector(selectorModalIngredients)
 
@@ -22,7 +22,8 @@ const ModalOverlay = () => {
     return (<>{order?<> <div className={styles.background} onClick={handleOrder}>
 
 
-            </div></>:<div className={styles.background} onClick={handleIngredients}>
+            </div></>:<div className={styles.background} onClick={handler}>
+
 
 
             </div>

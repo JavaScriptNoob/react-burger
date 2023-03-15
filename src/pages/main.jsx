@@ -11,10 +11,7 @@ const Main =()=>{
     const dispatch = useDispatch();
     const confirmed = useSelector(state => state.productsData.productsHaveBeenRecieved)
     const data= useSelector(state => state.productsData.productsData)
-    useEffect(() => {
 
-        dispatch(getProductsData())
-    }, [])
     return(
 
         <div style={{display: "flex"}}>

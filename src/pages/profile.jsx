@@ -10,12 +10,9 @@ const Profile = () => {
 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => (state.user))
-
     useEffect(() => {
-
         dispatch(getUser());
-        console.log(currentUser,78678, localStorage.getItem('refresh'))
-    },[]);
+    },[dispatch, currentUser]);
 
 
     const [name, setName] = useState(currentUser.name);

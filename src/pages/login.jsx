@@ -1,5 +1,5 @@
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {login} from "../components/servicies/actions/login-action";
 import {useDispatch, useSelector} from "react-redux";
 import styles from './login.module.css'
@@ -23,11 +23,14 @@ const Login = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(authDetails.login, authDetails.password));
-        if (loginSucess){
-            navigate('/profile')
-        }
+        dispatch(login(authDetails.login, authDetails.password));   }
+
+
+    if (loginSucess){
+        navigate('/profile')
     }
+
+
 
     return (
         <div className={styles.container}>

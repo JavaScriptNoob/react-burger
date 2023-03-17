@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {forgotPassword} from "../components/servicies/actions/forgot-password-action";
-
+import styles from "./forgot-password.module.css"
 const ForgotPassword = () => {
 
     const dispatch =  useDispatch();
@@ -23,27 +23,30 @@ const ForgotPassword = () => {
     },[success]);
     console.log(forgotten)
     return (
-        <div>
-            <form action="" onSubmit={e => onSubmit(e)}>
+        <div className={styles.container}>
 
+            <form action="" className={styles.formContainer} onSubmit={e => onSubmit(e)}>
+                <p  className="text text_type_main-medium">Востановление пароля </p>
                 <EmailInput
                     onChange={e => setForgotten(e.target.value)}
                     value={forgotten}
                     name={'secondInput'}
-                    placeholder="Почта"
-
+                    placeholder="Укажите пароль"
                     extraClass="mb-2"
                 />
-
+                <div className={styles.buttonContainer}>
                 <Button htmlType="submit" type="primary" size="large">
                     Нажми на меня
                 </Button>
+                </div>
 
             </form>
-            <div>
-                <p>Вы Уже Зарегистрированнны?</p>
+            <div >
+
                 <Link to="/login">
+                    <span>Вспомнили пароль?</span> <Button htmlType="button" type="secondary" size="small">
                     Войти
+                    </Button>
                 </Link>
             </div>
         </div>

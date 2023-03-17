@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
@@ -6,32 +6,43 @@ import {getUser} from "../components/servicies/actions/update-token-action";
 import {changeUserDetails} from "../components/servicies/actions/update-user-details-action";
 import styles from "./profile.module.css"
 import {exit} from "../components/servicies/actions/sign-out-action";
+import {refetchUser} from "../components/servicies/actions/refetch-user-action";
+import {selectorUser} from "../components/servicies/reducers/selectors";
+
 const Profile = () => {
 
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => (state.user))
-    useEffect(() => {
-        dispatch(getUser());
-    },[dispatch, currentUser]);
-
-
-    const [name, setName] = useState(currentUser.name);
-    const [email, setEmail] = useState(currentUser.email);
+    const currentUser = useSelector(selectorUser)
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate =useNavigate();
+    const conditionStatement = name !==''&& email!==''&& password!=='';
+    useEffect(() => {
+
+            dispatch(refetchUser());
+            dispatch(getUser());
+
+    },[]);
+
+    useEffect(()=> {
+            setName(currentUser.name);
+            setEmail(currentUser.email)
+        },[currentUser]
+    )
     const submitChanges = (e) => {
         e.preventDefault();
-        console.log(53, e, name, email, password)
-        dispatch(changeUserDetails(name, email, password));
+        dispatch(changeUserDetails(name,email,password));
+        navigate("/")
     }
+
+
     const signOut = () => {
-       dispatch(exit())
-
-
-
+        dispatch(exit())
     }
     return (
-        <div >
-            <div className={styles.container}>
+        <div>
+           <div className={styles.container}>
                 <ul className={styles.sideNav}>
                     <li><Link className="text text_type_main-medium" to={'/'}>Профиль</Link></li>
                     <li><Link className="text text_type_main-medium" to={'/'}>История заказов</Link></li>
@@ -73,14 +84,16 @@ const Profile = () => {
                             icon="EditIcon">
                         </PasswordInput>
                         <div className={styles.buttonContainer}>
-                        <Button
-                            onClick={submitChanges}
-                            type="primary"
-                            size="medium"
-                            htmlType={"submit"}
-                        >
-                            Сохранить
-                        </Button>
+                            <Button
+                                onClick={submitChanges}
+                                type="primary"
+                                size="medium"
+                                htmlType={"submit"}
+                                disabled={!conditionStatement}
+                            >
+                                Сохранить
+                            </Button>
+
                         </div>
                     </form>
                 </div>

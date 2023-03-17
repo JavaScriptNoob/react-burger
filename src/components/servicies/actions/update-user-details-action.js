@@ -2,8 +2,9 @@ import {CHANGE_DETAILS_FAILED, CHANGE_DETAILS_REQUEST, CHANGE_DETAILS_SUCCESS} f
 import {getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
-
+import {useNavigate} from "react-router-dom";
 export function changeUserDetails(name,email, password) {
+
     return function (dispatch) {
         dispatch({
             type: CHANGE_DETAILS_REQUEST,
@@ -26,6 +27,7 @@ export function changeUserDetails(name,email, password) {
 
                     return res.json();
                 }
+
             )
             .then((res) => {
 
@@ -37,6 +39,7 @@ export function changeUserDetails(name,email, password) {
                         type: CHANGE_DETAILS_SUCCESS,
                         user: res.user,
                     });
+
                 }
             })
             .catch((err) => {

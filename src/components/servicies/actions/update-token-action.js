@@ -7,7 +7,7 @@ export function getUser() {
         dispatch({
             type: GET_USER_REQUEST,
         });
-
+        console.log("getuser beginning" )
         fetch(`${_QUERY}auth/user`, {
             method: 'GET',
             headers: {
@@ -17,7 +17,7 @@ export function getUser() {
         })
             .then(
                 (res) => {
-
+                    console.log(res,'refresh')
                     return res.json();
 
                 }

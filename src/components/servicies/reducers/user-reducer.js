@@ -12,7 +12,7 @@ import {
     RESET_FAILED,
     SIGN_OUT_FAILED,
     SIGN_OUT_REQUEST,
-    SIGN_OUT_SUCCESS
+    SIGN_OUT_SUCCESS, REFETCH_USER_REQUEST, REFETCH_USER_SUCCESS, REFETCH_USER_FAILED
 } from "./index-reducer";
 
 
@@ -34,7 +34,13 @@ const initialState = {
     resetFailed: false,
     exitRequest:false,
     exitSucess:false,
-    exitFailed:false
+    exitFailed:false,
+    refetchRequest: false,
+    rerefetchSuccess: false,
+    refetchFailed: false,
+    changeDetailRequest:false,
+    changeDetailSuccess:false,
+    changeDetailFailed:false,
 
 
 
@@ -91,23 +97,23 @@ export const userReducer = (state = initialState, action) => {
         case CHANGE_DETAILS_REQUEST:
             return {
                 ...state,
-                loginSuccess: false,
-                loginRequest: false,
-                loginFailed: true
+                changeDetailSuccess: false,
+                changeDetailRequest: true,
+                changeDetailFailed: false
             }
         case CHANGE_DETAILS_SUCCESS:
             return {
                 ...state,
-                loginSuccess: false,
-                loginRequest: false,
-                loginFailed: true
+                changeDetailSuccess: true,
+                changeDetailRequest: false,
+                changeDetailFailed: false
             }
         case CHANGE_DETAILS_FAILED:
             return {
                 ...state,
-                loginSuccess: false,
-                loginRequest: false,
-                loginFailed: true
+                changeDetailSuccess: false,
+                changeDetailRequest: false,
+                changeDetailFailed: true
             }
         case RESET_REQUEST:
             return {
@@ -155,8 +161,40 @@ export const userReducer = (state = initialState, action) => {
                 resetRequest: false,
                 resetSuccess: false,
                 resetFailed: false,
+                exitRequest:false,
+                exitSucess:false,
+                exitFailed:false,
+                refetchRequest: false,
+                rerefetchSuccess: false,
+                refetchFailed: false,
+                changeDetailRequest:false,
+                changeDetailSuccess:false,
+                changeDetailFailed:false,
             }
         case SIGN_OUT_FAILED:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
+            }
+        case REFETCH_USER_REQUEST:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
+            }
+        case REFETCH_USER_SUCCESS:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true,
+                name:action.user.name,
+                email:action.user.email
+            }
+        case REFETCH_USER_FAILED:
             return {
                 ...state,
                 resetRequest: false,

@@ -10,6 +10,8 @@ const Login = () => {
         password: ''
 
     })
+    const [submit, setSubmit] = useState(false)
+
     const loginSucess = useSelector(state => state.user.loginSuccess)
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -23,11 +25,10 @@ const Login = () => {
     }
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(authDetails.login, authDetails.password));   }
-
-
+        setSubmit(true)
+        dispatch(login(authDetails.login, authDetails.password));}
     if (loginSucess){
-        navigate('/profile')
+        navigate('/')
     }
 
 
@@ -54,6 +55,7 @@ const Login = () => {
                 <Button style={{width:'200px'}} htmlType="submit" type="primary" size="large">
                     Войти
                 </Button>
+                {!loginSucess&& submit?<p className={styles.alert}>Все пошло не по плану</p>:null}
             </form>
             <div>
                 <a href="/register"><p>Вы - новый пользователь <Button htmlType="button" type="secondary" size="small">

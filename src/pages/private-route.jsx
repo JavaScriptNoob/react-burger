@@ -10,9 +10,9 @@ const  PrivateRoute=({ children, ...rest }) =>{
         setDomIsReady(true)
     }, []);
 
-    console.log(auth)
+
     const token = localStorage.getItem('refresh')
-    console.log(token,10000000000)
+
 
     return auth || token ? <Outlet /> : <Navigate to="/login" />;
 

@@ -12,7 +12,7 @@ export function changeUserDetails(name,email, password) {
         fetch(`${_QUERY}auth/user`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json;charset=utf-8',
+                'Content-Type': 'application/json',
                 authorization: getCookie('access')
             },
             body: JSON.stringify({

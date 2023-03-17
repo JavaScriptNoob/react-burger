@@ -51,7 +51,7 @@ class AppHeader extends React.Component {
                 }}>
                     <li className="pl-3" style={{marginLeft: 288}}>
                         <ProfileIcon type="primary"/>
-                        <span href="src/components/app-header" className="pl-1">
+                        <span  className="pl-1">
                             Личный кабинет
                         </span>
                     </li>

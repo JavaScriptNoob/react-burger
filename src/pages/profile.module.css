@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    justify-content: start;
+    margin-top: 15%;
+    width: 1280px;
+}
+.sideNav{
+    width: 30%;
+    margin-left: 0;
+    padding-left: 0;
+}
+.sideNav>li{
+    padding: 15px;
+}
+.formContainer{
+    width: 35%;
+}
+.formContainer>form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: baseline;
+}
+.buttonContainer {
+
+    align-self: center;
+}

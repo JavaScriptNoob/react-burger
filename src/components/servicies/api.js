@@ -1,4 +1,5 @@
 import React from "react";
+import {storeCookie} from "./jwt";
 
 
 export const _QUERY = "https://norma.nomoreparties.space/api/"

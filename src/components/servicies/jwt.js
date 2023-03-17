@@ -1,12 +1,33 @@
-export const storeCookie=(title,payload)=>{
+export function storeCookie(name, value, options = {}) {
 
+    options = {
+        path: '/',
 
-document.cookie = title + "="+payload
+        ...options
+    };
 
+    if (options.expires instanceof Date) {
+        options.expires = options.expires.toUTCString();
+    }
+
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+    for (let optionKey in options) {
+        updatedCookie += "; " + optionKey;
+        let optionValue = options[optionKey];
+        if (optionValue !== true) {
+            updatedCookie += "=" + optionValue;
+        }
+    }
+
+    document.cookie = updatedCookie;
 }
 
-export const setToken =(acess, refresh)=>{
-storeCookie('access',acess);
+// Пример использования:
+// setCookie('user', 'John', {'max-age': 1200});
+
+export const setToken =(access, refresh)=>{
+storeCookie('access',access,{'max-age': 3600});
 localStorage.setItem('refresh',refresh)
 
 }
@@ -16,4 +37,7 @@ export function getCookie(name) {
         new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+export function deleteCookie(name) {
+    storeCookie(name, '', { 'max-age': -1 });
 }

@@ -9,26 +9,34 @@ import {
     REGISTER_USER_REQUEST,
     RESET_REQUEST,
     RESET_SUCCESS,
-    RESET_FAILED
+    RESET_FAILED,
+    SIGN_OUT_FAILED,
+    SIGN_OUT_REQUEST,
+    SIGN_OUT_SUCCESS
 } from "./index-reducer";
 
 
 const initialState = {
-    userToken:"",
+    userToken: "",
     requestProcessing: false,
     requestSuccess: false,
     requestFailed: false,
-    responseBody:[],
-    errBody:[],
-    email:'',
-    name:'',
+    responseBody: [],
+    errBody: [],
+    email: '',
+    name: '',
     loginRequest: false,
     loginSuccess: false,
     loginFailed: false,
-    refreshToken:'',
-    resetRequest:false,
-    resetSuccess:false,
-    resetFailed:false,
+    refreshToken: '',
+    resetRequest: false,
+    resetSuccess: false,
+    resetFailed: false,
+    exitRequest:false,
+    exitSucess:false,
+    exitFailed:false
+
+
 
 
 }
@@ -50,18 +58,18 @@ export const userReducer = (state = initialState, action) => {
                 requestProcessing: false,
                 requestFailed: false,
                 email: action.email,
-                name : action.name
+                name: action.name
             }
         case REGISTER_REQUEST_FAILED:
             return {
                 ...state,
                 errBody: action.err,
                 requestFailed: true,
-                }
+            }
         case LOGIN_USER_REQUEST:
             return {
                 ...state,
-                loginRequest: true,
+                loginRequest: true
             }
         case LOGIN_REQUEST_SUCCESS:
             return {
@@ -70,67 +78,91 @@ export const userReducer = (state = initialState, action) => {
                 loginRequest: false,
                 userToken: action.response.accessToken,
                 refreshToken: action.response.refreshToken,
-                email:action.response.user.email,
-                name:action.response.user.name,
-
+                email: action.response.user.email,
+                name: action.response.user.name
             }
         case LOGIN_REQUEST_FAILED:
             return {
                 ...state,
-                loginSuccess:false,
+                loginSuccess: false,
                 loginRequest: false,
                 loginFailed: true
             }
         case CHANGE_DETAILS_REQUEST:
-                return {
-                    ...state,
-                    loginSuccess:false,
-                    loginRequest: false,
-                    loginFailed: true
-                }
+            return {
+                ...state,
+                loginSuccess: false,
+                loginRequest: false,
+                loginFailed: true
+            }
         case CHANGE_DETAILS_SUCCESS:
             return {
                 ...state,
-                loginSuccess:false,
+                loginSuccess: false,
                 loginRequest: false,
                 loginFailed: true
             }
         case CHANGE_DETAILS_FAILED:
             return {
                 ...state,
-                loginSuccess:false,
+                loginSuccess: false,
                 loginRequest: false,
                 loginFailed: true
             }
         case RESET_REQUEST:
             return {
                 ...state,
-                resetRequest:true,
-                resetSuccess:false,
-                resetFailed:false,
-
-
+                resetRequest: true,
+                resetSuccess: false,
+                resetFailed: false
             }
         case RESET_SUCCESS:
             return {
                 ...state,
-                resetRequest:false,
-                resetSuccess:true,
-                resetFailed:false,
-
-
+                resetRequest: false,
+                resetSuccess: true,
+                resetFailed: false
             }
         case RESET_FAILED:
             return {
                 ...state,
-                resetRequest:false,
-                resetSuccess:false,
-                resetFailed:true,
-
-
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
             }
-
-
+        case SIGN_OUT_REQUEST:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
+            }
+        case SIGN_OUT_SUCCESS:
+            return {
+                ...state,
+                userToken: "",
+                requestProcessing: false,
+                requestSuccess: false,
+                requestFailed: false,
+                responseBody: [],
+                errBody: [],
+                email: '',
+                name: '',
+                loginRequest: false,
+                loginSuccess: false,
+                loginFailed: false,
+                refreshToken: '',
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: false,
+            }
+        case SIGN_OUT_FAILED:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
+            }
         default:
             return state
     }

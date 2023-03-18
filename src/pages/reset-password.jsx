@@ -3,16 +3,17 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {reset} from "../components/servicies/actions/reset-password-action";
 import {useNavigate} from "react-router-dom";
-
+import {selectorUser} from "../components/servicies/reducers/selectors";
+import styles from "./reset-password.module.css"
 const ResetPassword=()=>{
     const dispatch =  useDispatch();
     const navigate =useNavigate();
     const [resetDetails, setResetDetails] = useState({
         newPassword: '',
         token: ''
-
     })
- const   resetStatus= useSelector(state => state.user.resetSuccess)
+    const forgotRequest =  useSelector(selectorUser)
+    const   resetStatus= useSelector(state => state.user.resetSuccess)
     const handleChange = (e) => {
         const value = e.target.value;
         console.log(resetDetails)
@@ -21,6 +22,11 @@ const ResetPassword=()=>{
             [e.target.name]: value
         });
     }
+
+    if (!forgotRequest.forgotPasswordSuccess){
+        navigate('/')
+    }
+
     const onSubmit =(e)=> {
         console.log('hej')
         e.preventDefault();
@@ -35,7 +41,7 @@ const ResetPassword=()=>{
 
 
     return (
-        <div>
+        <div className={styles.container}>
             <h4>Обновите пароль</h4>
 
             <form action="" onSubmit={e => onSubmit(e)}>
@@ -44,8 +50,8 @@ const ResetPassword=()=>{
                     value={resetDetails.newPassword}
                     name={'newPassword'}
                     placeholder="Введите новый пароль"
-                    isIcon={false}
-                    extraClass="mb-2"
+
+                    extraClass="mb-5"
                 />
                 <Input
                     onChange={e => handleChange(e)}
@@ -54,9 +60,11 @@ const ResetPassword=()=>{
                     extraClass="mb-2"
                     placeholder="Введите пароль из письма"
                 />
+                <div className={styles.buttonContainer}>
                 <Button htmlType="submit" type="primary" size="large">
                     Нажми на меня
                 </Button>
+                </div>
             </form>
 
         </div>

@@ -35,6 +35,12 @@ const Profile = () => {
         dispatch(changeUserDetails(name,email,password));
         navigate("/")
     }
+    const clear =()=>{
+        setEmail('');
+        setName('');
+        setPassword('')
+
+    }
 
 
     const signOut = () => {
@@ -44,8 +50,8 @@ const Profile = () => {
         <div>
            <div className={styles.container}>
                 <ul className={styles.sideNav}>
-                    <li><Link className="text text_type_main-medium" to={'/'}>Профиль</Link></li>
-                    <li><Link className="text text_type_main-medium" to={'/'}>История заказов</Link></li>
+                    <li><Link className="text text_type_main-medium" to={'/profile'}>Профиль</Link></li>
+                    <li><Link className="text text_type_main-medium" to={'/profile/orders'}>История заказов</Link></li>
                     <li><Link onClick={signOut} className="text text_type_main-medium" to={'/'}>Выход</Link></li>
                 </ul>
                 <div className={styles.formContainer}>
@@ -93,6 +99,16 @@ const Profile = () => {
                             >
                                 Сохранить
                             </Button>
+                            <Button
+                                onClick={clear}
+                                type="primary"
+                                size="medium"
+                                htmlType={"submit"}
+                                disabled={!conditionStatement}
+                            >
+                              Очистить
+                            </Button>
+
 
                         </div>
                     </form>

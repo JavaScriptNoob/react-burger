@@ -13,6 +13,7 @@ const ForgotPassword = () => {
     const onSubmit = (e) =>{
         e.preventDefault();
         dispatch(forgotPassword(forgotten))
+
     }
 
 
@@ -31,12 +32,12 @@ const ForgotPassword = () => {
                     onChange={e => setForgotten(e.target.value)}
                     value={forgotten}
                     name={'secondInput'}
-                    placeholder="Укажите пароль"
+                    placeholder="Укажите ваш почтовый ящик"
                     extraClass="mb-2"
                 />
                 <div className={styles.buttonContainer}>
                 <Button htmlType="submit" type="primary" size="large">
-                    Нажми на меня
+                    Отправить
                 </Button>
                 </div>
 

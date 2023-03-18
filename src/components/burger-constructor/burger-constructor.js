@@ -24,7 +24,7 @@ import {
     selectorBun,
     selectorCurrentConstructoorList,
     selectorCurrentList,
-    selectorModal
+    selectorModal, selectorUser
 } from "../servicies/reducers/selectors";
 
 
@@ -32,6 +32,7 @@ const BurgerConstructor = (props) => {
     const dispatch = useDispatch();
     const priceListener = useSelector(selectorCurrentList)
     const currentList = useSelector(selectorCurrentConstructoorList)
+    const user =useSelector( selectorUser)
     const bun = useSelector(selectorBun)
     const openModal = useSelector(selectorModal)
     const up = " (верх)"
@@ -202,7 +203,7 @@ const BurgerConstructor = (props) => {
                 <Button htmlType="button"
                         type="primary"
                         size="large"
-                        disabled={currentPrice < 1}
+                        disabled={currentPrice < 1 || user.name===''}
                         onClick={
                             (e) => enter()
                         }>

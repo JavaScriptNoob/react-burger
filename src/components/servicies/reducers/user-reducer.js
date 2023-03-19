@@ -210,25 +210,24 @@ export const userReducer = (state = initialState, action) => {
         case SENT_EMAIL:
             return {
                 ...state,
-                resetRequest: false,
-                resetSuccess: false,
-                resetFailed: true
+                forgoPasswordRequest: true,
+                forgotPasswordSuccess: false,
+                forgotPasswordFailed: false
             }
         case SENT_EMAIL_SUCCESS:
             return {
                 ...state,
-                resetRequest: false,
-                resetSuccess: false,
-                resetFailed: true,
-                name:action.user.name,
-                email:action.user.email
+                forgoPasswordRequest: false,
+                forgotPasswordSuccess: true,
+                forgotPasswordFailed: false
+
             }
         case SENT_EMAIL_FAILED:
             return {
                 ...state,
-                resetRequest: false,
-                resetSuccess: false,
-                resetFailed: true
+                forgoPasswordRequest: false,
+                forgotPasswordSuccess: false,
+                forgotPasswordFailed: true
             }
 
         default:

@@ -4,11 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {forgotPassword} from "../components/servicies/actions/forgot-password-action";
 import styles from "./forgot-password.module.css"
+import {selectorUser} from "../components/servicies/reducers/selectors";
 const ForgotPassword = () => {
 
     const dispatch =  useDispatch();
     const [forgotten,setForgotten] = useState('');
-    const success = useSelector( state => state.forgottenPassword.forgotPasswordSuccess )
+    const success = useSelector( selectorUser ).forgotPasswordSuccess
     let navigate = useNavigate();
     const onSubmit = (e) =>{
         e.preventDefault();

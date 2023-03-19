@@ -13,7 +13,7 @@ const ResetPassword = () => {
         newPassword: '', token: ''
     })
     const forgotRequest = useSelector(selectorUser)
-    const resetStatus = useSelector(state => state.user.resetSuccess)
+    const resetStatus = useSelector(selectorUser)
     const handleChange = (e) => {
         const value = e.target.value;
         console.log(resetDetails)
@@ -21,15 +21,19 @@ const ResetPassword = () => {
             ...resetDetails, [e.target.name]: value
         });
     }
-    if (!forgotRequest.forgotPasswordSuccess) {
-        navigate('/')
-    }
+    useEffect(() => {
+        if (!forgotRequest.forgotPasswordSuccess) {
+            navigate('/forgot-password')
+        }
+    }, []);
+
+
     const onSubmit = (e) => {
         console.log('hej')
         e.preventDefault();
         dispatch(reset(resetDetails.newPassword, resetDetails.token));
     }
-    if (resetStatus) {
+    if (resetStatus.resetSuccess) {
         navigate('/login')
     }
     return (<div className={styles.container}>
@@ -50,10 +54,12 @@ const ResetPassword = () => {
                 extraClass="mb-2"
                 placeholder="Введите пароль из письма"
             />
+            {resetStatus.resetFailed && <p className={styles.alert}>Вы допустили ошибку </p> }
             <div className={styles.buttonContainer}>
                 <Button htmlType="submit" type="primary" size="large">
                     Нажми на меня
                 </Button>
+
             </div>
         </form>
 

@@ -33,10 +33,9 @@ export function forgotPassword( email) {
             .catch(err => {
 
                 dispatch({
-                    type: SENT_EMAIL_FAILED,
-
+                    type: SENT_EMAIL_FAILED
                 })
-                console.log(err)
+
             })
     }
 }

@@ -12,7 +12,7 @@ const location = useLocation()
 
         return (<nav className="pt-4 pb-4  " style={{display: "flex", width: "100%"}}>
             <ul className={styles.navbarList}>
-                <NavLink exact to="/" className={({ isActive, isPending }) =>
+                <NavLink  to="/" className={({ isActive, isPending }) =>
                         isActive  ? "text_active" : "text_color_inactive"}>
                     <li className=" ">
                         <BurgerIcon type="primary"/>
@@ -21,7 +21,7 @@ const location = useLocation()
                         </span>
                     </li>
                 </NavLink>
-                <NavLink exact to="/profile/orders/" className={({ isActive, isPending }) =>
+                <NavLink  to="/profile/orders/" className={({ isActive, isPending }) =>
                     isActive ? "text_active" : "text_color_inactive"
                 }>
                     <li className="pl-4">
@@ -36,7 +36,7 @@ const location = useLocation()
                         <Logo className="logo"/>
                     </span>
                 </li>
-                <NavLink exact to="/profile" className={({ isActive, isPending }) =>
+                <NavLink  to="/profile" className={({ isActive, isPending }) =>
                     location.pathname ==="/profile" ? "text_active" : "text_color_inactive"
                 }>
                     <li className="pl-3" style={{marginLeft: 288}}>

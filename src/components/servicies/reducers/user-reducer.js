@@ -1,6 +1,7 @@
 import {
     CHANGE_DETAILS_FAILED,
-    CHANGE_DETAILS_REQUEST, CHANGE_DETAILS_SUCCESS,
+    CHANGE_DETAILS_REQUEST,
+    CHANGE_DETAILS_SUCCESS,
     LOGIN_REQUEST_FAILED,
     LOGIN_REQUEST_SUCCESS,
     LOGIN_USER_REQUEST,
@@ -12,7 +13,13 @@ import {
     RESET_FAILED,
     SIGN_OUT_FAILED,
     SIGN_OUT_REQUEST,
-    SIGN_OUT_SUCCESS, REFETCH_USER_REQUEST, REFETCH_USER_SUCCESS, REFETCH_USER_FAILED
+    SIGN_OUT_SUCCESS,
+    REFETCH_USER_REQUEST,
+    REFETCH_USER_SUCCESS,
+    REFETCH_USER_FAILED,
+    SENT_EMAIL,
+    SENT_EMAIL_SUCCESS,
+    SENT_EMAIL_FAILED
 } from "./index-reducer";
 
 
@@ -41,10 +48,9 @@ const initialState = {
     changeDetailRequest:false,
     changeDetailSuccess:false,
     changeDetailFailed:false,
-
-
-
-
+    forgoPasswordRequest: false,
+    forgotPasswordSuccess: false,
+    forgotPasswordFailed: false
 }
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -201,6 +207,30 @@ export const userReducer = (state = initialState, action) => {
                 resetSuccess: false,
                 resetFailed: true
             }
+        case SENT_EMAIL:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
+            }
+        case SENT_EMAIL_SUCCESS:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true,
+                name:action.user.name,
+                email:action.user.email
+            }
+        case SENT_EMAIL_FAILED:
+            return {
+                ...state,
+                resetRequest: false,
+                resetSuccess: false,
+                resetFailed: true
+            }
+
         default:
             return state
     }

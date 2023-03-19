@@ -27,7 +27,7 @@ export function refetchUser() {
             .then((res) => {
 
                 if (res.message === 'jwt expired') {
-                    dispatch(refreshToken(getUser()));
+                    dispatch(refreshToken(refetchUser()));
                 }
                 if (res.success) {
                     dispatch({

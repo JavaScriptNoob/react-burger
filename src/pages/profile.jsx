@@ -1,4 +1,4 @@
-import {Link, NavLink, useLocation, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
@@ -19,7 +19,6 @@ const Profile = () => {
         email: '',
         password: ''
     })
-    const location = useLocation();
     const navigate = useNavigate();
     const conditionStatement = values.name !== currentUser.name || values.email !== currentUser.email || values.password !== '';
     useEffect(() => {
@@ -42,7 +41,6 @@ const Profile = () => {
         const submitChanges = (e) => {
             e.preventDefault();
             dispatch(changeUserDetails(values));
-
         }
         const clear = () => {
             setValues({
@@ -63,30 +61,28 @@ const Profile = () => {
                     <ul className={styles.sideNav}>
                         <li
                             className="text text_type_main-medium">
-                            <NavLink
-                                className={({ isActive, isPending }) =>
-                                    isActive  ? "text_active" : "text_color_inactive"}
+                            <Link
+                                className="text text_type_main-medium"
                                 to={'/profile'}>
                                 Профиль
-                            </NavLink>
+                            </Link>
                         </li>
                         <li
                             className="text text_type_main-medium">
-                            <NavLink
-                                className={({ isActive, isPending }) =>
-                                    isActive  ? "text_active" : "text_color_inactive"}
-                                to={'/profile/order'}>
+                            <Link
+                                className="text text_type_main-medium"
+                                to={'/profile/orders'}>
                                 История заказов
-                            </NavLink>
+                            </Link>
                         </li>
                         <li
                             className="text text_type_main-medium">
-                            <NavLink
+                            <Link
                                 onClick={signOut}
                                 className="text text_type_main-medium"
                                 to={'/'}>
                                 Выход
-                            </NavLink>
+                            </Link>
                         </li>
                     </ul>
                     <div className={styles.formContainer}>

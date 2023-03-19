@@ -28,7 +28,7 @@ export function changeUserDetails(values) {
             .then((res) => {
 
                 if (res.message === 'jwt expired') {
-                    dispatch(refreshToken(changeUserDetails()));
+                    dispatch(refreshToken(changeUserDetails(values)));
                 }
                 if (res.success) {
                     dispatch({

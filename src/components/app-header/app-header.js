@@ -3,21 +3,17 @@ import {
     Counter, Logo, BurgerIcon, ListIcon, MenuIcon, ProfileIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './app-header.module.css'
-import {NavLink, Link} from "react-router-dom";
+import {NavLink, Link, useLocation} from "react-router-dom";
 
-class AppHeader extends React.Component {
+const  AppHeader=()=> {
 
+const location = useLocation()
 
-    render() {
 
         return (<nav className="pt-4 pb-4  " style={{display: "flex", width: "100%"}}>
             <ul className={styles.navbarList}>
-                <NavLink to="/" style={({ isActive, isPending }) => {
-                    return {
-
-                        color: isPending ? "gray" : "white",
-                    };
-                }}>
+                <NavLink exact to="/" className={({ isActive, isPending }) =>
+                        isActive  ? "text_active" : "text_color_inactive"}>
                     <li className=" ">
                         <BurgerIcon type="primary"/>
                         <span className="pl-2">
@@ -25,12 +21,9 @@ class AppHeader extends React.Component {
                         </span>
                     </li>
                 </NavLink>
-                <NavLink to="/profile/orders" style={({ isActive, isPending }) => {
-                    return {
-                        fontWeight: isActive ? "bold" : "",
-                        color: isPending ? "gray" : "white",
-                    };
-                }}>
+                <NavLink exact to="/profile/orders/" className={({ isActive, isPending }) =>
+                    isActive ? "text_active" : "text_color_inactive"
+                }>
                     <li className="pl-4">
                         <ListIcon type="primary"/>
                         <span className="pl-2">
@@ -43,12 +36,9 @@ class AppHeader extends React.Component {
                         <Logo className="logo"/>
                     </span>
                 </li>
-                <NavLink to="/profile" style={({ isActive, isPending }) => {
-                    return {
-
-                        color: isPending ? "gray" : "white",
-                    };
-                }}>
+                <NavLink exact to="/profile" className={({ isActive, isPending }) =>
+                    location.pathname ==="/profile" ? "text_active" : "text_color_inactive"
+                }>
                     <li className="pl-3" style={{marginLeft: 288}}>
                         <ProfileIcon type="primary"/>
                         <span  className="pl-1">
@@ -59,7 +49,7 @@ class AppHeader extends React.Component {
             </ul>
 
         </nav>)
-    }
+
 }
 
 export default AppHeader;

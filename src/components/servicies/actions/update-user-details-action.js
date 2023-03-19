@@ -3,7 +3,7 @@ import {getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
 import {useNavigate} from "react-router-dom";
-export function changeUserDetails(name,email, password) {
+export function changeUserDetails(values) {
 
     return function (dispatch) {
         dispatch({
@@ -16,11 +16,7 @@ export function changeUserDetails(name,email, password) {
                 'Content-Type': 'application/json',
                 authorization: getCookie('access')
             },
-            body: JSON.stringify({
-                email: email,
-                name: name,
-                password: password
-            })
+            body: JSON.stringify(values)
         })
             .then(
                 (res) => {

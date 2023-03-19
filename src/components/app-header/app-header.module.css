@@ -33,3 +33,6 @@ logo{
 .text_color_inactive>li>span{
     color: gray;
 }
+.text_active{
+    color: #ffffff;
+}

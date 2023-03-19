@@ -16,6 +16,7 @@ import {CLOSE_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
 import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import Modal from "../modal/modal";
 import {getProductsData} from "../servicies/actions/get-ingredient-actions";
+import Orders from "../../pages/orders";
 const App = () => {
 
     const dispatch =useDispatch();
@@ -51,12 +52,13 @@ const App = () => {
                         <Route path="/forgot-password" element={<ForgotPassword/>}/>
                         <Route path="/reset-password" element={<ResetPassword/>}/>
                         <Route path="/" element={<Main/>}/>
-                        <Route path="/profile" element={<PrivateRoute/>}>
-                            <Route path="/profile" element={<Profile/>}/>
-                        </Route>
                         <Route path="/profile/orders" element={<PrivateRoute/>}>
-                            <Route path="/profile/orders" element={<Profile/>}/>
+                            <Route path="/profile/orders" element={<Orders/>}/>
                         </Route>
+                        <Route path="/profile" element={<PrivateRoute/>}>
+                            <Route exact path="/profile" element={<Profile/>}/>
+                        </Route>
+
                         <Route path='/ingredients/:ingredientId' element={<IngredientDetails />} />
 
                     </Routes>

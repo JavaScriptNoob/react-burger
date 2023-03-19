@@ -22,6 +22,10 @@
     align-items: baseline;
 }
 .buttonContainer {
+    display: flex;
+    justify-content: space-between;
 
-    align-self: center;
+}
+.buttonContainer>div{
+    width: 0%;
 }

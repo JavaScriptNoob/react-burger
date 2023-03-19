@@ -3,6 +3,7 @@ import {getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
 import {useNavigate} from "react-router-dom";
+import {refetchUser} from "./refetch-user-action";
 export function changeUserDetails(values) {
 
     return function (dispatch) {
@@ -35,6 +36,7 @@ export function changeUserDetails(values) {
                         type: CHANGE_DETAILS_SUCCESS,
                         user: res.user,
                     });
+                    dispatch(refetchUser());
 
                 }
             })

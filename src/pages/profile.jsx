@@ -15,9 +15,7 @@ const Profile = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(selectorUser)
     const {values, handleChange, setValues} = useForm({
-        name: '',
-        email: '',
-        password: ''
+        name: '', email: '', password: ''
     })
     const navigate = useNavigate();
     const conditionStatement = values.name !== currentUser.name || values.email !== currentUser.email || values.password !== '';
@@ -31,96 +29,104 @@ const Profile = () => {
 
     useEffect(() => {
         setValues({
-                ...values,
-                name: currentUser.name,
-                email: currentUser.email,
+            ...values, name: currentUser.name, email: currentUser.email,
 
 
-            })}, [currentUser]
-        )
-        const submitChanges = (e) => {
-            e.preventDefault();
-            dispatch(changeUserDetails(values));
-        }
-        const clear = () => {
-            setValues({
-                name: currentUser.name,
-                email: currentUser.email,
-                password: ''
-            });
+        })
+    }, [currentUser])
+    const submitChanges = (e) => {
+        e.preventDefault();
+        dispatch(changeUserDetails(values));
+    }
+    const clear = () => {
+        setValues({
+            name: currentUser.name, email: currentUser.email, password: ''
+        });
 
-        }
+    }
 
 
-        const signOut = () => {
-            dispatch(exit())
-        }
-        return (
-            <div>
-                <div className={styles.container}>
-                    <ul className={styles.sideNav}>
-                        <li
-                            className="text text_type_main-medium">
-                            <Link
-                                className="text text_type_main-medium"
-                                to={'/profile'}>
-                                Профиль
-                            </Link>
-                        </li>
-                        <li
-                            className="text text_type_main-medium">
-                            <Link
-                                className="text text_type_main-medium"
-                                to={'/profile/orders'}>
-                                История заказов
-                            </Link>
-                        </li>
-                        <li
-                            className="text text_type_main-medium">
-                            <Link
-                                onClick={signOut}
-                                className="text text_type_main-medium"
-                                to={'/'}>
-                                Выход
-                            </Link>
-                        </li>
-                    </ul>
-                    <div className={styles.formContainer}>
-                        <form action="">
-                            <Input
-                                type={'text'}
-                                placeholder={'Имя'}
-                                onChange={handleChange}
-                                value={values.name}
-                                name={'name'}
-                                error={false}
-                                errorText={'Ошибка'}
-                                icon="EditIcon"
-                            >
+    const signOut = () => {
+        dispatch(exit())
+    }
+    return (<div>
+            <div className={styles.container}>
+                <ul className={styles.sideNav}>
+                    <li
+                        className="text text_type_main-medium">
+                        <Link
+                            className="text text_type_main-medium"
+                            to={'/profile'}>
+                            Профиль
+                        </Link>
+                    </li>
+                    <li
+                        className="text text_type_main-medium">
+                        <Link
+                            className="text text_type_main-medium"
+                            to={'/profile/orders'}>
+                            История заказов
+                        </Link>
+                    </li>
+                    <li
+                        className="text text_type_main-medium">
+                        <Link
+                            onClick={signOut}
+                            className="text text_type_main-medium"
+                            to={'/'}>
+                            Выход
+                        </Link>
+                    </li>
+                </ul>
+                <div className={styles.formContainer}>
+                    <form action="">
+                        <Input
+                            type={'text'}
+                            placeholder={'Имя'}
+                            onChange={handleChange}
+                            value={values.name}
+                            name={'name'}
+                            error={false}
+                            errorText={'Ошибка'}
+                            icon="EditIcon"
+                        >
 
-                            </Input>
-                            <EmailInput
-                                type={'text'}
-                                placeholder={'Почта'}
-                                onChange={handleChange}
-                                value={values.email}
-                                name={'email'}
-                                error={false}
-                                errorText={'Ошибка'}
-                                icon="EditIcon">
+                        </Input>
+                        <EmailInput
+                            type={'text'}
+                            placeholder={'Почта'}
+                            onChange={handleChange}
+                            value={values.email}
+                            name={'email'}
+                            error={false}
+                            errorText={'Ошибка'}
+                            icon="EditIcon">
 
-                            </EmailInput>
-                            <PasswordInput
-                                type={'text'}
-                                placeholder={'Пароль'}
-                                onChange={handleChange}
-                                value={values.password}
-                                name={'password'}
-                                error={false}
-                                errorText={'Ошибка'}
-                                icon="EditIcon">
-                            </PasswordInput>
-                            <div className={styles.buttonContainer}>
+                        </EmailInput>
+                        <PasswordInput
+                            type={'text'}
+                            placeholder={'Пароль'}
+                            onChange={handleChange}
+                            value={values.password}
+                            name={'password'}
+                            error={false}
+                            errorText={'Ошибка'}
+                            icon="EditIcon">
+                        </PasswordInput>
+                        <div className={styles.buttonContainer}>
+                            <div>
+                                <Button
+                                    onClick={clear}
+                                    type="primary"
+                                    size="medium"
+                                    htmlType={"submit"}
+                                    disabled={!conditionStatement}
+
+                                >
+                                    Отмена
+                                </Button>
+                            </div>
+                            <div>
                                 <Button
                                     onClick={submitChanges}
                                     type="primary"
@@ -130,25 +136,17 @@ const Profile = () => {
                                 >
                                     Сохранить
                                 </Button>
-                                <Button
-                                    onClick={clear}
-                                    type="primary"
-                                    size="medium"
-                                    htmlType={"submit"}
-                                    disabled={!conditionStatement}
-                                >
-                                    Очистить
-                                </Button>
-
 
                             </div>
-                        </form>
-                    </div>
+
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
 
-        )
+    )
 
 
-    }
-    export default Profile
+}
+export default Profile

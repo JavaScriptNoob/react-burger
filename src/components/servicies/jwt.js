@@ -13,6 +13,7 @@ export function storeCookie(name, value, options = {}) {
         options.expires = options.expires.toUTCString();
     }
 
+
     let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 
     for (let optionKey in options) {

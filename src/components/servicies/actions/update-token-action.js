@@ -58,7 +58,7 @@ export function getUser() {
 //             dispatch(afterRefresh());
 //         })
 //         .catch(err => console.log(err))
-// };
+// }
 
 
 export const refreshToken = () => {

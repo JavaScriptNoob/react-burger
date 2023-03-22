@@ -6,7 +6,7 @@ import {getUser} from "../components/servicies/actions/update-token-action";
 import {changeUserDetails} from "../components/servicies/actions/update-user-details-action";
 import styles from "./profile.module.css"
 import {exit} from "../components/servicies/actions/sign-out-action";
-import {refetchUser} from "../components/servicies/actions/refetch-user-action";
+
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import {useForm} from "../components/servicies/customHooks/useForm";
 
@@ -21,7 +21,7 @@ const Profile = () => {
     const conditionStatement = values.name !== currentUser.name || values.email !== currentUser.email || values.password !== '';
     useEffect(() => {
 
-        dispatch(refetchUser());
+
         dispatch(getUser());
         console.log(values)
 

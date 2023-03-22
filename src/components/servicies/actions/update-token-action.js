@@ -1,6 +1,6 @@
 import {GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS} from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
-import {getCookie, setToken} from "../jwt";
+import {fetchWithRefresh, getCookie, setToken} from "../jwt";
 
 export function getUser() {
     return function (dispatch) {
@@ -8,26 +8,25 @@ export function getUser() {
             type: GET_USER_REQUEST,
         });
         console.log("getuser beginning" )
-        fetch(`${_QUERY}auth/user`, {
+        fetchWithRefresh(`${_QUERY}auth/user`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
                 authorization: getCookie('access')
             }
         })
-            .then(
-                (res) => {
-                    console.log(res,'refresh')
-                    return res.json();
-
-                }
-            )
+            // .then(
+            //     (res) => {
+            //         console.log(res,'refresh')
+            //         return res.json();
+            //
+            //     }
+            // )
             .then((res) => {
 
-                if (res.message === 'jwt expired') {
-                    dispatch(refreshToken(getUser()));
-                }
+
                 if (res.success) {
+                    console.log(res,"sucess get user")
                     dispatch({
                         type: GET_USER_SUCCESS,
                         user: res.user,
@@ -35,6 +34,7 @@ export function getUser() {
                 }
             })
             .catch((err) => {
+                console.log(err)
                 dispatch({
                     type: GET_USER_FAILED,
                     payload: err.message,
@@ -42,22 +42,33 @@ export function getUser() {
             });
     }
 };
-export const refreshToken = (afterRefresh) => (dispatch) => {
-    fetch(`${_QUERY}auth/token`, {
-        method: 'POST',
+// export const refreshToken = (afterRefresh) => (dispatch) => {
+//     fetch(`${_QUERY}auth/token`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json;charset=utf-8'
+//         },
+//         body: JSON.stringify({
+//             token: localStorage.getItem('refresh')
+//         })
+//     })
+//         .then(errorHandling)
+//         .then((res) => {
+//             setToken(res.accessToken, res.refreshToken);
+//             dispatch(afterRefresh());
+//         })
+//         .catch(err => console.log(err))
+// };
+
+
+export const refreshToken = () => {
+    return fetch(`${_QUERY}auth/token`, {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
-            token: localStorage.getItem('refresh')
-        })
-    })
-        .then(errorHandling)
-        .then((res) => {
-            setToken(res.accessToken, res.refreshToken);
-            dispatch(afterRefresh());
-        })
-        .catch(err => console.log(err))
+            token: localStorage.getItem("refresh"),
+        }),
+    }).then(errorHandling)
 };
-
-

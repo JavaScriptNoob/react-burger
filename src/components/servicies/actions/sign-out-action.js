@@ -4,7 +4,7 @@ import {
     SIGN_OUT_SUCCESS
 } from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
-import {deleteCookie, getCookie} from "../jwt";
+import {deleteCookie, fetchWithRefresh, getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
 
 export function exit() {
@@ -14,7 +14,7 @@ export function exit() {
             type: SIGN_OUT_REQUEST,
         });
 
-        fetch(`${_QUERY}auth/logout`, {
+        fetchWithRefresh(`${_QUERY}auth/logout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
@@ -24,7 +24,7 @@ export function exit() {
                 token: localStorage.getItem('refresh')
             })
         })
-            .then(errorHandling)
+
             .then((res) => {
                 dispatch({
                     type: SIGN_OUT_SUCCESS,

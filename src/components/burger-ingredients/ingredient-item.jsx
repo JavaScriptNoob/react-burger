@@ -17,7 +17,7 @@ export const IngredientItem = ({openModal,data}) => {
     })
 
     const location = useLocation();
-    console.log(location,"343334")
+
  const occurrence=   (id) => (
         [...currentConstructorList, bun].filter(function (item) {
 

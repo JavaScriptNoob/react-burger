@@ -19,7 +19,7 @@ import {
     REFETCH_USER_FAILED,
     SENT_EMAIL,
     SENT_EMAIL_SUCCESS,
-    SENT_EMAIL_FAILED
+    SENT_EMAIL_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS, GET_USER_FAILED
 } from "./index-reducer";
 
 
@@ -42,9 +42,9 @@ const initialState = {
     exitRequest:false,
     exitSucess:false,
     exitFailed:false,
-    refetchRequest: false,
-    rerefetchSuccess: false,
-    refetchFailed: false,
+    getUserRequest: false,
+    getUserSuccess: false,
+    getUserFailed: false,
     changeDetailRequest:false,
     changeDetailSuccess:false,
     changeDetailFailed:false,
@@ -184,29 +184,29 @@ export const userReducer = (state = initialState, action) => {
                 resetSuccess: false,
                 resetFailed: true
             }
-        case REFETCH_USER_REQUEST:
-            return {
-                ...state,
-                resetRequest: false,
-                resetSuccess: false,
-                resetFailed: true
-            }
-        case REFETCH_USER_SUCCESS:
-            return {
-                ...state,
-                resetRequest: false,
-                resetSuccess: false,
-                resetFailed: true,
-                name:action.user.name,
-                email:action.user.email
-            }
-        case REFETCH_USER_FAILED:
-            return {
-                ...state,
-                resetRequest: false,
-                resetSuccess: false,
-                resetFailed: true
-            }
+        // case REFETCH_USER_REQUEST:
+        //     return {
+        //         ...state,
+        //         resetRequest: false,
+        //         resetSuccess: false,
+        //         resetFailed: true
+        //     }
+        // case REFETCH_USER_SUCCESS:
+        //     return {
+        //         ...state,
+        //         resetRequest: false,
+        //         resetSuccess: false,
+        //         resetFailed: true,
+        //         name:action.user.name,
+        //         email:action.user.email
+        //     }
+        // case REFETCH_USER_FAILED:
+        //     return {
+        //         ...state,
+        //         resetRequest: false,
+        //         resetSuccess: false,
+        //         resetFailed: true
+        //     }
         case SENT_EMAIL:
             return {
                 ...state,
@@ -229,7 +229,29 @@ export const userReducer = (state = initialState, action) => {
                 forgotPasswordSuccess: false,
                 forgotPasswordFailed: true
             }
-
+          case   GET_USER_REQUEST:
+              return{
+                  ...state,
+                  getUserRequest: true,
+                  getUserSuccess: false,
+                  getUserFailed: false
+          }
+          case   GET_USER_SUCCESS:
+              return{
+                  ...state,
+                  getUserRequest: false,
+                  getUserSuccess: true,
+                  getUserFailed: false,
+                  email: action.user.email,
+                  name: action.user.name
+              }
+          case   GET_USER_FAILED:
+              return{
+                  ...state,
+                  getUserRequest: false,
+                  getUserSuccess: false,
+                  getUserFailed: true
+              }
         default:
             return state
     }

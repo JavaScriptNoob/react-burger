@@ -1,4 +1,4 @@
-import {_QUERY, errorHandling} from "../api";
+import {_QUERY, errorHandling, errorHanlin} from "../api";
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "../reducers/index-reducer";
 
 export const getProductsData = () => {
@@ -17,6 +17,7 @@ export const getProductsData = () => {
                 })
             })
             .catch(e => {
+                console.log(e,54645)
                 dispatch({
                     type: REQUEST_FAILED,
                     productsRequestFailed: e

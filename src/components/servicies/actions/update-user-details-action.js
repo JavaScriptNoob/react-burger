@@ -1,9 +1,8 @@
 import {CHANGE_DETAILS_FAILED, CHANGE_DETAILS_REQUEST, CHANGE_DETAILS_SUCCESS} from "../reducers/index-reducer";
-import {getCookie} from "../jwt";
-import {refreshToken} from "./update-token-action";
+import {fetchWithRefresh, getCookie} from "../jwt";
+import {getUser, refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
-import {useNavigate} from "react-router-dom";
-import {refetchUser} from "./refetch-user-action";
+
 export function changeUserDetails(values) {
 
     return function (dispatch) {
@@ -11,7 +10,7 @@ export function changeUserDetails(values) {
             type: CHANGE_DETAILS_REQUEST,
         });
 
-        fetch(`${_QUERY}auth/user`, {
+        fetchWithRefresh(`${_QUERY}auth/user`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,32 +18,24 @@ export function changeUserDetails(values) {
             },
             body: JSON.stringify(values)
         })
-            .then(
-                (res) => {
 
-                    return res.json();
-                }
-
-            )
             .then((res) => {
-
-                if (res.message === 'jwt expired') {
-                    dispatch(refreshToken(changeUserDetails(values)));
-                }
                 if (res.success) {
+                    console.log("updateDetails,  if (res.success)", res)
                     dispatch({
                         type: CHANGE_DETAILS_SUCCESS,
                         user: res.user,
                     });
-                    dispatch(refetchUser());
+                    dispatch(getUser());
 
                 }
             })
             .catch((err) => {
+                console.log("updateDetails,  if (res.failed)", err)
                 dispatch({
                     type: CHANGE_DETAILS_FAILED,
                     payload: err.message,
                 });
             });
     }
-};
+}

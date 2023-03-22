@@ -1,3 +1,6 @@
+import {errorHandling} from "./api";
+import {refreshToken} from "./actions/update-token-action";
+
 export function storeCookie(name, value, options = {}) {
 
     options = {
@@ -41,3 +44,35 @@ export function getCookie(name) {
 export function deleteCookie(name) {
     storeCookie(name, '', { 'max-age': -1 });
 }
+export const fetchWithRefresh = async (url, options) => {
+    try {
+        const res = await fetch(url, options);
+        console.log("fwr try begining", res)
+        return await errorHandling(res);
+    } catch (err) {console.log("fwr catch begining",err)
+        if (err.message === "jwt expired") {
+            console.log("fwr err.message === \"jwt expired begining",err.message)
+            const refreshData = await refreshToken();
+            if (!refreshData.success) {
+                console.log("fwr  if (!refreshData.success) begining",refreshData)
+                Promise.reject(refreshData);
+            }
+            console.log("fwr  localStorage.setItem(\"refreshToken\", refreshData.refreshToken) begining",refreshData)
+            localStorage.setItem("refresh", refreshData.refreshToken);
+            let authToken = refreshData.accessToken;
+
+            if (authToken) {
+                console.log("fwr  storeCookie(\"access\", authToken) statement begining",authToken)
+                storeCookie("access", authToken);
+            }
+            options.headers.authorization = refreshData.accessToken;
+            console.log("fwr after options.headers.authorization ",refreshData)
+            const res = await fetch(url, options);
+            console.log("fwr errorHandling",res)
+            return await errorHandling(res);
+        } else {
+            console.log("fwr if message not jwt expired",err)
+            return Promise.reject(err);
+        }
+    }
+};

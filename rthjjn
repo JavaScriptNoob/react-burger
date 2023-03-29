@@ -1,0 +1,275 @@
+[33mcommit a7e158880bf5542dfabd9bdfe75295b4bdad31a2[m[33m ([m[1;36mHEAD -> [m[1;32msprin_3/steg_1[m[33m, [m[1;31morigin/sprin_3/steg_1[m[33m)[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 19 17:13:52 2023 +0100
+
+    profile buttons
+
+[33mcommit db9b590aeef2e987d015fac51cd200a02180141c[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 19 16:50:53 2023 +0100
+
+    check for reset and redirect efter
+
+[33mcommit c02d6d342f64992265fc8f3d7d9dc0467b6264ff[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 19 04:49:10 2023 +0100
+
+    reset
+
+[33mcommit b93ef6953417805ae6d186c8c2fe1387c051b4b1[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 19 03:50:17 2023 +0100
+
+    useForm
+
+[33mcommit 561055bd0bc26853140626cc72c385c4bec1915f[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Mar 18 02:54:02 2023 +0100
+
+    require auth for order
+
+[33mcommit 9fa7b6fde39c533e65b6a8e974e0352f681f64bb[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Mar 18 01:15:50 2023 +0100
+
+    require auth for order
+
+[33mcommit 8f263962a16e27ea3f52183f35cbfa1ddfc6f64c[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Mar 18 00:35:06 2023 +0100
+
+    styles
+
+[33mcommit b25e2865e3805bc2fada2b001a14f38d85e6db44[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Mar 18 00:34:46 2023 +0100
+
+    routing to login
+
+[33mcommit 75f87305dbe72724ec7fcc44c5cc8fa13379f76c[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Fri Mar 17 19:45:46 2023 +0100
+
+    redirect after loginsuccess
+
+[33mcommit 06df1db9d201a29a9d17c00af21ce1b3d939ff9e[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Fri Mar 17 19:32:19 2023 +0100
+
+    sign out inmplemented
+
+[33mcommit 5facef746128debfca5d1d4e6630eb86f56928cc[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Wed Mar 15 22:03:51 2023 +0100
+
+    like it is ready
+
+[33mcommit c16a5a25df1e0352a6c56a810216a994ee9e4d3d[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Mon Mar 13 18:44:39 2023 +0100
+
+    reset
+
+[33mcommit 7801dfecb51d37ce745da350eb857d54d48d5327[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Mon Mar 13 18:21:33 2023 +0100
+
+    reset
+
+[33mcommit afc6cf593e0c8297d2ffd53d4856cd7caa91a102[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Mon Mar 13 14:35:38 2023 +0100
+
+    protected routes
+
+[33mcommit d572496eeb51a87d7fe80f3f57b047fe3a29f129[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Mon Mar 13 08:37:38 2023 +0100
+
+    profile page has been added
+
+[33mcommit 9d3ecf8103242f2c206e74a21d7da4d455359c5d[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 12 22:16:33 2023 +0100
+
+    created cookie handler
+
+[33mcommit 9573aab58eb138cbadcc46fb5fe207aebd6be4ad[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 12 07:52:04 2023 +0100
+
+    request to auth and routing
+
+[33mcommit 8ce7ea2cd899ab39a06ae7945bd0a6da59039968[m[33m ([m[1;32mmaster[m[33m)[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 5 22:38:41 2023 +0100
+
+    Fix namespace for store and ordernumber clearing
+
+[33mcommit 662eb4317618a86c7ba843f44ac26775bb4e50e2[m
+Merge: 28d267a aec27be
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Mar 5 22:33:02 2023 +0100
+
+    Merge branch 'master' into sprint2/steg2
+
+[33mcommit 28d267ad004999dcf5e330771f34ee5370458379[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Mar 4 21:33:26 2023 +0100
+
+    Fix namespace for store and ordernumber clearing
+
+[33mcommit 85a9d8c9987c942c2bb84c7c96a3a0edd10c13f8[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Mar 4 03:13:15 2023 +0100
+
+    All is working!!!! Hura
+
+[33mcommit 3aedfcf4f77a977b74cb9f5c5bf17d7d3cee0765[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Thu Mar 2 22:12:28 2023 +0100
+
+    reducers
+
+[33mcommit 103c8418fc70c856ae9054e07972aeac0e7c6eda[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Thu Mar 2 09:41:14 2023 +0100
+
+    burger styles
+
+[33mcommit 33401e66921bfbc728fbea62faa147e64343b732[m[33m ([m[1;32msprint2/steg1[m[33m)[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Thu Mar 2 08:45:16 2023 +0100
+
+    drag and drop fully implemented
+
+[33mcommit bf19d55a7d4d40afbc3eb19a5dfc829f1c8ecb2e[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Thu Mar 2 07:40:42 2023 +0100
+
+    drag and drop fully implemented
+
+[33mcommit 3b051e24466f990eb89730e9562fda7790ebeefc[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Thu Mar 2 07:40:29 2023 +0100
+
+    drag and drop fully implemented
+
+[33mcommit 2a922f0c4bd9c4e414b40187d1cba965a052e7dd[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Mon Feb 27 00:11:22 2023 +0100
+
+    api request moved to redux
+
+[33mcommit 07864b8fc5f70a83a2df82e0b14f0d6868a57fb1[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 26 03:39:25 2023 +0100
+
+    api request moved to redux
+
+[33mcommit 344dffc43cd515764431b3b88bdbca06111fcb8c[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Feb 25 02:00:30 2023 +0100
+
+    redux added
+
+[33mcommit b5c2f1de0401e65d097a49501001565cae46c7f9[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Tue Feb 21 01:12:54 2023 +0100
+
+    redux added
+
+[33mcommit a89b5a50a49f8a7dda94b41f6f9e5c26b9618d61[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Tue Feb 21 00:44:20 2023 +0100
+
+    sending request just onclick
+
+[33mcommit 43fd784399f0a409acfa6893d9b33672633d5ec6[m[33m ([m[1;31morigin/sprint_2_steg_1[m[33m)[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 14:38:39 2023 +0100
+
+    all changes implemented
+
+[33mcommit 2c47118fc429c704abcccb0472cb7eb815b60e01[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 13:04:58 2023 +0100
+
+    key error removed
+
+[33mcommit 289e9801534b30917bf36f2ec8fadda8a0603757[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 01:34:41 2023 +0100
+
+    code style
+
+[33mcommit dc763a3a15dfdf79ac5faa278ede1a0dc14962f7[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 01:33:10 2023 +0100
+
+    code style
+
+[33mcommit b7162e59a8c0a7afd3c463a8bb8a39bb7f084eab[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 01:32:15 2023 +0100
+
+    context refactored according to requirementa
+
+[33mcommit 29277ca65739ff6deca9a33492004bec6d88ec8b[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 01:12:01 2023 +0100
+
+    butItems are locked
+
+[33mcommit 93a7f297f54a56dc447463ddb42d1d1f893a29eb[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 00:36:34 2023 +0100
+
+    seterr removed
+
+[33mcommit 4d2eee27f81da953846aa99e14a05b3cd1e56e2a[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sun Feb 19 00:33:44 2023 +0100
+
+    Project directory structure changed
+
+[33mcommit ffeea69344e19fa942e3c696cdb1b770d31caf55[m[33m ([m[1;31morigin/sprint_2-steg_1[m[33m, [m[1;32mcurrent[m[33m)[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Feb 18 18:40:49 2023 +0100
+
+    To pull request
+
+[33mcommit 81f96a07e830bc8c08423aad039a6d6b6f92d0b6[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Feb 18 18:38:47 2023 +0100
+
+    Several hours of awfull experience
+
+[33mcommit ebf1ca79d9ae7a644a1f4df762a6935eb5f53114[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Sat Feb 18 10:02:41 2023 +0100
+
+    api finally implemented
+
+[33mcommit da482fe0281d01ecff2698e28a707341499e80a4[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Fri Feb 17 20:59:22 2023 +0100
+
+    bun repeats
+
+[33mcommit f0b80e54d63a0589c83b181b0732aaa2a08cd2c6[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Fri Feb 17 18:26:38 2023 +0100
+
+    context api added
+
+[33mcommit 7a33a5987ec9209d732d660fd2189580bae622de[m
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Fri Feb 17 14:49:07 2023 +0100
+
+    import of api js
+
+[33mcommit 2e27a4245fc2e676ceec7bea19efb5ec94db3980[m
+Merge: 4beaee8 f3b913d
+Author: JavascripNoob <timur.bobylev@yandex.ru>
+Date:   Thu Feb 16 10:09:53 2023 +010

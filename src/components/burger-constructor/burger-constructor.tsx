@@ -206,7 +206,7 @@ const BurgerConstructor = () => {
                 <Button htmlType="button"
                         type="primary"
                         size="large"
-                        disabled={currentPrice < 1}
+                        disabled={currentPrice < 1 || user.name===""}
                         onClick={
                             (e) => enter()
                         }>

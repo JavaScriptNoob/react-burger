@@ -29,9 +29,9 @@ const Modal:FC<IModal> = ({onClose,...props}) => {
             }
         }
     }
-    console.log(props,onClose)
 
-    console.log('background',location)
+
+
     useEffect(() => {
         setDomIsReady(true)
         const handleEsc = (event:KeyboardEvent) => {

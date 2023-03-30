@@ -18,7 +18,7 @@ const IngredientDetails=()=>{
 
     const item = selectorItem.find((item) => item._id === ingredientId);
 
-    console.log(item,selectorItem,ingredientId)
+
     const close=()=>{
    dispatch(closePopUp())
 
@@ -26,7 +26,7 @@ const IngredientDetails=()=>{
 
 }
     const location = useLocation();
-    console.log(location)
+
 
     if (!item) {
         return null

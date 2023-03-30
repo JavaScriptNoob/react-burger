@@ -18,7 +18,7 @@ const Login = () => {
     const dispatch = useAppDispatch()
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(authDetails)
+
         setAuthDetails({
             ...authDetails,
             [e.target.name]: value

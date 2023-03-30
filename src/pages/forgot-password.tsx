@@ -24,7 +24,7 @@ const ForgotPassword = () => {
             return navigate("/reset-password");
         }
     },[success]);
-    console.log(forgotten)
+
     return (
         <div className={styles.container}>
 

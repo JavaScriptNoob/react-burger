@@ -35,7 +35,7 @@ const BurgerIngredients: FC = () => {
         });
     }
     const setScroll = (type: string) => {
-        console.log(type, '9889')
+
         setCurrent(type)
         // @ts-ignore
         document.querySelector(`#${type}`).scrollIntoView({block: "start", behavior: "smooth"})

@@ -42,3 +42,7 @@ export interface IModal {
 export interface IModalOverlayProps {
     handler: () => void;
 }
+export interface IResetDetails {
+    newPassword: string;
+    token: string;
+}

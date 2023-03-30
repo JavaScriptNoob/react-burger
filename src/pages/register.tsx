@@ -1,20 +1,21 @@
 import {Link} from "react-router-dom";
 import {Input, Button, PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useRef, useState} from "react";
+import {ChangeEvent, FormEvent, useRef, useState} from "react";
 import {useDispatch} from "react-redux";
 import {register} from "../components/servicies/actions/register-action";
 import styles from "./register.module.css"
+import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
 
 const Register = () => {
     const inputRef = useRef();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [inputData, setInputData] = useState({
         firstInput: '',
         secondInput: '',
         thirdInput: ''
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(inputData)
         setInputData({
@@ -22,7 +23,7 @@ const Register = () => {
             [e.target.name]: value
         });
     }
-    const onSubmit = (e) => {
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(register(
             inputData.firstInput,
@@ -44,7 +45,7 @@ const Register = () => {
                     error={false}
                     errorText={'Ошибка'}
                     size={'default'}
-                    e
+
                 />
                 <EmailInput
                     onChange={e => handleChange(e)}

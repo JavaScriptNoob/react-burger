@@ -1,20 +1,21 @@
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {reset} from "../components/servicies/actions/reset-password-action";
 import {useNavigate} from "react-router-dom";
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import styles from "./reset-password.module.css"
+import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
 
 const ResetPassword = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [resetDetails, setResetDetails] = useState({
         newPassword: '', token: ''
     })
     const forgotRequest = useSelector(selectorUser)
     const resetStatus = useSelector(selectorUser)
-    const handleChange = (e) => {
+    const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(resetDetails)
         setResetDetails({
@@ -28,7 +29,7 @@ const ResetPassword = () => {
     }, []);
 
 
-    const onSubmit = (e) => {
+    const onSubmit = (e:FormEvent<HTMLFormElement>) => {
         console.log('hej')
         e.preventDefault();
         dispatch(reset(resetDetails.newPassword, resetDetails.token));

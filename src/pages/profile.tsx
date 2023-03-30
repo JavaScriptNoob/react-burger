@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {FC, MouseEvent, SyntheticEvent, useEffect, useState} from "react";
 import {getUser} from "../components/servicies/actions/update-token-action";
 import {changeUserDetails} from "../components/servicies/actions/update-user-details-action";
 import styles from "./profile.module.css"
@@ -9,10 +9,11 @@ import {exit} from "../components/servicies/actions/sign-out-action";
 
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import {useForm} from "../components/servicies/customHooks/useForm";
+import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
 
-const Profile = () => {
+const Profile:FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const currentUser = useSelector(selectorUser)
     const {values, handleChange, setValues} = useForm({
         name: '', email: '', password: ''
@@ -34,7 +35,7 @@ const Profile = () => {
 
         })
     }, [currentUser])
-    const submitChanges = (e) => {
+    const submitChanges = (e: SyntheticEvent) => {
         e.preventDefault();
         dispatch(changeUserDetails(values));
     }
@@ -93,24 +94,24 @@ const Profile = () => {
 
                         </Input>
                         <EmailInput
-                            type={'text'}
+
                             placeholder={'Почта'}
                             onChange={handleChange}
                             value={values.email}
-                            name={'email'}
-                            error={false}
-                            errorText={'Ошибка'}
-                            icon="EditIcon">
+                            name={'email'}>
+
+
+
 
                         </EmailInput>
                         <PasswordInput
-                            type={'text'}
+
                             placeholder={'Пароль'}
                             onChange={handleChange}
                             value={values.password}
                             name={'password'}
-                            error={false}
-                            errorText={'Ошибка'}
+
+
                             icon="EditIcon">
                         </PasswordInput>
                         <div className={styles.buttonContainer}>

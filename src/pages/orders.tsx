@@ -1,10 +1,7 @@
-import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
-import {forgotPassword} from "../components/servicies/actions/forgot-password-action";
+
 import styles from "./forgot-password.module.css"
-const Orders = () => {
+import {FC} from "react";
+const Orders: FC = () => {
 
 
 

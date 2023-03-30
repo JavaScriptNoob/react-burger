@@ -1,9 +1,10 @@
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {login} from "../components/servicies/actions/login-action";
 import {useDispatch, useSelector} from "react-redux";
 import styles from './login.module.css'
 import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
 const Login = () => {
     const [authDetails, setAuthDetails] = useState({
         login: '',
@@ -12,10 +13,10 @@ const Login = () => {
     })
     const [submit, setSubmit] = useState(false)
 
-    const loginSucess = useSelector(state => state.user.loginSuccess)
+    const loginSucess = useSelector((state:any )=> state.user.loginSuccess)
     const navigate = useNavigate();
-    const dispatch = useDispatch()
-    const handleChange = (e) => {
+    const dispatch = useAppDispatch()
+    const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         console.log(authDetails)
         setAuthDetails({
@@ -23,7 +24,7 @@ const Login = () => {
             [e.target.name]: value
         });
     }
-    const onSubmit = (e) => {
+    const onSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmit(true)
         dispatch(login(authDetails.login, authDetails.password));}
@@ -58,12 +59,12 @@ const Login = () => {
                 {!loginSucess&& submit?<p className={styles.alert}>Все пошло не по плану</p>:null}
             </form>
             <div>
-                <a href="/register"><p>Вы - новый пользователь <Button htmlType="button" type="secondary" size="small">
+                <a href="/register.tsx"><p>Вы - новый пользователь <Button htmlType="button" type="secondary" size="small">
                     Зарегистрироваться
                 </Button></p> </a>
             </div>
             <div>
-                <a href="/forgot-password"><p>Вы Забыли пароль - востановите его <Button htmlType="button" type="secondary" size="small">
+                <a href="/forgot-password.tsx"><p>Вы Забыли пароль - востановите его <Button htmlType="button" type="secondary" size="small">
                     Востановить пароль
                 </Button></p> </a>
             </div>

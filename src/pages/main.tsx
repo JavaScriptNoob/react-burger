@@ -4,20 +4,19 @@ import BurgerIngredients from "../components/burger-ingredients/burger-ingredien
 import BurgerConstructor from "../components/burger-constructor/burger-constructor";
 import {DndProvider} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {getProductsData} from "../components/servicies/actions/get-ingredient-actions";
 
 const Main =()=>{
 
     const dispatch = useDispatch();
-    const confirmed = useSelector(state => state.productsData.productsHaveBeenRecieved)
-    const data= useSelector(state => state.productsData.productsData)
+    const confirmed = useSelector((state:any) => state.productsData.productsHaveBeenRecieved)
+    const data= useSelector((state:any) => state.productsData.productsData)
 
     return(
 
         <div style={{display: "flex"}}>
             <DndProvider backend={HTML5Backend}>
         { confirmed?(<><BurgerIngredients />
-            <BurgerConstructor data={data}/></>) :<BurgerIngredients/>
+            <BurgerConstructor /></>) :<BurgerIngredients/>
 
         }
     </DndProvider >

@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef, useCallback, useEffect} from 'react'
+import React, {useState, useContext, FC, useRef, useCallback, useEffect, SyntheticEvent} from 'react'
 import Modal from "../modal/modal";
 import {
     Tab,
@@ -8,33 +8,38 @@ import {
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
-import {closePopUP,openPopUp} from "../servicies/actions/ingredient-modal-action";
+import {closePopUp,openPopUp} from "../servicies/actions/ingredient-modal-action";
 import {IngredientItem} from "./ingredient-item";
 import {coordAxel} from "../utils/coordAxel";
 import {selectorModalIngredients,selectorProducts} from "../servicies/reducers/selectors";
+import {IData} from "../utils/types";
+import {OPEN_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
 
-
-const BurgerIngredients = () => {
+const BurgerIngredients :FC =  () => {
     const data = useSelector(selectorProducts)
     const modal = useSelector(selectorModalIngredients)
-    const [current, setCurrent] = React.useState('bun')
+    const [current, setCurrent] = useState<string>('bun')
     const dispatch =useDispatch()
-    const [itemsData, setItemsData] = useState([]);
-    const openModalIngredients = (data) => {
-         dispatch(
-            openPopUp(data)
+    const [itemsData, setItemsData] = useState<IData[]>([]);
+    const openModalIngredients = (data:IData) => {
+         dispatch({
+             type:OPEN_INGREDIENTS_POP_UP,
+             payload:data
+         }
+
         )
 
-         setItemsData(data);
+         setItemsData([data]);
     }
 
 
-    const scrollHandler = (evt) => {
+    const scrollHandler = (evt:SyntheticEvent) => {
         evt.target.addEventListener('scroll', function () {
             setCurrent(coordAxel(styles.containerGeneral))
         });
     }
-    const setScroll = (type) => {
+    const setScroll  = (type:string) => {
+        console.log(type,'9889')
         setCurrent(type)
         document.querySelector(`#${type}`).scrollIntoView({block: "start", behavior: "smooth"})
     }

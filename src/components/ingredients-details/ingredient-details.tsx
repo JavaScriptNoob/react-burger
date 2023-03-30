@@ -5,16 +5,18 @@ import {closePopUp} from "../servicies/actions/ingredient-modal-action";
 import {useDispatch, useSelector} from "react-redux";
 import {selectorCurrentIngredient, selectorModalIngredients, selectorProducts} from "../servicies/reducers/selectors";
 import {useLocation, useParams} from "react-router-dom";
+import {useAppDispatch} from "../servicies/customHooks/typeHooks";
+import {IItem} from "../utils/types";
 
 
 const IngredientDetails=()=>{
 
-   const dispatch =useDispatch();
+   const dispatch =useAppDispatch();
 
     const  {ingredientId}  = useParams();
-    const selectorItem = useSelector(selectorProducts)
+    const selectorItem:IItem[] = useSelector(selectorProducts)
 
-    const item = selectorItem.find((item) => item._id == ingredientId);
+    const item = selectorItem.find((item) => item._id === ingredientId);
 
     console.log(item,selectorItem,ingredientId)
     const close=()=>{

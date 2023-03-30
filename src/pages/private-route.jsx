@@ -1,7 +1,7 @@
 import {Route, Navigate, useLocation, Outlet} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-const  PrivateRoute=({ children, ...rest }) =>{
+const  PrivateRoute=() =>{
     const auth = useSelector(state => state.user.userToken)
     const [domIsReady,setDomIsReady] =useState(false);
     useEffect(() => {

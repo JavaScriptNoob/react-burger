@@ -1,4 +1,4 @@
-import React, {useEffect,useRef, useState, useContext, useReducer} from 'react'
+import React, {useEffect,useRef,FC, useState, useContext, useReducer} from 'react'
 import {
     Button,
     ConstructorElement,
@@ -8,11 +8,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css'
 import {useDrag,useDrop} from "react-dnd";
+import {IConstructorItem} from "../utils/types";
 
 
-const ConstructorItems=({data,handleClose,id, index,moveItemInsideContainer})=>{
+const ConstructorItems:FC<IConstructorItem>=({data,handleClose, index,moveItemInsideContainer})=>{
 
-    const ref = useRef(null)
+    const ref = useRef<HTMLLIElement>(null)
     const [{ handlerId }, drop] = useDrop({
         accept: 'constructor',
         collect(monitor) {
@@ -20,11 +21,12 @@ const ConstructorItems=({data,handleClose,id, index,moveItemInsideContainer})=>{
                 handlerId: monitor.getHandlerId(),
             }
         },
-        hover(data, monitor) {
+        hover: function (data, monitor:any) {
             if (!ref.current) {
                 return
             }
-            const dragIndex = data.index
+            const dragIndex = index
+
             const hoverIndex = index
 
             if (dragIndex === hoverIndex) {
@@ -50,12 +52,12 @@ const ConstructorItems=({data,handleClose,id, index,moveItemInsideContainer})=>{
 
             moveItemInsideContainer(dragIndex, hoverIndex)
 
-            data.index = hoverIndex
+            index = hoverIndex
         },
     })
     const [{ isDragging }, drag] = useDrag({
         type: 'constructor',
-        item: () => ({ id: data.id, index }),
+        item: () => ({ id: data._id, index }),
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),

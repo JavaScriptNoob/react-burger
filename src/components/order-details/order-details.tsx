@@ -6,13 +6,14 @@ import image from "../img/done.png"
 import {useDispatch, useSelector} from "react-redux";
 import {CLEAR_CURRENT_LIST, CLOSE_MODAL} from "../servicies/reducers/index-reducer";
 import {closeOrderModal} from "../servicies/actions/order-actions";
+import {useAppDispatch} from "../servicies/customHooks/typeHooks";
 
 
 
 
 const OrderDetails = () => {
-const orderNumber = useSelector(state => state.orderNumber.orderNumber)
-const dispatch = useDispatch();
+const orderNumber = useSelector((state:any)=> state.orderNumber.orderNumber)
+const dispatch = useAppDispatch();
     const handleClick = () => {
     dispatch(
         closeOrderModal()

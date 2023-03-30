@@ -26,10 +26,12 @@ import {
     selectorCurrentList,
     selectorModal, selectorUser
 } from "../servicies/reducers/selectors";
+import {IData, IItem, ICurrentList, QueryObject} from "../utils/types";
+import {Dispatch} from "redux";
 
 
-const BurgerConstructor = (props) => {
-    const dispatch = useDispatch();
+const BurgerConstructor = () => {
+    const dispatch:any = useDispatch();
     const priceListener = useSelector(selectorCurrentList)
     const currentList = useSelector(selectorCurrentConstructoorList)
     const user =useSelector( selectorUser)
@@ -37,12 +39,12 @@ const BurgerConstructor = (props) => {
     const openModal = useSelector(selectorModal)
     const up = " (верх)"
     const down = " (низ)"
-    const [currentPrice, setCurrentPrice] = useState(0);
-    let joined = []
-    const objQuery = {"ingredients": []}
+    const [currentPrice, setCurrentPrice] = useState<number>(0);
+    let joined:any[] = []
+    const objQuery: QueryObject = {"ingredients": []}
     const [, dropTarget] = useDrop({
         accept: 'item',
-        drop(item) {
+        drop(item:IItem) {
 
             if (item.type === 'bun') {
                 dispatch({
@@ -66,7 +68,7 @@ const BurgerConstructor = (props) => {
     })
 
 
-    const moveItemInsideContainer = useCallback((dragIndex, hoverIndex) => {
+    const moveItemInsideContainer = useCallback((dragIndex:number, hoverIndex:number) => {
 
         const dragSubject = currentList[dragIndex]
         const updated = [...currentList]
@@ -78,11 +80,12 @@ const BurgerConstructor = (props) => {
         })
 
     }, [currentList, dispatch])
-    const removeIngredientFromCurrentList = (id, currentlist) => {
+    const removeIngredientFromCurrentList = (id:string, currentlist:[]) => {
 
-        return function (dispatch) {
+        return function (dispatch:Dispatch) {
             let found = false;
-            const arr = currentList.filter(v => found || !(found = v._id === id));
+
+            const arr = currentList.filter(((v:IItem) => found || !(found = v._id === id)))
 
             return dispatch({
                 type: DECREMENT_CURRENT_CONSTRUCTOR_LIST,
@@ -91,7 +94,7 @@ const BurgerConstructor = (props) => {
         }
     }
 
-    const handleClose = useCallback((id) => {
+    const handleClose = useCallback((id:string) => {
         dispatch(removeIngredientFromCurrentList(id, currentList));
     }, [currentList, bun]);
 
@@ -164,13 +167,13 @@ const BurgerConstructor = (props) => {
                     </div>}
                     <ul className={styles.scrollContainer}>
                         {
-                            currentList && currentList.map((item, index) => (
+                            currentList && currentList.map((item:IItem, index:number) => (
                                 <ConstructorItems
                                     handleClose={handleClose}
                                     key={item._id + index}
                                     data={item} index={index}
                                     moveItemInsideContainer={moveItemInsideContainer}
-                                    id={item._id}
+
                                 />))
                         }
                     </ul>
@@ -203,7 +206,7 @@ const BurgerConstructor = (props) => {
                 <Button htmlType="button"
                         type="primary"
                         size="large"
-                        disabled={currentPrice < 1 || user.name===''}
+                        disabled={currentPrice < 1}
                         onClick={
                             (e) => enter()
                         }>

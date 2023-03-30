@@ -8,52 +8,44 @@ import {
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
-import {closePopUp,openPopUp} from "../servicies/actions/ingredient-modal-action";
+import {closePopUp, openPopUp} from "../servicies/actions/ingredient-modal-action";
 import {IngredientItem} from "./ingredient-item";
 import {coordAxel} from "../utils/coordAxel";
-import {selectorModalIngredients,selectorProducts} from "../servicies/reducers/selectors";
-import {IData} from "../utils/types";
+import {selectorModalIngredients, selectorProducts} from "../servicies/reducers/selectors";
+import {IData, IItem} from "../utils/types";
 import {OPEN_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
-
-const BurgerIngredients :FC =  () => {
+const BurgerIngredients: FC = () => {
     const data = useSelector(selectorProducts)
     const modal = useSelector(selectorModalIngredients)
     const [current, setCurrent] = useState<string>('bun')
-    const dispatch =useDispatch()
+    const dispatch = useDispatch()
     const [itemsData, setItemsData] = useState<IData[]>([]);
-    const openModalIngredients = (data:IData) => {
-         dispatch({
-             type:OPEN_INGREDIENTS_POP_UP,
-             payload:data
-         }
-
+    const openModalIngredients = (data: IData) => {
+        dispatch({
+                type: OPEN_INGREDIENTS_POP_UP,
+                payload: data
+            }
         )
-
-         setItemsData([data]);
+        setItemsData([data]);
     }
 
-
-    const scrollHandler = (evt:SyntheticEvent) => {
+    const scrollHandler = (evt: SyntheticEvent) => {
         evt.target.addEventListener('scroll', function () {
             setCurrent(coordAxel(styles.containerGeneral))
         });
     }
-    const setScroll  = (type:string) => {
-        console.log(type,'9889')
+    const setScroll = (type: string) => {
+        console.log(type, '9889')
         setCurrent(type)
+        // @ts-ignore
         document.querySelector(`#${type}`).scrollIntoView({block: "start", behavior: "smooth"})
     }
-
-
-
-
     return (
 
         <div className={styles.containerGeneral}>
-            {modal && <Modal confirm={modal} >
-                <IngredientDetails  items={itemsData}/>
+            {modal && <Modal confirm={modal} onClose={undefined}>
+                <IngredientDetails/>
             </Modal>}
-
             <div className={styles.containerMain} style={{position: "relative"}}>
                 <div className={styles.containerSub}>
                     <div className={styles.containerTitle}>
@@ -72,34 +64,29 @@ const BurgerIngredients :FC =  () => {
                             </Tab>
                         </div>
                         <div className={styles.scrollContainer} onScroll={scrollHandler}>
-
-
                             <h2 id="bun" className="mb-6 text text_type_main-medium">
                                 Булки
                             </h2>
                             <div className={styles.wrapper}>
-
-                                {data.map((item) => (item.type === 'bun' &&
-                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item} />))
-
+                                {data.map((item: IItem) => (item.type === 'bun' &&
+                                    <IngredientItem key={item._id} data={item}/>))
                                 }</div>
                             <h2 id="sauce" className="mb-6 text text_type_main-medium">
                                 Соусы
                             </h2>
                             <div className={styles.wrapper}>
+                                {data.map((item: IItem) => (
+                                    item.type === 'sauce' &&
 
-                                {data.map((item) => (item.type === 'sauce' &&
-
-                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item} />))
+                                    <IngredientItem key={item._id} data={item}/>))
 
                                 }</div>
                             <h2 id="main" className="mb-6 text text_type_main-medium">
                                 Начинки
                             </h2>
                             <div className={styles.wrapper}>
-                                {data.map((item) => (item.type === 'main' &&
-                                    <IngredientItem openModal={openModalIngredients} key={item._id} data={item}  />))
-
+                                {data.map((item: IItem) => (item.type === 'main' &&
+                                    <IngredientItem key={item._id} data={item}/>))
                                 }</div>
                         </div>
                     </div>

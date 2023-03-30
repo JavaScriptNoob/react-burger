@@ -33,7 +33,7 @@ const location = useLocation()
                 </NavLink>
                 <li style={{marginLeft: 112}}>
                     <span className="pl-1">
-                        <Logo className="logo"/>
+                        <Logo />
                     </span>
                 </li>
                 <NavLink  to="/profile" className={({ isActive, isPending }) =>

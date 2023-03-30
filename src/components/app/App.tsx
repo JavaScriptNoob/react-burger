@@ -17,9 +17,10 @@ import {shallowEqual, useDispatch, useSelector} from "react-redux";
 import Modal from "../modal/modal";
 import {getProductsData} from "../servicies/actions/get-ingredient-actions";
 import Orders from "../../pages/orders";
+import {useAppDispatch} from "../servicies/customHooks/typeHooks";
 const App = () => {
 
-    const dispatch =useDispatch();
+    const dispatch =useAppDispatch();
     useEffect(() => {
 
         dispatch(getProductsData())
@@ -29,7 +30,7 @@ const App = () => {
 
         let background = location.state && location.state.background;
 
-        const currentItem=useSelector(state => state.ingredientModal.currentIngredient)
+        const currentItem=useSelector((state:any) => state.ingredientModal.currentIngredient)
 
         const navigate =useNavigate();
         const dispatch =useDispatch();
@@ -55,7 +56,7 @@ const App = () => {
                         <Route path="/profile/orders" element={<PrivateRoute/>}>
                             <Route path="/profile/orders" element={<Orders/>}/>
                         </Route>
-                        <Route path="/profile" element={<PrivateRoute/>}>
+                        <Route path="/profile" element={<PrivateRoute />}>
                             <Route path="/profile" element={<Profile/>}/>
                         </Route>
 
@@ -71,7 +72,7 @@ const App = () => {
                                 title='Детали ингридиента'
                                 onClose={closePopup}
                             >
-                                <IngredientDetails  currentItem={currentItem}/>
+                                <IngredientDetails  />
                             </Modal>
                         }
 

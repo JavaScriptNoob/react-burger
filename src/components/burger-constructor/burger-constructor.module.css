@@ -11,7 +11,12 @@
     align-items: baseline;
 
 }
-
+.flexContainer {
+    display: flex;
+    flexWrap: wrap;
+    margin: auto;
+    width: 100%;
+}
 .scrollContainer{
     margin-top:0 ;
     overflow-y: scroll;

@@ -55,8 +55,7 @@ export interface FormValues {
 
 export type FormEvent = ChangeEvent<HTMLInputElement>;
 
-export interface UseForm {
-    values: FormValues;
-    handleChange: (event: FormEvent) => void;
-    setValues: (values: FormValues) => void;
+
+export interface ICurrentList {
+    currentConstructorList: IItem[];
 }

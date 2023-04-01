@@ -17,7 +17,7 @@ const ResetPassword = () => {
     const resetStatus = useSelector(selectorUser)
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        console.log(resetDetails)
+
         setResetDetails({
             ...resetDetails, [e.target.name]: value
         });
@@ -30,7 +30,7 @@ const ResetPassword = () => {
 
 
     const onSubmit = (e:FormEvent<HTMLFormElement>) => {
-        console.log('hej')
+
         e.preventDefault();
         dispatch(reset(resetDetails.newPassword, resetDetails.token));
     }

@@ -22,19 +22,19 @@ import {useDrop} from "react-dnd";
 import ConstructorItems from "./constructor-items";
 import {
     selectorBun,
-    selectorCurrentConstructoorList,
+     selectorCurrentConstructorList,
     selectorCurrentList,
     selectorModal,
     selectorUser
 } from "../servicies/reducers/selectors";
-import {IItem, QueryObject} from "../utils/types";
+import {ICurrentList, IItem, QueryObject} from "../utils/types";
 import {Dispatch} from "redux";
 
 
 const BurgerConstructor: FC = () => {
     const dispatch: any = useDispatch();
     const priceListener = useSelector(selectorCurrentList)
-    const currentList = useSelector(selectorCurrentConstructoorList)
+    const currentList : IItem[]  = useSelector(selectorCurrentConstructorList)
     const user = useSelector(selectorUser)
     const bun = useSelector(selectorBun)
     const openModal = useSelector(selectorModal)
@@ -75,7 +75,7 @@ const BurgerConstructor: FC = () => {
         })
 
     }, [currentList, dispatch])
-    const removeIngredientFromCurrentList = (id: string, currentlist: []) => {
+    const removeIngredientFromCurrentList = (id: string, currentlist: IItem[]) => {
         return function (dispatch: Dispatch) {
             let found = false;
             const arr = currentList.filter(((v: IItem) => found || !(found = v._id === id)))
@@ -120,7 +120,7 @@ const BurgerConstructor: FC = () => {
     }
     const request = () => {
         joined.map((e) => {
-            objQuery.ingredients.push(e._id)
+          return   objQuery.ingredients.push(e._id)
         })
         dispatch(
             postProductData(objQuery)
@@ -134,7 +134,7 @@ const BurgerConstructor: FC = () => {
         <div className="mt-30">
             <div role={'Dustbin'} ref={dropTarget}>
                 {bun.name && <div className={styles.bunDown} key={bun._id + "3"}>
-                    <ul style={{display: "flex", flexWrap: "wrap", margin: "auto", width: '100%'}}>
+                    <ul className={styles.flexContainer}>
                         <li className="mt-2">
                             <i className="pr-3">
                                 <LockIcon type="primary"/>

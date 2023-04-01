@@ -11,7 +11,6 @@ import {IItem} from "../utils/types";
 const IngredientDetails: FC = () => {
 
 
-
     const {ingredientId} = useParams();
     const selectorItem: IItem[] = useSelector(selectorProducts)
     const item = selectorItem.find((item) => item._id === ingredientId);

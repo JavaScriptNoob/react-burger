@@ -1,5 +1,5 @@
 export const selectorBun = (state)=>  state.currentList.bun;
-export const selectorCurrentConstructoorList = (state)=>  state.currentList.currentConstructorList;
+export const selectorCurrentConstructorList = (state)=>  state.currentList.currentConstructorList;
 export const selectorModal = (state)=>  state.modal.openModal;
 export const selectorOrderNunmber= (state)=>  state.orderNumber.orderNumber;
 export const selectorProducts = (state)=>  state.productsData.orders;

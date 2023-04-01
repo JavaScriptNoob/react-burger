@@ -1,8 +1,6 @@
-import React, {useEffect,useRef,FC, useState, useContext, useReducer} from 'react'
+import React, {useRef,FC} from 'react'
 import {
-    Button,
     ConstructorElement,
-    CurrencyIcon,
     DragIcon,
     LockIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";

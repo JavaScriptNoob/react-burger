@@ -1,20 +1,20 @@
-import React, {useEffect, useState, useCallback} from 'react'
+import React, {FC, useCallback, useEffect, useState} from 'react'
 import {
     Button,
     ConstructorElement,
     CurrencyIcon,
-    DragIcon, InfoIcon,
+    InfoIcon,
     LockIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-constructor.module.css'
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import {
-    OPEN_MODAL,
-    DECREMENT_CURRENT_CONSTRUCTOR_LIST,
-    ADD_ITEM_TO_CURRENT_LIST,
     ADD_BUN,
-    DRAG_INSIDE_CONTAINER
+    ADD_ITEM_TO_CURRENT_LIST,
+    DECREMENT_CURRENT_CONSTRUCTOR_LIST,
+    DRAG_INSIDE_CONTAINER,
+    OPEN_MODAL
 } from "../servicies/reducers/index-reducer";
 import {postProductData} from "../servicies/actions/order-actions"
 import {useDispatch, useSelector} from "react-redux";
@@ -24,41 +24,37 @@ import {
     selectorBun,
     selectorCurrentConstructoorList,
     selectorCurrentList,
-    selectorModal, selectorUser
+    selectorModal,
+    selectorUser
 } from "../servicies/reducers/selectors";
-import {IData, IItem, ICurrentList, QueryObject} from "../utils/types";
+import {IItem, QueryObject} from "../utils/types";
 import {Dispatch} from "redux";
 
 
-const BurgerConstructor = () => {
-    const dispatch:any = useDispatch();
+const BurgerConstructor: FC = () => {
+    const dispatch: any = useDispatch();
     const priceListener = useSelector(selectorCurrentList)
     const currentList = useSelector(selectorCurrentConstructoorList)
-    const user =useSelector( selectorUser)
+    const user = useSelector(selectorUser)
     const bun = useSelector(selectorBun)
     const openModal = useSelector(selectorModal)
     const up = " (верх)"
     const down = " (низ)"
     const [currentPrice, setCurrentPrice] = useState<number>(0);
-    let joined:any[] = []
+    let joined: any[] = []
     const objQuery: QueryObject = {"ingredients": []}
     const [, dropTarget] = useDrop({
         accept: 'item',
-        drop(item:IItem) {
-
+        drop(item: IItem) {
             if (item.type === 'bun') {
                 dispatch({
                     type: ADD_BUN,
                     payload: item,
-
-
                 });
             } else {
                 dispatch({
                     type: ADD_ITEM_TO_CURRENT_LIST,
                     payload: item,
-
-
                 });
             }
         },
@@ -68,8 +64,7 @@ const BurgerConstructor = () => {
     })
 
 
-    const moveItemInsideContainer = useCallback((dragIndex:number, hoverIndex:number) => {
-
+    const moveItemInsideContainer = useCallback((dragIndex: number, hoverIndex: number) => {
         const dragSubject = currentList[dragIndex]
         const updated = [...currentList]
         updated.splice(dragIndex, 1)
@@ -80,13 +75,10 @@ const BurgerConstructor = () => {
         })
 
     }, [currentList, dispatch])
-    const removeIngredientFromCurrentList = (id:string, currentlist:[]) => {
-
-        return function (dispatch:Dispatch) {
+    const removeIngredientFromCurrentList = (id: string, currentlist: []) => {
+        return function (dispatch: Dispatch) {
             let found = false;
-
-            const arr = currentList.filter(((v:IItem) => found || !(found = v._id === id)))
-
+            const arr = currentList.filter(((v: IItem) => found || !(found = v._id === id)))
             return dispatch({
                 type: DECREMENT_CURRENT_CONSTRUCTOR_LIST,
                 payload: arr
@@ -94,7 +86,7 @@ const BurgerConstructor = () => {
         }
     }
 
-    const handleClose = useCallback((id:string) => {
+    const handleClose = useCallback((id: string) => {
         dispatch(removeIngredientFromCurrentList(id, currentList));
     }, [currentList, bun]);
 
@@ -114,9 +106,7 @@ const BurgerConstructor = () => {
             }
         }
         let prices = joined.reduce((sum, item) => {
-
             if (item.type === 'bun') {
-
                 return sum += item.price * 2
             } else if (item.type !== bun) {
                 return sum += item.price
@@ -132,7 +122,6 @@ const BurgerConstructor = () => {
         joined.map((e) => {
             objQuery.ingredients.push(e._id)
         })
-
         dispatch(
             postProductData(objQuery)
         )
@@ -167,7 +156,7 @@ const BurgerConstructor = () => {
                     </div>}
                     <ul className={styles.scrollContainer}>
                         {
-                            currentList && currentList.map((item:IItem, index:number) => (
+                            currentList && currentList.map((item: IItem, index: number) => (
                                 <ConstructorItems
                                     handleClose={handleClose}
                                     key={item._id + index}
@@ -177,7 +166,6 @@ const BurgerConstructor = () => {
                                 />))
                         }
                     </ul>
-
                 </div>
                 {openModal && <Modal>
                     <OrderDetails/>
@@ -206,15 +194,13 @@ const BurgerConstructor = () => {
                 <Button htmlType="button"
                         type="primary"
                         size="large"
-                        disabled={currentPrice < 1 || user.name===""}
+                        disabled={currentPrice < 1 || user.name === ""}
                         onClick={
                             (e) => enter()
                         }>
                     Оформить заказ
                 </Button>
             </div>
-
-
         </div>
     )
 }

@@ -1,33 +1,21 @@
-import React, {useState, useContext, FC, useRef, useCallback, useEffect, SyntheticEvent} from 'react'
+import React, {useState, FC,  SyntheticEvent} from 'react'
 import Modal from "../modal/modal";
 import {
-    Tab,
-    ConstructorElement,
-    Counter, CurrencyIcon
+    Tab
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
-import {closePopUp, openPopUp} from "../servicies/actions/ingredient-modal-action";
+import {useSelector} from 'react-redux';
 import {IngredientItem} from "./ingredient-item";
 import {coordAxel} from "../utils/coordAxel";
 import {selectorModalIngredients, selectorProducts} from "../servicies/reducers/selectors";
-import {IData, IItem} from "../utils/types";
-import {OPEN_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
+import { IItem} from "../utils/types";
 const BurgerIngredients: FC = () => {
     const data = useSelector(selectorProducts)
     const modal = useSelector(selectorModalIngredients)
     const [current, setCurrent] = useState<string>('bun')
-    const dispatch = useDispatch()
-    const [itemsData, setItemsData] = useState<IData[]>([]);
-    const openModalIngredients = (data: IData) => {
-        dispatch({
-                type: OPEN_INGREDIENTS_POP_UP,
-                payload: data
-            }
-        )
-        setItemsData([data]);
-    }
+
+
 
     const scrollHandler = (evt: SyntheticEvent) => {
         evt.target.addEventListener('scroll', function () {
@@ -41,7 +29,6 @@ const BurgerIngredients: FC = () => {
         document.querySelector(`#${type}`).scrollIntoView({block: "start", behavior: "smooth"})
     }
     return (
-
         <div className={styles.containerGeneral}>
             {modal && <Modal confirm={modal} onClose={undefined}>
                 <IngredientDetails/>

@@ -5,8 +5,7 @@ import {useDrag} from "react-dnd";
 import {useSelector} from "react-redux";
 import {selectorCurrentList} from "../servicies/reducers/selectors";
 import {Link, useLocation} from "react-router-dom";
-import ingredientDetails from "../ingredients-details/ingredient-details";
-import {current} from "@reduxjs/toolkit";
+
 import {IData} from "../utils/types";
 
 export const IngredientItem: FC<IData> = ({data}) => {

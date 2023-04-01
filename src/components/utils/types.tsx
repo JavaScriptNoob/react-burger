@@ -1,3 +1,5 @@
+import {ChangeEvent} from "react";
+
 export interface IItem {
     calories: number,
     carbohydrates: number,
@@ -45,4 +47,16 @@ export interface IModalOverlayProps {
 export interface IResetDetails {
     newPassword: string;
     token: string;
+}
+
+export interface FormValues {
+    [key: string]: string | number | boolean;
+}
+
+export type FormEvent = ChangeEvent<HTMLInputElement>;
+
+export interface UseForm {
+    values: FormValues;
+    handleChange: (event: FormEvent) => void;
+    setValues: (values: FormValues) => void;
 }

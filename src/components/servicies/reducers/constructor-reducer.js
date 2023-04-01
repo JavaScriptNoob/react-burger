@@ -3,7 +3,7 @@ import {
     ADD_ITEM_TO_CURRENT_LIST, CLEAR_CURRENT_LIST,
     DECREMENT_CURRENT_CONSTRUCTOR_LIST,
     DRAG_INSIDE_CONTAINER
-} from "../reducers/index-reducer";
+} from "./index-reducer";
 const initialState ={
 
     currentConstructorList:[],

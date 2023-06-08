@@ -7,9 +7,11 @@ import {
     ORDER_NUMBER_CLEAR
 } from "../reducers/index-reducer";
 import {errorHandling} from "../api";
+import {AppDispatch} from "../../../index";
+import {QueryObject} from "../../utils/types";
 
-export const postProductData =  (arr) => {
-    return function (dispatch){
+export const postProductData =  (arr: QueryObject) => {
+    return function (dispatch:AppDispatch){
         dispatch({
             type:POST_ORDER_REQUEST,
             text:"click on button"
@@ -38,7 +40,7 @@ export const postProductData =  (arr) => {
             })}
 }
 export const closeOrderModal=()=>{
-    return function (dispatch){
+    return function (dispatch:AppDispatch){
     dispatch({
         type:CLOSE_MODAL,
         openModal: false,

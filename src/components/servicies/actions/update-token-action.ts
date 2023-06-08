@@ -1,9 +1,10 @@
 import {GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS} from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
 import {fetchWithRefresh, getCookie, setToken} from "../jwt";
+import {AppDispatch} from "../../../index";
 
 export function getUser() {
-    return function (dispatch) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: GET_USER_REQUEST,
         });

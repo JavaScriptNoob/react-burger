@@ -1,9 +1,10 @@
 import {LOGIN_REQUEST_FAILED, LOGIN_REQUEST_SUCCESS, LOGIN_USER_REQUEST} from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
 import {setToken} from "../jwt";
+import {AppDispatch} from "../../../index";
 
-export function login(email, password) {
-    return function (dispatch) {
+export function login(email:string, password:string) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: LOGIN_USER_REQUEST
         });

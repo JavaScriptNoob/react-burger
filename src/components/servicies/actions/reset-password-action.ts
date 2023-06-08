@@ -2,9 +2,10 @@
 
 import {RESET_FAILED,RESET_SUCCESS,RESET_REQUEST} from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
+import {AppDispatch} from "../../../index";
 
-export function reset(password, token) {
-    return function (dispatch) {
+export function reset(password:string, token:string) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: RESET_REQUEST
         });

@@ -1,8 +1,9 @@
-import {_QUERY, errorHandling, errorHanlin} from "../api";
+import {_QUERY, errorHandling,} from "../api";
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "../reducers/index-reducer";
+import {AppDispatch} from "../../../index";
 
 export const getProductsData = () => {
-    return function (dispatch) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: GET_PRODUCT_DATA_REQUEST,
             text: 'my fetch'

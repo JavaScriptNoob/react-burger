@@ -16,7 +16,7 @@ import Modal from "../modal/modal";
 import {getProductsData} from "../servicies/actions/get-ingredient-actions";
 import Orders from "../../pages/orders";
 import {useAppDispatch} from "../servicies/customHooks/typeHooks";
-
+import Feed from "../../pages/feed";
 const App: FC = () => {
 
     const dispatch = useAppDispatch();
@@ -45,6 +45,12 @@ const App: FC = () => {
                     <Route path="/forgot-password" element={<ForgotPassword/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
                     <Route path="/" element={<Main/>}/>
+                    <Route path="/feed" element={<PrivateRoute/>}>
+                        <Route path="/feed" element={<Feed/>}/>
+                    </Route>
+                    <Route path="/feed" element={<PrivateRoute/>}>
+                    <Route path="/feed/:id" element={<Orders/>}/>
+                     </Route>
                     <Route path="/profile/orders" element={<PrivateRoute/>}>
                         <Route path="/profile/orders" element={<Orders/>}/>
                     </Route>

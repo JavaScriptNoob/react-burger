@@ -19,7 +19,7 @@ const AppHeader: FC = () => {
                         </span>
                 </li>
             </NavLink>
-            <NavLink to="/profile/orders/" className={({isActive, isPending}) =>
+            <NavLink to="/feed/" className={({isActive, isPending}) =>
                 isActive ? "text_active" : "text_color_inactive"
             }>
                 <li className="pl-4">

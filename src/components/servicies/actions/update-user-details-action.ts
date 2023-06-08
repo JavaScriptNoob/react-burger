@@ -2,10 +2,12 @@ import {CHANGE_DETAILS_FAILED, CHANGE_DETAILS_REQUEST, CHANGE_DETAILS_SUCCESS} f
 import {fetchWithRefresh, getCookie} from "../jwt";
 import {getUser, refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
+import {AppDispatch} from "../../../index";
+import {FormValues} from "../../utils/types";
 
-export function changeUserDetails(values) {
+export function changeUserDetails(values: FormValues) {
 
-    return function (dispatch) {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: CHANGE_DETAILS_REQUEST,
         });

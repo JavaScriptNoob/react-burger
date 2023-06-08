@@ -1,9 +1,10 @@
 import {REGISTER_REQUEST_FAILED, REGISTER_REQUEST_SUCCESS, REGISTER_USER_REQUEST} from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
 import {setToken} from "../jwt";
+import {AppDispatch} from "../../../index";
 
-export function register(name, email, password) {
-    return function (dispatch) {
+export function register(name:string, email:string, password:string) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: REGISTER_USER_REQUEST
         });

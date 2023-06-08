@@ -1,8 +1,7 @@
 import { useState, ChangeEvent } from "react";
+import {FormValues} from "../../utils/types";
 
-interface FormValues {
-    [key: string]: string;
-}
+
 
 type FormEvent = ChangeEvent<HTMLInputElement>;
 

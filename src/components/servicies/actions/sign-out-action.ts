@@ -6,10 +6,11 @@ import {
 import {_QUERY, errorHandling} from "../api";
 import {deleteCookie, fetchWithRefresh, getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
+import {AppDispatch} from "../../../index";
 
 export function exit() {
     console.log(localStorage.getItem('refresh'))
-    return function (dispatch) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: SIGN_OUT_REQUEST,
         });

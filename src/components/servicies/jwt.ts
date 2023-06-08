@@ -1,7 +1,19 @@
 import {errorHandling} from "./api";
 import {refreshToken} from "./actions/update-token-action";
+interface CookieOptions {
+    path?: string;
+    expires?: Date| string;
+    [key: string]: any;
+}
 
-export function storeCookie(name, value, options = {}) {
+interface RefreshToken {
+    access:string,
+    refresh:string
+}
+interface ResponseData {
+    features: any[];
+}
+export function storeCookie(name:string, value:string, options:CookieOptions = {}):void {
 
     options = {
         path: '/',
@@ -30,27 +42,27 @@ export function storeCookie(name, value, options = {}) {
 // Пример использования:
 // setCookie('user', 'John', {'max-age': 1200});
 
-export const setToken =(access, refresh)=>{
+export const setToken =(access:string, refresh:string)=>{
 storeCookie('access',access,{'max-age': 3600});
 localStorage.setItem('refresh',refresh)
 
 }
 
-export function getCookie(name) {
+export function getCookie(name:string) {
     const matches = document.cookie.match(
         new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
     );
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-export function deleteCookie(name) {
+export function deleteCookie(name:string) {
     storeCookie(name, '', { 'max-age': -1 });
 }
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url:string, options:any) => {
     try {
         const res = await fetch(url, options);
         console.log("fwr try begining", res)
         return await errorHandling(res);
-    } catch (err) {console.log("fwr catch begining",err)
+    } catch (err:any) {console.log("fwr catch begining",err)
         if (err.message === "jwt expired") {
             console.log("fwr err.message === \"jwt expired begining",err.message)
             const refreshData = await refreshToken();

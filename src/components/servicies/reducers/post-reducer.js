@@ -1,4 +1,4 @@
-import { POST_SUCCESS, ORDER_NUMBER_CLEAR, POST_FAILED, POST_ORDER_REQUEST} from "../reducers/index-reducer";
+import { POST_SUCCESS, ORDER_NUMBER_CLEAR, POST_FAILED, POST_ORDER_REQUEST} from "./index-reducer";
 const initialState ={
 
     orderNumber:null,

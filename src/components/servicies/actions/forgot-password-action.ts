@@ -3,9 +3,10 @@ import {
     SENT_EMAIL, SENT_EMAIL_FAILED, SENT_EMAIL_SUCCESS
 } from "../reducers/index-reducer";
 import {_QUERY, errorHandling} from "../api";
+import {AppDispatch} from "../../../index";
 
-export function forgotPassword( email) {
-    return function (dispatch) {
+export function forgotPassword( email:string) {
+    return function (dispatch:AppDispatch) {
         dispatch({
             type: SENT_EMAIL
         });

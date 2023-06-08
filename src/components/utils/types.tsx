@@ -50,7 +50,7 @@ export interface IResetDetails {
 }
 
 export interface FormValues {
-    [key: string]: string | number | boolean;
+    [key: string]: string ;
 }
 
 export type FormEvent = ChangeEvent<HTMLInputElement>;

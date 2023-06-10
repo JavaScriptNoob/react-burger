@@ -14,9 +14,6 @@ import {
     SIGN_OUT_FAILED,
     SIGN_OUT_REQUEST,
     SIGN_OUT_SUCCESS,
-    REFETCH_USER_REQUEST,
-    REFETCH_USER_SUCCESS,
-    REFETCH_USER_FAILED,
     SENT_EMAIL,
     SENT_EMAIL_SUCCESS,
     SENT_EMAIL_FAILED,
@@ -25,7 +22,7 @@ import {
     GET_USER_FAILED
 } from "./index-reducer";
 
-
+import {TUserAction} from "../../utils/action-types";
 const initialState = {
     userToken: "",
     requestProcessing: false,
@@ -55,7 +52,7 @@ const initialState = {
     forgotPasswordSuccess: false,
     forgotPasswordFailed: false
 }
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action:TUserAction) => {
     switch (action.type) {
 
         case REGISTER_USER_REQUEST:

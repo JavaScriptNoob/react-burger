@@ -4,6 +4,9 @@ import {
     DECREMENT_CURRENT_CONSTRUCTOR_LIST,
     DRAG_INSIDE_CONTAINER
 } from "./index-reducer";
+import {TBurgerConstructorActionTypes} from "../../utils/types";
+
+
 const initialState ={
 
     currentConstructorList:[],
@@ -11,7 +14,7 @@ const initialState ={
 
 }
 
-export const burgerConstructorReducer = (state = initialState, action)=>{
+export const burgerConstructorReducer = (state = initialState, action:TBurgerConstructorActionTypes)=>{
     switch (action.type){
 
         case DECREMENT_CURRENT_CONSTRUCTOR_LIST:

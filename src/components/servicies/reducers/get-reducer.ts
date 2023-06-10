@@ -1,5 +1,11 @@
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "./index-reducer";
-const initialState ={
+import {TProductsActionTypes} from "../../utils/action-types";
+import {IProductsState} from "../../utils/types";
+
+
+
+
+const initialState :IProductsState ={
     productsHaveBeenRecieved:false,
     productsRequestConfirmed:false,
     productsRequest:false,
@@ -8,7 +14,8 @@ const initialState ={
     productErrBody:[],
 
 }
-export const productsReducer = (state = initialState, action) => {
+
+export const productsReducer = (state: IProductsState = initialState, action:TProductsActionTypes) => {
     switch (action.type) {
         // Добавление новой задачи в список дел
         case GET_PRODUCT_DATA_REQUEST:

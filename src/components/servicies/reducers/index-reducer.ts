@@ -5,7 +5,8 @@ import {modalViewReducer} from "./modal-view-reducer";
 import {productsReducer} from "./get-reducer";
 import {ingredientModalReducer} from "./ingredient_modal-reducer";
 import {userReducer} from "./user-reducer";
-
+import {EqualityFn, useSelector as selectorHook} from "react-redux";
+import {RootState} from "../../../index";
 
 export const GET_PRODUCT_DATA_REQUEST : 'GET_PRODUCT_DATA_REQUEST' = 'GET_PRODUCT_DATA_REQUEST';
 export const REQUEST_FAILED : 'REQUEST_FAILED' = 'REQUEST_FAILED';
@@ -62,3 +63,12 @@ export const rootReducer = combineReducers({
 
 
 });
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook
+export interface TypedUseSelectorHook<TState> {
+    <TSelected>(
+        selector: (state: TState) => TSelected,
+        equalityFn?: EqualityFn<NoInfer<TSelected>>
+    ): TSelected
+}
+
+export type NoInfer<T> = [T][T extends any ? 0 : never]

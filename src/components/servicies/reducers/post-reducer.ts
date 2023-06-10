@@ -1,4 +1,13 @@
 import { POST_SUCCESS, ORDER_NUMBER_CLEAR, POST_FAILED, POST_ORDER_REQUEST} from "./index-reducer";
+import  { PayloadAction} from "@reduxjs/toolkit";
+import {
+    IOrderNumberClearAction,
+    IPostFailedAction, IPostOrderRequestAction,
+    IPostSuccessAction,
+    TOrderActionTypes
+} from "../../utils/action-types";
+
+
 const initialState ={
 
     orderNumber:null,
@@ -8,7 +17,7 @@ const initialState ={
     postRequestFailed:false ,
 
 }
-export const orderNumberReducer = (state = initialState, action) => {
+export const orderNumberReducer = (state = initialState, action:TOrderActionTypes) => {
     switch (action.type) {
 
         case POST_ORDER_REQUEST:
@@ -25,7 +34,7 @@ export const orderNumberReducer = (state = initialState, action) => {
                 postRequest: false,
 
             }
-        case 'POST_FAILED':
+        case POST_FAILED:
             return {
                 ...state,
                 postErrBody: action.postFailed,

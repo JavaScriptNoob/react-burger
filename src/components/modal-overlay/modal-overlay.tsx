@@ -5,13 +5,13 @@ import {useSelector} from "react-redux";
 import {selectorModal} from "../servicies/reducers/selectors";
 import {closeOrderModal} from "../servicies/actions/order-actions";
 import {IModalOverlayProps} from "../utils/types";
-import {useAppDispatch} from "../servicies/customHooks/typeHooks";
+import {useDispatch} from "../servicies/customHooks/typeHooks";
 
 const ModalOverlay: FC<IModalOverlayProps> = ({handler}) => {
     const order = useSelector(selectorModal)
 
 
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
 
     const handleOrder = () => {
         dispatch(

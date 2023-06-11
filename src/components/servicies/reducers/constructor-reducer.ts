@@ -4,17 +4,25 @@ import {
     DECREMENT_CURRENT_CONSTRUCTOR_LIST,
     DRAG_INSIDE_CONTAINER
 } from "./index-reducer";
-import {TBurgerConstructorActionTypes} from "../../utils/types";
+import {TBurgerConstructorAction} from "../../utils/action-types";
+import {IItem} from "../../utils/types";
+interface IBun {
+    [key: string]: any;
+}
 
+type BurgerConstructorState = {
+    currentConstructorList: IItem[];
+    bun: IBun ;
+};
 
-const initialState ={
+const initialState:BurgerConstructorState ={
 
     currentConstructorList:[],
     bun:{}
 
 }
 
-export const burgerConstructorReducer = (state = initialState, action:TBurgerConstructorActionTypes)=>{
+export const burgerConstructorReducer = (state = initialState, action:TBurgerConstructorAction)=>{
     switch (action.type){
 
         case DECREMENT_CURRENT_CONSTRUCTOR_LIST:
@@ -31,7 +39,7 @@ export const burgerConstructorReducer = (state = initialState, action:TBurgerCon
         case ADD_ITEM_TO_CURRENT_LIST:
             return{
                 ...state,
-                currentConstructorList: state.currentConstructorList.concat(action.payload),
+                currentConstructorList: [...state.currentConstructorList, action.payload],
 
 
             }

@@ -1,14 +1,14 @@
 import {Link} from "react-router-dom";
 import {Input, Button, PasswordInput, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ChangeEvent, FormEvent, useRef, useState} from "react";
-import {useDispatch} from "react-redux";
+
 import {register} from "../components/servicies/actions/register-action";
 import styles from "./register.module.css"
-import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
+import {useDispatch} from "../components/servicies/customHooks/typeHooks";
 
 const Register = () => {
     const inputRef = useRef();
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const [inputData, setInputData] = useState({
         firstInput: '',
         secondInput: '',

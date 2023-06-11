@@ -7,13 +7,13 @@ import {selectorModal} from "../servicies/reducers/selectors";
 import {closeOrderModal} from "../servicies/actions/order-actions";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {IModal} from "../utils/types";
-import {useAppDispatch} from "../servicies/customHooks/typeHooks";
+import {useDispatch} from "../servicies/customHooks/typeHooks";
 
 
 const Modal: FC<IModal> = ({onClose, ...props}) => {
     const modalOrder = useSelector(selectorModal)
     const [domIsReady, setDomIsReady] = useState(false);
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const close = () => {
         if (modalOrder) {
             dispatch(

@@ -1,5 +1,6 @@
-import {errorHandling} from "./api";
+import {errorHandling} from "./error";
 import {refreshToken} from "./actions/update-token-action";
+
 interface CookieOptions {
     path?: string;
     expires?: Date| string;

@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom";
-import {Provider} from "react-redux";
+import {Provider, TypedUseSelectorHook, useSelector} from "react-redux";
 import {rootReducer} from "./components/servicies/reducers/index-reducer";
 
 
@@ -28,7 +28,7 @@ const root = ReactDOM.createRoot(
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof rootReducer>
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+
 root.render(
     <React.StrictMode>
         <Provider store={store}>
@@ -43,3 +43,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+export type AppDispatch = typeof store.dispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

@@ -1,14 +1,14 @@
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {reset} from "../components/servicies/actions/reset-password-action";
 import {useNavigate} from "react-router-dom";
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import styles from "./reset-password.module.css"
-import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
+import {useDispatch} from "../components/servicies/customHooks/typeHooks";
 
 const ResetPassword = () => {
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [resetDetails, setResetDetails] = useState({
         newPassword: '', token: ''
@@ -23,7 +23,7 @@ const ResetPassword = () => {
         });
     }
     useEffect(() => {
-        if (!forgotRequest.forgotPasswordSuccess) {
+        if (!forgotRequest['forgotPasswordSuccess']) {
             navigate('/forgot-password')
         }
     }, []);
@@ -34,7 +34,7 @@ const ResetPassword = () => {
         e.preventDefault();
         dispatch(reset(resetDetails.newPassword, resetDetails.token));
     }
-    if (resetStatus.resetSuccess) {
+    if (resetStatus['resetSuccess']) {
         navigate('/login')
     }
     return (<div className={styles.container}>

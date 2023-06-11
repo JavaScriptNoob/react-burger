@@ -7,6 +7,25 @@ import {_QUERY, errorHandling} from "../api";
 import {deleteCookie, fetchWithRefresh, getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
 import {AppDispatch} from "../../../index";
+import {IRegisterRequestFailed, IRegisterRequestSuccess, IRegisterUserRequest} from "./register-action";
+
+export interface ISignOutFailed {
+    type: typeof SIGN_OUT_FAILED;
+    payload: string;
+}
+
+export interface ISignOutRequest {
+    type: typeof SIGN_OUT_REQUEST;
+}
+
+export interface ISignOutSuccess {
+    type: typeof SIGN_OUT_SUCCESS;
+}
+export type TSignOutActions =
+    | ISignOutSuccess
+    | ISignOutRequest
+    | ISignOutFailed;
+
 
 export function exit() {
     console.log(localStorage.getItem('refresh'))

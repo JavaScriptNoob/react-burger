@@ -1,11 +1,11 @@
 import {OPEN_INGREDIENTS_POP_UP, CLOSE_INGREDIENTS_POP_UP} from "./index-reducer";
-import {TOrderActionTypes} from "../../utils/action-types";
-import {TIngredientModalActionTypes} from "../../utils/action-types";
+
+import {TIngredientsPopUpAction} from "../actions/ingredient-modal-action";
 const initialState={
     ingredientsModal:false,
-    currentIngredient:[]
+    currentIngredient: {}
 }
-export const ingredientModalReducer = (state = initialState, action:TIngredientModalActionTypes) => {
+export const ingredientModalReducer = (state = initialState, action:TIngredientsPopUpAction) => {
     switch (action.type) {
         case OPEN_INGREDIENTS_POP_UP:
             return {

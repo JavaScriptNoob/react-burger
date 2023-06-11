@@ -1,6 +1,15 @@
 import {ChangeEvent} from "react";
-import { ADD_BUN,ADD_ITEM_TO_CURRENT_LIST,
-CLEAR_CURRENT_LIST,DECREMENT_CURRENT_CONSTRUCTOR_LIST, DRAG_INSIDE_CONTAINER} from "../servicies/reducers/index-reducer";
+import {
+    ADD_BUN, ADD_ITEM_TO_CURRENT_LIST,
+    CLEAR_CURRENT_LIST, DECREMENT_CURRENT_CONSTRUCTOR_LIST, DRAG_INSIDE_CONTAINER, RootState
+} from "../servicies/reducers/index-reducer";
+import {TBurgerConstructorAction} from "./action-types";
+import {TAuthActions} from "../servicies/reducers/user-reducer";
+import {TModalStatus, TOrderDataAction} from "../servicies/actions/order-actions";
+import {TIngredientsPopUpAction} from "../servicies/actions/ingredient-modal-action";
+import {TProductDataAction} from "../servicies/actions/get-ingredient-actions";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {ActionCreator} from "redux";
 
 export interface IItem {
     calories: number,
@@ -29,7 +38,7 @@ export interface IUser {
     loginRequest: boolean,
     loginSuccess:boolean,
     loginFailed: boolean,
-    refreshToken: '',
+    refreshToken: string,
     resetRequest: boolean,
     resetSuccess: boolean,
     resetFailed: boolean,
@@ -51,11 +60,12 @@ export interface IData {
     data: IItem,
 
 }
+
 export interface IProductsState {
     productsHaveBeenRecieved: boolean;
     productsRequestConfirmed: boolean;
     productsRequest: boolean;
-    orders: IItem[]; // Replace 'any' with the appropriate type for 'orders'
+    orders: any[];
     productsRequestFailed: boolean;
     productErrBody: any[]; // Replace 'any' with the appropriate type for 'productErrBody'
 }
@@ -104,32 +114,14 @@ export type FormEvent = ChangeEvent<HTMLInputElement>;
 export interface ICurrentList {
     currentConstructorList: IItem[];
 }
-interface IDecrementCurrentConstructorListAction {
-    type: typeof DECREMENT_CURRENT_CONSTRUCTOR_LIST;
-    payload: IItem[]; // Replace `any` with the appropriate payload type
-}
-
-interface IDragInsideContainerAction {
-    type: typeof DRAG_INSIDE_CONTAINER;
-    afterDrag: IItem[]; // Replace `any` with the appropriate payload type
-}
-
-interface IAddItemToCurrentListAction {
-    type: typeof ADD_ITEM_TO_CURRENT_LIST;
-    payload: any; // Replace `any` with the appropriate payload type
-}
-
-interface IAddBunAction {
-    type: typeof ADD_BUN;
-    payload: IItem; // Replace `any` with the appropriate payload type
-}
-
-interface IClearCurrentListAction {
-    type: typeof CLEAR_CURRENT_LIST;
-}
-export type TBurgerConstructorActionTypes =
-    | IDecrementCurrentConstructorListAction
-    | IDragInsideContainerAction
-    | IAddItemToCurrentListAction
-    | IAddBunAction
-    | IClearCurrentListAction;
+export type TAppActions =
+    |TBurgerConstructorAction
+    |TAuthActions
+    |TOrderDataAction
+    |TModalStatus
+|TIngredientsPopUpAction
+|TProductDataAction;
+export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
+export type AppThunk<TReturn = void> = ActionCreator<
+    ThunkAction<Promise<TReturn>, RootState, never, TAppActions>
+>;

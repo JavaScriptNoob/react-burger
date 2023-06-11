@@ -1,6 +1,28 @@
-import {_QUERY, errorHandling,} from "../api";
+import {_QUERY} from "../api";
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "../reducers/index-reducer";
 import {AppDispatch} from "../../../index";
+
+
+interface IGetProductDataRequest {
+    type: typeof GET_PRODUCT_DATA_REQUEST;
+    text: string;
+}
+
+interface IRequestSuccess {
+    type: typeof REQUEST_SUCCESS;
+    orders: any[];
+}
+
+interface IRequestFailed {
+    type: typeof REQUEST_FAILED;
+    productsRequestFailed: Error;
+}
+
+export  type TProductDataAction =
+    IGetProductDataRequest
+    | IRequestSuccess
+    | IRequestFailed;
+
 
 export const getProductsData = () => {
     return function (dispatch:AppDispatch) {

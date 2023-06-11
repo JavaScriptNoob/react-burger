@@ -11,15 +11,15 @@ import Profile from "../../pages/profile";
 import PrivateRoute from "../../pages/private-route";
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import {CLOSE_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
-import {useDispatch, useSelector} from "react-redux";
+
 import Modal from "../modal/modal";
 import {getProductsData} from "../servicies/actions/get-ingredient-actions";
 import Orders from "../../pages/orders";
-import {useAppDispatch} from "../servicies/customHooks/typeHooks";
+import {useDispatch, useSelector} from "../servicies/customHooks/typeHooks";
 import Feed from "../../pages/feed";
 const App: FC = () => {
 
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     useEffect(() => {
 
         dispatch(getProductsData())

@@ -16,6 +16,8 @@ export interface IGetUserFailed{
 export interface IGetUserRequest{
     readonly type: typeof GET_USER_REQUEST;
 
+
+
 }
 export interface IGetUserSuccess{
     readonly type: typeof GET_USER_SUCCESS;

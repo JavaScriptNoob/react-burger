@@ -3,7 +3,7 @@
 import {RESET_FAILED,RESET_SUCCESS,RESET_REQUEST} from "../reducers/index-reducer";
 import {_QUERY} from "../api";
 import {errorHandling} from "../error";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
 interface IResetRequest {
     type: typeof RESET_REQUEST;
 }

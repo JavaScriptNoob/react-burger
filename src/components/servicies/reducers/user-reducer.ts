@@ -69,7 +69,7 @@ const initialState :IUser= {
     forgotPasswordSuccess: false,
     forgotPasswordFailed: false
 }
-export const userReducer = (state:IUser = initialState, action:TAuthActions) => {
+export const userReducer = (state= initialState, action:TAuthActions) => {
     switch (action.type) {
 
         case REGISTER_USER_REQUEST:

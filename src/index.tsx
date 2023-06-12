@@ -6,8 +6,10 @@ import thunk from 'redux-thunk';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom";
-import {Provider, TypedUseSelectorHook, useSelector} from "react-redux";
+import {Provider, TypedUseSelectorHook, useSelector as selectorHooks} from "react-redux";
 import {rootReducer} from "./components/servicies/reducers/index-reducer";
+import {socketMiddleware} from "./components/servicies/middleware/socket-middleware";
+import {wsQuery} from "./components/servicies/api";
 
 
 declare global {
@@ -19,7 +21,7 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk));
+const enhancer = composeEnhancers(applyMiddleware(thunk), applyMiddleware(socketMiddleware(wsQuery)));
 
 const store = createStore(rootReducer, enhancer);
 const root = ReactDOM.createRoot(
@@ -43,5 +45,5 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-export type AppDispatch = typeof store.dispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHooks

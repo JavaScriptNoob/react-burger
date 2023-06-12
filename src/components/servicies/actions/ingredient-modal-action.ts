@@ -1,5 +1,5 @@
 import {OPEN_INGREDIENTS_POP_UP,CLOSE_INGREDIENTS_POP_UP} from "../reducers/index-reducer";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
 import {IItem} from "../../utils/types";
 interface ICloseIngredientsPopUp {
     type: typeof CLOSE_INGREDIENTS_POP_UP;

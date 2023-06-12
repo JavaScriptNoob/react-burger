@@ -1,4 +1,5 @@
 import {ChangeEvent} from "react";
+import * as router from 'react-router-dom';
 import {
     ADD_BUN, ADD_ITEM_TO_CURRENT_LIST,
     CLEAR_CURRENT_LIST, DECREMENT_CURRENT_CONSTRUCTOR_LIST, DRAG_INSIDE_CONTAINER, RootState
@@ -10,6 +11,7 @@ import {TIngredientsPopUpAction} from "../servicies/actions/ingredient-modal-act
 import {TProductDataAction} from "../servicies/actions/get-ingredient-actions";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {ActionCreator} from "redux";
+import {TSocketActions} from "../servicies/actions/socket-action";
 
 export interface IItem {
     calories: number,
@@ -61,14 +63,7 @@ export interface IData {
 
 }
 
-export interface IProductsState {
-    productsHaveBeenRecieved: boolean;
-    productsRequestConfirmed: boolean;
-    productsRequest: boolean;
-    orders: any[];
-    productsRequestFailed: boolean;
-    productErrBody: any[]; // Replace 'any' with the appropriate type for 'productErrBody'
-}
+
 type TJSONValue =
     | string
     | number
@@ -119,9 +114,32 @@ export type TAppActions =
     |TAuthActions
     |TOrderDataAction
     |TModalStatus
-|TIngredientsPopUpAction
-|TProductDataAction;
+    |TIngredientsPopUpAction
+    |TProductDataAction
+    | TSocketActions;
+
 export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
 export type AppThunk<TReturn = void> = ActionCreator<
     ThunkAction<Promise<TReturn>, RootState, never, TAppActions>
 >;
+export type ISocketDataOrder = {
+    ingredients: string[];
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    name: string;
+    updatedAt: string;
+};
+export interface ILocation {
+    from?: Location;
+    background?: Location;
+    pathname?: string;
+    id?: string;
+}
+//// Router bones import * as router from 'react-router-dom';
+export function useLocation<T>() {
+  type L = router.Location & { state: T };
+
+  return router.useLocation() as L;
+}

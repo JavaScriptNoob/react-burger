@@ -2,7 +2,7 @@
 import {fetchWithRefresh, getCookie} from "../jwt";
 import {getUser, IGetUserFailed, IGetUserRequest, IGetUserSuccess, refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
 import {FormValues, IUser} from "../../utils/types";
 import {CHANGE_DETAILS_SUCCESS, CHANGE_DETAILS_FAILED, CHANGE_DETAILS_REQUEST } from "../reducers/index-reducer";
 

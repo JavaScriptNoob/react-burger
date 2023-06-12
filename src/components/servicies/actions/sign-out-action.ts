@@ -3,10 +3,10 @@ import {
     SIGN_OUT_REQUEST,
     SIGN_OUT_SUCCESS
 } from "../reducers/index-reducer";
-import {_QUERY, errorHandling} from "../api";
+import {_QUERY} from "../api";
 import {deleteCookie, fetchWithRefresh, getCookie} from "../jwt";
 import {refreshToken} from "./update-token-action";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
 import {IRegisterRequestFailed, IRegisterRequestSuccess, IRegisterUserRequest} from "./register-action";
 
 export interface ISignOutFailed {

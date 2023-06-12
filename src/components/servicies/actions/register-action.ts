@@ -2,7 +2,7 @@ import {REGISTER_REQUEST_FAILED, REGISTER_REQUEST_SUCCESS, REGISTER_USER_REQUEST
 import {_QUERY} from "../api";
 import {errorHandling} from "../error";
 import {setToken} from "../jwt";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
 import {Simulate} from "react-dom/test-utils";
 import {IUser} from "../../utils/types";
 

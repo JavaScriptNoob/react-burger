@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import './App.css';
-import AppHeader from '../app-header/app-header'
+import {AppHeader} from '../app-header/app-header'
 import Main from "../../pages/main";
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import Register from "../../pages/register";
@@ -13,10 +13,11 @@ import IngredientDetails from "../ingredients-details/ingredient-details";
 import {CLOSE_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
 
 import Modal from "../modal/modal";
-import {getProductsData} from "../servicies/actions/get-ingredient-actions";
+import getProductsData from "../servicies/actions/get-ingredient-actions";
 import Orders from "../../pages/orders";
 import {useDispatch, useSelector} from "../servicies/customHooks/typeHooks";
 import Feed from "../../pages/feed";
+import Order from "../order/order";
 const App: FC = () => {
 
     const dispatch = useDispatch();
@@ -49,7 +50,7 @@ const App: FC = () => {
                         <Route path="/feed" element={<Feed/>}/>
                     </Route>
                     <Route path="/feed" element={<PrivateRoute/>}>
-                    <Route path="/feed/:id" element={<Orders/>}/>
+
                      </Route>
                     <Route path="/profile/orders" element={<PrivateRoute/>}>
                         <Route path="/profile/orders" element={<Orders/>}/>
@@ -75,6 +76,19 @@ const App: FC = () => {
                             }
                         />
                     </Routes>)}
+                <Routes>
+                    <Route
+                        path='/feed/:id'
+                        element={
+                            <Modal
+                                title='Детали ингридиента'
+                                onClose={closePopup}
+                            >
+                                <Order/>
+                            </Modal>
+                        }
+                    />
+                </Routes>
             </div>
         );
     }

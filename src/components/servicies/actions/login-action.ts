@@ -2,7 +2,8 @@ import {LOGIN_REQUEST_FAILED, LOGIN_REQUEST_SUCCESS, LOGIN_USER_REQUEST} from ".
 import {_QUERY} from "../api";
 import {errorHandling} from "../error";
 import {setToken} from "../jwt";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
+import {reset} from "./reset-password-action";
 
 export interface IToken {
 
@@ -34,36 +35,37 @@ export type TLoginUserAction =
     ILoginRequestFailed
     | ILoginRequestSuccess
     | ILoginUserRequest;
-export function login(email:string, password:string) {
-    return function (dispatch:AppDispatch) {
+export function login(email: string, password: string) {
+    return function (dispatch: AppDispatch) {
         dispatch({
-            type: LOGIN_USER_REQUEST
+            type: LOGIN_USER_REQUEST,
         });
         fetch(`${_QUERY}auth/login`, {
             method: 'POST',
             headers: {
-                "Content-Type": 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-
                 email: email,
-                password: password
-            })
+                password: password,
+            }),
         })
-            .then()
-            .then(res => {
+            .then((res) => res.json()) // Extract JSON data from the response
+            .then((data) => {
                 dispatch({
-                    type:LOGIN_REQUEST_SUCCESS,
-                    response:res
+                    type: LOGIN_REQUEST_SUCCESS,
+                    response: data,
+                    token: data.accessToken,
+                    email: data.user.email,
+                    name: data.user.name,
                 });
-                setToken(res.accessToken, res.refreshToken)
+                setToken(data.accessToken, data.refreshToken);
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch({
                     type: LOGIN_REQUEST_FAILED,
-
-                })
-                console.log(err)
-            })
-    }
+                });
+                console.log(err);
+            });
+    };
 }

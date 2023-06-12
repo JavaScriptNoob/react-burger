@@ -6,8 +6,8 @@ import {
     CLEAR_CURRENT_LIST,
     ORDER_NUMBER_CLEAR, OPEN_MODAL
 } from "../reducers/index-reducer";
-import {errorHandling} from "../api";
-import {AppDispatch} from "../../../index";
+import {errorHandling} from "../error";
+import {AppDispatch} from "../../utils/types";
 import {QueryObject} from "../../utils/types";
 
 

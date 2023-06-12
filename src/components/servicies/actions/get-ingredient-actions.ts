@@ -1,6 +1,7 @@
 import {_QUERY} from "../api";
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "../reducers/index-reducer";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
+import {errorHandling} from "../error";
 
 
 interface IGetProductDataRequest {
@@ -15,7 +16,7 @@ interface IRequestSuccess {
 
 interface IRequestFailed {
     type: typeof REQUEST_FAILED;
-    productsRequestFailed: Error;
+    productsRequestFailed: any;
 }
 
 export  type TProductDataAction =
@@ -24,7 +25,7 @@ export  type TProductDataAction =
     | IRequestFailed;
 
 
-export const getProductsData = () => {
+const getProductsData = () => {
     return function (dispatch:AppDispatch) {
         dispatch({
             type: GET_PRODUCT_DATA_REQUEST,
@@ -49,3 +50,4 @@ export const getProductsData = () => {
             })
     }
 }
+export  default getProductsData

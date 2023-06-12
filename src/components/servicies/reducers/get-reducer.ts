@@ -1,10 +1,17 @@
 import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "./index-reducer";
 
-import {IProductsState} from "../../utils/types";
+
 import {TProductDataAction} from "../actions/get-ingredient-actions";
-import {IngredientItem} from "../../burger-ingredients/ingredient-item";
 
 
+export interface IProductsState {
+    productsHaveBeenRecieved: boolean;
+    productsRequestConfirmed: boolean;
+    productsRequest: boolean;
+    orders: any[];
+    productsRequestFailed: boolean;
+    productErrBody: any[];
+}
 
 
 const initialState :IProductsState ={
@@ -17,7 +24,7 @@ const initialState :IProductsState ={
 
 }
 
-export const productsReducer = (state: IProductsState = initialState, action:TProductDataAction) => {
+export const productsReducer = (state= initialState, action:TProductDataAction) => {
     switch (action.type) {
         // Добавление новой задачи в список дел
         case GET_PRODUCT_DATA_REQUEST:

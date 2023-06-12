@@ -5,6 +5,7 @@ import {modalViewReducer} from "./modal-view-reducer";
 import {productsReducer} from "./get-reducer";
 import {ingredientModalReducer} from "./ingredient_modal-reducer";
 import {userReducer} from "./user-reducer";
+import {wsReducer} from "./feed-reducer";
 
 export const GET_PRODUCT_DATA_REQUEST : 'GET_PRODUCT_DATA_REQUEST' = 'GET_PRODUCT_DATA_REQUEST';
 export const REQUEST_FAILED : 'REQUEST_FAILED' = 'REQUEST_FAILED';
@@ -58,7 +59,7 @@ export const rootReducer = combineReducers({
     modal:modalViewReducer,
     ingredientModal:ingredientModalReducer,
     user:userReducer,
-
+    feed:wsReducer
 
 });
 

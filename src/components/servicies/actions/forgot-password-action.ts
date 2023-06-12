@@ -1,7 +1,7 @@
 
 import {SENT_EMAIL, SENT_EMAIL_FAILED, SENT_EMAIL_SUCCESS} from "../reducers/index-reducer";
 import {_QUERY} from "../api";
-import {AppDispatch} from "../../../index";
+import {AppDispatch} from "../../utils/types";
 import {errorHandling} from "../error";
 
 interface ISentEmail {

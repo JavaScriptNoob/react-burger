@@ -23,7 +23,7 @@ import ConstructorItems from "./constructor-items";
 
 import {ICurrentList, IItem, QueryObject} from "../utils/types";
 import {Dispatch} from "redux";
-import {AppDispatch} from "../../index";
+import {AppDispatch} from "../utils/types";
 import {
     selectorBun,
     selectorCurrentConstructorList,

@@ -18,22 +18,18 @@
 }
 
 .order_title {
-    /*white-space: nowrap;*/
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: flex;
-    align-items: flex-start;
 }
-
 
 
 .order_ingridients {
     display: flex;
-    width: 100%;
     justify-content: space-between;
-    align-content: stretch;
-    flex-direction: row;
+    align-items: center;
 }
+
 .order_ingridients_images {
     display: flex;
     margin: 0;
@@ -56,8 +52,9 @@
     border-radius: 50%;
     margin-left: -12px;
     border: 2px solid #4C4CFF;
-
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .order_ingridients_image_last {
@@ -82,7 +79,7 @@
     margin: 0;
     padding: 0;
     align-self: flex-start;
-    padding-top: auto;
+
     height: 300px;
     overflow-y: scroll;
     box-sizing: border-box;

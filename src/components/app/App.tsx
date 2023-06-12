@@ -18,6 +18,7 @@ import Orders from "../../pages/orders";
 import {useDispatch, useSelector} from "../servicies/customHooks/typeHooks";
 import Feed from "../../pages/feed";
 import Order from "../order/order";
+import OrderArchive from "../order-archive/order-archive";
 const App: FC = () => {
 
     const dispatch = useDispatch();
@@ -84,7 +85,7 @@ const App: FC = () => {
                                 title='Детали ингридиента'
                                 onClose={closePopup}
                             >
-                                <Order/>
+                                <OrderArchive/>
                             </Modal>
                         }
                     />

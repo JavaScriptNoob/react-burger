@@ -54,7 +54,7 @@ const App: FC = () => {
 
                      </Route>
                     <Route path="/profile/orders" element={<PrivateRoute/>}>
-                        <Route path="/profile/orders" element={<Orders/>}/>
+                        <Route path="/profile/orders" element={<Profile/>}/>
                     </Route>
                     <Route path="/profile" element={<PrivateRoute/>}>
                         <Route path="/profile" element={<Profile/>}/>
@@ -80,6 +80,19 @@ const App: FC = () => {
                 <Routes>
                     <Route
                         path='/feed/:id'
+                        element={
+                            <Modal
+                                title='Детали ингридиента'
+                                onClose={closePopup}
+                            >
+                                <OrderArchive/>
+                            </Modal>
+                        }
+                    />
+                </Routes>
+                <Routes>
+                    <Route
+                        path='/profile/orders/:id'
                         element={
                             <Modal
                                 title='Детали ингридиента'

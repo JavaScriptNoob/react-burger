@@ -41,7 +41,7 @@ export type TAuthActions =
     TForgotPasswordAction
 
 const initialState :IUser= {
-    userToken: "344",
+    userToken: '',
     requestProcessing: false,
     requestSuccess: false,
     requestFailed: false,

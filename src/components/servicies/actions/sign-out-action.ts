@@ -46,6 +46,7 @@ export function exit() {
         })
 
             .then((res) => {
+                console.log(res)
                 dispatch({
                     type: SIGN_OUT_SUCCESS,
                 });

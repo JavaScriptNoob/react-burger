@@ -10,6 +10,7 @@ import {
     WS_ORDERS_START
 } from "../../utils/wsTypes";
 import {getCookie} from "../jwt";
+import {useSelector} from "../customHooks/typeHooks";
 
 
 export const socketMiddleware = (wsQuery: string): Middleware => {
@@ -26,8 +27,10 @@ export const socketMiddleware = (wsQuery: string): Middleware => {
             }
             if (type === WS_ORDERS_START) {
 
-                const accessToken = getCookie("accessToken");
-                const token = accessToken?.split('Bearer ')[1];
+                const access = getCookie("access");
+                const token =access?.split('Bearer ')[1]
+
+                console.log(token )
 
                 socket = new WebSocket(`${wsQuery}?token=${token}`);
             }

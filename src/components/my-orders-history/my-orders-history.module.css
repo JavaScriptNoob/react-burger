@@ -1,0 +1,23 @@
+
+.items {
+    max-height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-wrap: wrap;
+    width: 608px;
+    margin: 0 auto;
+}
+.items::-webkit-scrollbar-thumb{
+
+}
+.items::-webkit-scrollbar{
+    width: 12px;
+}
+.items::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(47, 47, 55, 1);
+    border-radius: 10px;
+}
+.items::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(133, 133, 173, 1);
+}

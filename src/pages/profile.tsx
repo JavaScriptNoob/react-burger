@@ -10,9 +10,11 @@ import {exit} from "../components/servicies/actions/sign-out-action";
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import {useForm} from "../components/servicies/customHooks/useForm";
 import {useDispatch} from "../components/servicies/customHooks/typeHooks";
+import {useLocation} from "../components/utils/types";
+import MyOrdersHistory from "../components/my-orders-history/my-orders-history";
 
 const Profile:FC = () => {
-
+    const location = useLocation();
     const dispatch = useDispatch();
     const currentUser = useSelector(selectorUser)
     const {values, handleChange, setValues} = useForm({
@@ -79,7 +81,7 @@ const Profile:FC = () => {
                         </Link>
                     </li>
                 </ul>
-                <div className={styles.formContainer}>
+                {location.pathname === '/profile' && <div className={styles.formContainer}>
                     <form action="">
                         <Input
                             type={'text'}
@@ -142,8 +144,9 @@ const Profile:FC = () => {
 
                         </div>
                     </form>
-                </div>
-            </div>
+                </div>}{location.pathname === '/profile/orders' && <MyOrdersHistory />}
+               </div>
+
         </div>
 
     )

@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import styles from './modal-overlay.module.css';
 
-import {useSelector} from "react-redux";
+import {useSelector} from "../servicies/customHooks/typeHooks";
 import {selectorModal} from "../servicies/reducers/selectors";
 import {closeOrderModal} from "../servicies/actions/order-actions";
 import {IModalOverlayProps} from "../utils/types";

@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burger-ingrediens.module.css'
 import IngredientDetails from "../ingredients-details/ingredient-details";
-import {useSelector} from 'react-redux';
+import {useSelector} from "../servicies/customHooks/typeHooks";
 import {IngredientItem} from "./ingredient-item";
 import {coordAxel} from "../utils/coordAxel";
 import {selectorModalIngredients, selectorProducts} from "../servicies/reducers/selectors";

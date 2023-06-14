@@ -9,6 +9,7 @@ import {
 import {errorHandling} from "../error";
 import {AppDispatch} from "../../utils/types";
 import {QueryObject} from "../../utils/types";
+import {getCookie} from "../jwt";
 
 
 interface IPostOrderRequest {
@@ -71,7 +72,11 @@ export const postProductData =  (arr: QueryObject) => {
 
         })
         fetch("https://norma.nomoreparties.space/api/orders", {
-            method: "post", headers: {"Content-Type": 'application/json'}, body: JSON.stringify(arr)
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `${getCookie("access")}`,
+            }, body: JSON.stringify(arr)
         })
             .then(errorHandling).then((item) => {
 

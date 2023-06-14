@@ -1,10 +1,9 @@
 import React, {FC, useEffect} from "react";
 import FeedDetails from "../components/feedDetails/feed-details";
 import FeedTable from "../components/feed-table/feed-table";
-import {useDispatch, useSelector} from "../components/servicies/customHooks/typeHooks";
-import {WS_HANDSHAKE_CLOSED, WS_HANDSHAKE_START} from "../components/utils/wsTypes";
-import {RootState} from "../components/servicies/reducers/index-reducer";
+import {useDispatch} from "../components/servicies/customHooks/typeHooks";
 import styles from "./feed.module.css";
+import {WS_FEED_HANDSHAKE_CLOSED, WS_FEED_HANDSHAKE_START} from "../components/utils/wsTypes";
 
 
 const Feed : FC  = () =>{
@@ -12,11 +11,11 @@ const Feed : FC  = () =>{
 
     useEffect(() => {
         dispatch(
-            { type: WS_HANDSHAKE_START }
+            { type: WS_FEED_HANDSHAKE_START }
         );
         return () => {
             dispatch(
-                { type: WS_HANDSHAKE_CLOSED }
+                { type: WS_FEED_HANDSHAKE_CLOSED}
             );
         };
     }, [dispatch]);

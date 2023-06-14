@@ -1,7 +1,7 @@
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent,   useState} from "react";
 import {login} from "../components/servicies/actions/login-action";
-import { useSelector} from "react-redux";
+import {useSelector} from "../components/servicies/customHooks/typeHooks";
 import styles from './login.module.css'
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "../components/servicies/customHooks/typeHooks";

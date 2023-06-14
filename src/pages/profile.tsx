@@ -1,6 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {useSelector} from "react-redux";
+
 import {FC, MouseEvent, SyntheticEvent, useEffect, useState} from "react";
 import {getUser} from "../components/servicies/actions/update-token-action";
 import {changeUserDetails} from "../components/servicies/actions/update-user-details-action";
@@ -9,7 +9,7 @@ import {exit} from "../components/servicies/actions/sign-out-action";
 
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import {useForm} from "../components/servicies/customHooks/useForm";
-import {useDispatch} from "../components/servicies/customHooks/typeHooks";
+import {useDispatch,useSelector} from "../components/servicies/customHooks/typeHooks";
 import {useLocation} from "../components/utils/types";
 import MyOrdersHistory from "../components/my-orders-history/my-orders-history";
 

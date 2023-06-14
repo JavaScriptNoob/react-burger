@@ -1,5 +1,5 @@
 import {Route, Navigate, useLocation, Outlet} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useSelector} from "../components/servicies/customHooks/typeHooks";
 import {FC, useEffect, useState} from "react";
 import {RootState} from "../components/servicies/reducers/index-reducer";
 const  PrivateRoute:FC=() =>{

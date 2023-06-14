@@ -16,23 +16,20 @@ import {
     DRAG_INSIDE_CONTAINER,
     OPEN_MODAL
 } from "../servicies/reducers/index-reducer";
-import {postProductData} from "../servicies/actions/order-actions"
-import {useDispatch, useSelector} from "react-redux";
+import {postProductData} from "../servicies/actions/order-actions";
 import {useDrop} from "react-dnd";
 import ConstructorItems from "./constructor-items";
-
-import {ICurrentList, IItem, QueryObject} from "../utils/types";
-import {Dispatch} from "redux";
+import {IItem, QueryObject} from "../utils/types";
 import {AppDispatch} from "../utils/types";
 import {
     selectorBun,
     selectorCurrentConstructorList,
     selectorCurrentList,
     selectorModal,
-    selectorModalIngredients,
-    selectorProducts,
     selectorUser
 } from "../servicies/reducers/selectors";
+import {} from "react-redux";
+import {useSelector, useDispatch} from "../servicies/customHooks/typeHooks";
 
 
 export const BurgerConstructor: FC = () => {

@@ -1,11 +1,10 @@
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {useSelector} from "react-redux";
 import {reset} from "../components/servicies/actions/reset-password-action";
 import {useNavigate} from "react-router-dom";
 import {selectorUser} from "../components/servicies/reducers/selectors";
 import styles from "./reset-password.module.css"
-import {useDispatch} from "../components/servicies/customHooks/typeHooks";
+import {useDispatch,useSelector} from "../components/servicies/customHooks/typeHooks";
 
 const ResetPassword = () => {
     const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import Order from '../order/order';
 import {useDispatch, useSelector} from "../servicies/customHooks/typeHooks";
-import {WS_HANDSHAKE_CLOSED, WS_ORDERS_START} from "../utils/wsTypes";
+import {WS_ORDER_HANDSHAKE_CLOSED, WS_ORDER_HANDSHAKE_START} from "../utils/wsTypes";
 
 import {ISocketDataOrder} from "../utils/types";
 import styles from './my-orders-history.module.css';
@@ -12,16 +12,16 @@ const MyOrdersHistory: FC = () => {
 
     useEffect(() => {
         dispatch(
-            { type:WS_ORDERS_START }
+            { type:WS_ORDER_HANDSHAKE_START }
         );
         return () => {
             dispatch(
-                { type:WS_HANDSHAKE_CLOSED }
+                { type:WS_ORDER_HANDSHAKE_CLOSED }
             );
         };
     }, [dispatch]);
 
-    const { orders } = useSelector((state:RootState) => state.feed);
+    const { orders } = useSelector((state:RootState) => state.ordersHistory);
 
     return (
         <div className={styles.scrollContainer}>

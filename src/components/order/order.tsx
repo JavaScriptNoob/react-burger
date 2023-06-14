@@ -1,8 +1,5 @@
 import { FC } from 'react';
-
 import {  Link, useLocation} from "react-router-dom";
-
-import {ILocation} from "../utils/types";
 import {ISocketDataOrder} from "../utils/types";
 import {useSelector} from "../servicies/customHooks/typeHooks";
 import {IItem} from "../utils/types";

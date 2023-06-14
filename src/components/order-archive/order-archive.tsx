@@ -1,31 +1,30 @@
 import {FC, useEffect, useMemo} from 'react';
 import {useDispatch, useSelector} from "../servicies/customHooks/typeHooks";
 import styles from './order-archive.module.css';
-import {WS_HANDSHAKE_START, WS_ORDERS_START} from "../utils/wsTypes";
-
+import {WS_ORDER_HANDSHAKE_START, WS_FEED_HANDSHAKE_START} from "../utils/wsTypes";
 import {useLocation} from "react-router";
 import {IItem, ISocketDataOrder} from "../utils/types";
-
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {getOrderDate, getOrderPrice} from "../servicies/jwt";
 
 const OrderArchive: FC = () => {
     const dispatch = useDispatch();
-    const { orders } = useSelector((state) => state.feed);
+    const { orders } = useSelector((state) => state.ordersHistory);
     const location = useLocation();
     const allIngridients = useSelector((state) => state.productsData.orders);
 
     useEffect(() => {
         if (orders.length === 0 && location.pathname.includes('feed')) {
             dispatch(
-                { type: WS_HANDSHAKE_START }
+                { type: WS_FEED_HANDSHAKE_START }
             );
 
         }
 
         if (orders.length === 0 && location.pathname.includes('profile')) {
+
             dispatch(
-                { type: WS_ORDERS_START }
+                { type: WS_ORDER_HANDSHAKE_START }
             );
 
         }

@@ -11,13 +11,11 @@ import Profile from "../../pages/profile";
 import PrivateRoute from "../../pages/private-route";
 import IngredientDetails from "../ingredients-details/ingredient-details";
 import {CLOSE_INGREDIENTS_POP_UP} from "../servicies/reducers/index-reducer";
-
 import Modal from "../modal/modal";
 import getProductsData from "../servicies/actions/get-ingredient-actions";
-import Orders from "../../pages/orders";
 import {useDispatch, useSelector} from "../servicies/customHooks/typeHooks";
 import Feed from "../../pages/feed";
-import Order from "../order/order";
+
 import OrderArchive from "../order-archive/order-archive";
 const App: FC = () => {
 
@@ -47,12 +45,10 @@ const App: FC = () => {
                     <Route path="/forgot-password" element={<ForgotPassword/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
                     <Route path="/" element={<Main/>}/>
-                    <Route path="/feed" element={<PrivateRoute/>}>
-                        <Route path="/feed" element={<Feed/>}/>
-                    </Route>
-                    <Route path="/feed" element={<PrivateRoute/>}>
 
-                     </Route>
+                        <Route path="/feed" element={<Feed/>}/>
+
+
                     <Route path="/profile/orders" element={<PrivateRoute/>}>
                         <Route path="/profile/orders" element={<Profile/>}/>
                     </Route>
@@ -108,9 +104,7 @@ const App: FC = () => {
     }
     return (
         <div className="App">
-
             <ModalSwitch/>
-
         </div>
     )
 }

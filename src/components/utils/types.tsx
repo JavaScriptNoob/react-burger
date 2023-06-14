@@ -11,7 +11,9 @@ import {TIngredientsPopUpAction} from "../servicies/actions/ingredient-modal-act
 import {TProductDataAction} from "../servicies/actions/get-ingredient-actions";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {ActionCreator} from "redux";
-import {TSocketActions} from "../servicies/actions/socket-action";
+
+import {TFeedSocketsAction} from "../servicies/actions/feed-action";
+import {TOrderSocketsAction} from "../servicies/actions/order-archive-actions";
 
 export interface IItem {
     calories: number,
@@ -116,7 +118,8 @@ export type TAppActions =
     |TModalStatus
     |TIngredientsPopUpAction
     |TProductDataAction
-    | TSocketActions;
+    |TFeedSocketsAction
+    |TOrderSocketsAction;
 
 export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
 export type AppThunk<TReturn = void> = ActionCreator<

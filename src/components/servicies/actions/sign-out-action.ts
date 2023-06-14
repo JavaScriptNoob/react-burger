@@ -5,9 +5,9 @@ import {
 } from "../reducers/index-reducer";
 import {_QUERY} from "../api";
 import {deleteCookie, fetchWithRefresh, getCookie} from "../jwt";
-import {refreshToken} from "./update-token-action";
+
 import {AppDispatch} from "../../utils/types";
-import {IRegisterRequestFailed, IRegisterRequestSuccess, IRegisterUserRequest} from "./register-action";
+
 
 export interface ISignOutFailed {
     type: typeof SIGN_OUT_FAILED;

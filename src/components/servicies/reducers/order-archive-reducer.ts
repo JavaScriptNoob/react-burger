@@ -1,9 +1,14 @@
-import {WS_FEED_HANDSHAKE_START, WS_FEED_HANDSHAKE_SUCCESS,WS_FEED_HANDSHAKE_MESSAGE,WS_FEED_HANDSHAKE_CLOSED,WS_FEED_HANDSHAKE_ERROR} from "../../utils/wsTypes";
+import {
+    WS_ORDER_HANDSHAKE_CLOSED,
+    WS_ORDER_HANDSHAKE_MESSAGE,
+    WS_ORDER_HANDSHAKE_SUCCESS,
+    WS_ORDER_HANDSHAKE_ERROR
 
-import {TFeedSocketsAction} from "../actions/feed-action";
+} from "../../utils/wsTypes";
+import {TOrderSocketsAction} from "../actions/order-archive-actions";
 import type {ISocketDataOrder} from '../../utils/types';
 
-type TWSFeedState = {
+type TWSOrderState = {
     wsConnected: boolean;
     orders: ISocketDataOrder[];
     total: number;
@@ -11,18 +16,16 @@ type TWSFeedState = {
     error?: string;
 }
 
-const initialState: TWSFeedState = {
+const initialState: TWSOrderState = {
     wsConnected: false,
     orders: [],
     total: 0,
     totalToday: 0,
 };
-
-
-export const feedReducer = (state = initialState, action: TFeedSocketsAction) => {
+export const ordersHistoryReducer = (state = initialState, action: TOrderSocketsAction) => {
     switch (action.type) {
 
-        case WS_FEED_HANDSHAKE_SUCCESS:
+        case WS_ORDER_HANDSHAKE_SUCCESS:
             return {
                 ...state,
                 error: undefined,
@@ -30,14 +33,14 @@ export const feedReducer = (state = initialState, action: TFeedSocketsAction) =>
             };
 
 
-        case WS_FEED_HANDSHAKE_ERROR:
+        case WS_ORDER_HANDSHAKE_ERROR:
             return {
                 ...state,
 
                 wsConnected: false
             };
 
-        case WS_FEED_HANDSHAKE_CLOSED:
+        case WS_ORDER_HANDSHAKE_CLOSED:
             return {
                 ...state,
                 error: undefined,
@@ -46,7 +49,7 @@ export const feedReducer = (state = initialState, action: TFeedSocketsAction) =>
             };
 
 
-        case WS_FEED_HANDSHAKE_MESSAGE:
+        case WS_ORDER_HANDSHAKE_MESSAGE:
             return {
                 ...state,
                 error: undefined,

@@ -3,7 +3,7 @@ import styles from '../feedDetails/feed-details.module.css';
 import { useSelector, useDispatch } from '../servicies/customHooks/typeHooks';
 import {ISocketDataOrder} from "../utils/types";
 import {RootState} from "../servicies/reducers/index-reducer";
-const FeedInfo: FC = () => {
+const FeedTable: FC = () => {
     const { orders, total, totalToday } = useSelector((state:RootState) => state.feed);
 
     return (
@@ -49,4 +49,4 @@ const FeedInfo: FC = () => {
 }
 
 
-export default FeedInfo;
+export default FeedTable;

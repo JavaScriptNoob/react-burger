@@ -9,8 +9,7 @@ import styles from './order.module.css'
 const Order: FC<ISocketDataOrder> = ({ _id, number, createdAt, name, ingredients }) => {
 
     const location = useLocation();
-    console.log( location)
-    console.log()
+
     const allIngridients = useSelector((state) => state.productsData.orders);
     const stateForTo =  { background: location, id: _id }
     const path =

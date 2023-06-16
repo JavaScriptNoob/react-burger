@@ -46,6 +46,7 @@ export function storeCookie(name:string, value:string, options:CookieOptions = {
 
 export const setToken =(access:string, refresh:string)=>{
 storeCookie('access',access,{'max-age': 3600});
+storeCookie('withoutBearer',access.replace("Bearer ", ''),{'max-age': 3600});
 localStorage.setItem('refresh',refresh)
 
 }

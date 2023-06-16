@@ -10,32 +10,45 @@ import {WS_FEED, WS_HISTORY} from "../servicies/api";
 
 const OrderArchive: FC = () => {
     const dispatch = useDispatch();
-    const { orders } = useSelector((state) => state.ordersHistory);
+    const ordersOrdersHistory= useSelector((state) => state.ordersHistory.orders);
+    const ordersOrdersFeed = useSelector((state) => state.feed.orders);
+
     const location = useLocation();
     const allIngridients = useSelector((state) => state.productsData.orders);
-    const accessToken =getCookie('access')
+    let accessToken : string| undefined =getCookie('access');
     useEffect(() => {
-        if (orders.length === 0 && location.pathname.includes('feed')) {
+        const orderId = location.pathname.replace('/feed/', '').replace('/profile/orders/', '');
+
+        if (ordersOrdersFeed.length === 0 && location.pathname.includes('feed')) {
             dispatch(
                 { type: WS_FEED_HANDSHAKE_START , payload:WS_FEED}
             );
 
+
         }
 
-        if (orders.length === 0 && location.pathname.includes('profile')) {
+        if (ordersOrdersHistory.length === 0 && location.pathname.includes('profile')) {
 
             dispatch(
-                { type: WS_ORDER_HANDSHAKE_START, payload: `${WS_HISTORY}?token=${accessToken}`  }
+                { type: WS_ORDER_HANDSHAKE_START, payload: `${WS_HISTORY}?token=${accessToken?.replace("Bearer","")}`  }
             );
 
         }
 
     }, [dispatch, location]);
 
-    const currentOrder = useMemo(
-        () => orders.find((i: ISocketDataOrder) => i._id === location.pathname.replace('/feed/', '') || i._id === location.pathname.replace('/profile/orders/', '')),
-        [orders, location]);
-
+    // const currentOrder= useMemo(
+    //
+    //     () => orders.find((i: ISocketDataOrder) => i._id === location.pathname.replace('/feed/', '') || i._id === location.pathname.replace('/profile/orders/', '')),
+    //     [orders, location]);
+    const currentOrder = useMemo(() => {
+        const orderId = location.pathname.replace('/feed/', '').replace('/profile/orders/', '');
+        return (
+            ordersOrdersFeed.find((order: ISocketDataOrder) => order._id === orderId) ||
+            ordersOrdersHistory.find((order: ISocketDataOrder) => order._id === orderId)
+        );
+    }, [ordersOrdersFeed, ordersOrdersHistory, location]);
+    console.log('CURRENTORDER: ' + currentOrder)
     const ingredientsObjects = currentOrder?.ingredients.map((id: string) => allIngridients.filter((item: IItem) => item._id === id)).flat();
 
     const uniqIngredientsObjects = ingredientsObjects?.reduce((acc: IItem[], item: IItem) => {

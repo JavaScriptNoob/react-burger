@@ -15,7 +15,7 @@ const BurgerIngredients: FC = () => {
     const modal = useSelector(selectorModalIngredients)
     const [current, setCurrent] = useState<string>('bun')
 
-
+    console.log(data)
 
     const scrollHandler = (evt: SyntheticEvent) => {
         evt.target.addEventListener('scroll', function () {

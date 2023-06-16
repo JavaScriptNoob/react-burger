@@ -13,7 +13,7 @@ const MyOrdersHistory: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const accessToken =getCookie('access')
+        const accessToken =getCookie('withoutBearer')
         dispatch(
             { type:WS_ORDER_HANDSHAKE_START, payload:`${WS_HISTORY}?token=${accessToken}` })
 

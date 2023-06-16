@@ -2,13 +2,14 @@ import {GET_PRODUCT_DATA_REQUEST, REQUEST_SUCCESS, REQUEST_FAILED} from "./index
 
 
 import {TProductDataAction} from "../actions/get-ingredient-actions";
+import {IItem} from "../../utils/types";
 
 
 export interface IProductsState {
     productsHaveBeenRecieved: boolean;
     productsRequestConfirmed: boolean;
     productsRequest: boolean;
-    orders: any[];
+    orders: IItem[];
     productsRequestFailed: boolean;
     productErrBody: any[];
 }

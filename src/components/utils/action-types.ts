@@ -7,6 +7,7 @@ import {
 } from "../servicies/reducers/index-reducer";
 import {IItem} from "./types";
 
+
 interface IAddBunAction {
     type: typeof ADD_BUN;
     payload: IItem;
@@ -41,3 +42,4 @@ export type TBurgerConstructorAction =
     | IDragInsideContainerAction
     | IOpenModalAction
     |IClearCurrentListAction;
+

@@ -4,6 +4,7 @@ import FeedTable from "../components/feed-table/feed-table";
 import {useDispatch} from "../components/servicies/customHooks/typeHooks";
 import styles from "./feed.module.css";
 import {WS_FEED_HANDSHAKE_CLOSED, WS_FEED_HANDSHAKE_START} from "../components/utils/wsTypes";
+import {WS_QUERY} from "../components/servicies/api";
 
 
 const Feed : FC  = () =>{
@@ -11,7 +12,7 @@ const Feed : FC  = () =>{
 
     useEffect(() => {
         dispatch(
-            { type: WS_FEED_HANDSHAKE_START }
+            { type: WS_FEED_HANDSHAKE_START, payload: WS_QUERY}
         );
         return () => {
             dispatch(

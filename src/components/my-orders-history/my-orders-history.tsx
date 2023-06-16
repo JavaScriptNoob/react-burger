@@ -6,14 +6,17 @@ import {WS_ORDER_HANDSHAKE_CLOSED, WS_ORDER_HANDSHAKE_START} from "../utils/wsTy
 import {ISocketDataOrder} from "../utils/types";
 import styles from './my-orders-history.module.css';
 import {RootState} from "../servicies/reducers/index-reducer";
+import {getCookie} from "../servicies/jwt";
+import {WS_HISTORY} from "../servicies/api";
 
 const MyOrdersHistory: FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        const accessToken =getCookie('access')
         dispatch(
-            { type:WS_ORDER_HANDSHAKE_START }
-        );
+            { type:WS_ORDER_HANDSHAKE_START, payload:`${WS_HISTORY}?token=${accessToken}` })
+
         return () => {
             dispatch(
                 { type:WS_ORDER_HANDSHAKE_CLOSED }

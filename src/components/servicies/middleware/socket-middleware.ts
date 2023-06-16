@@ -2,59 +2,90 @@ import type {Middleware, MiddlewareAPI} from "redux";
 import {AppDispatch} from "../../utils/types";
 import {RootState} from "../reducers/index-reducer";
 import {
-    WS_FEED_HANDSHAKE_CLOSED,
-    WS_FEED_HANDSHAKE_ERROR,
-    WS_FEED_HANDSHAKE_MESSAGE,
-    WS_FEED_HANDSHAKE_START,
-    WS_FEED_HANDSHAKE_SUCCESS,
-    WS_ORDER_HANDSHAKE_START
+    TWsActiontypes,
+
 } from "../../utils/wsTypes";
+
 import {getCookie} from "../jwt";
+import {refreshToken} from "../actions/update-token-action";
+import {createNextState} from "@reduxjs/toolkit";
+import {feedActionTypes} from "../actions/feed-action";
+type TwsMessage = {
+    success: false
+    message: string
+} | {
+    success: true
+    orders: []
+    total: number
+    totalToday: number
+}
+export const socketMiddleware = (wsQuery: TWsActiontypes): Middleware<{},RootState> => {
 
-
-export const socketMiddleware = (wsQuery: string): Middleware => {
-    return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
-        let socket: WebSocket | null = null;
-
-        return next => (action: any) => {
+        return store  => {
+            let socket: WebSocket | null = null;
+            let wsUrl = '';
+            let isConnected = false;
+            let reconnectTimer = 0;
+            return next =>action =>{
+            let isConnected = false;
             const { dispatch, getState } = store;
             const { type, payload } = action;
+            const { wsConnect, wsConnecting, wsDisconnect, onOpen, onClose, onError, onMessage } = wsQuery;
+            if (type === wsConnect) {
+                wsUrl = payload;
+                socket = new WebSocket(wsUrl);
+                isConnected = true;
+                dispatch({ type: wsConnecting })
 
-            if (type === WS_FEED_HANDSHAKE_START) {
-                // объект класса WebSocket
-                socket = new WebSocket(`${wsQuery}/all`);
-            }
-            if (type === WS_ORDER_HANDSHAKE_START ) {
-
-                const access = getCookie("access");
-                const token =access?.split('Bearer ')[1]
-                console.log(token )
-                socket = new WebSocket(`${wsQuery}?token=${token}`);
-            }
-            if (socket) {
-                // функция, которая вызывается при открытии сокета
                 socket.onopen = event => {
-                    dispatch({ type: WS_FEED_HANDSHAKE_SUCCESS, payload: event });
+                    dispatch({ type: onOpen, payload: event });
                 };
-                // функция, которая вызывается при ошибке соединения
+
                 socket.onerror = event => {
-                    dispatch({ type: WS_FEED_HANDSHAKE_ERROR, payload: event });
+                    dispatch({ type: onError, payload: event });
                 };
-                // функция, которая вызывается при получения события от сервера
+
                 socket.onmessage = event => {
-                    const { data } = event;
-                    console.log(event);
-                    const parsedData = JSON.parse(data);
-                    const { success, ...restParsedData } = parsedData;
-                    dispatch({ type: WS_FEED_HANDSHAKE_MESSAGE, payload: restParsedData });
+                    const data: TwsMessage = JSON.parse(event.data);
+                    const { success, ...restData } = data;
+
+                    if (!success && data.message === "Invalid or missing token") {
+                        refreshToken()
+                            .then(() => {
+                                const wsUrlAfterRefresh = new URL(wsUrl);
+                                const token = getCookie('accessToken');
+                                wsUrlAfterRefresh.searchParams.set(
+                                    'token',
+                                    token || ''
+                                );
+                                dispatch({ //диспатч экшена нового подключения
+                                    type: wsConnect,
+                                    payload: wsUrlAfterRefresh.href,
+                                });
+                            })
+                            .catch((err) => {
+                                dispatch({ type: onError, payload: err });
+                            });
+
+                        dispatch({ type: wsDisconnect });  //закрываем предыдущее подключение
+                    } else {
+                        dispatch({ type: onMessage, payload: restData });
+                    }
                 };
-                // функция, которая вызывается при закрытии соединения
+
                 socket.onclose = event => {
-                    dispatch({ type: WS_FEED_HANDSHAKE_CLOSED });
+                    dispatch({ type: onClose, payload: event });
+
+                    if (isConnected) { //прервано внешним фактором
+                        dispatch({ type: wsConnecting }); //начинаем реконнект
+                        reconnectTimer = window.setTimeout(() => {
+                            dispatch({ type: wsConnect, payload: wsUrl });
+                        }, 3000)
+                    }
                 };
             }
 
             next(action);
         };
-    }) as Middleware;
+    }
 };

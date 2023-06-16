@@ -14,6 +14,7 @@ import {ActionCreator} from "redux";
 
 import {TFeedSocketsAction} from "../servicies/actions/feed-action";
 import {TOrderSocketsAction} from "../servicies/actions/order-archive-actions";
+import {TWsActiontypes} from "./wsTypes";
 
 export interface IItem {
     calories: number,
@@ -119,9 +120,10 @@ export type TAppActions =
     |TIngredientsPopUpAction
     |TProductDataAction
     |TFeedSocketsAction
-    |TOrderSocketsAction;
+    |TOrderSocketsAction
+  ;
 
-export type AppDispatch = ThunkDispatch<RootState, never, TAppActions>;
+export type AppDispatch<TReturnType = void> = ThunkDispatch<RootState, never, TAppActions>;
 export type AppThunk<TReturn = void> = ActionCreator<
     ThunkAction<Promise<TReturn>, RootState, never, TAppActions>
 >;
@@ -130,7 +132,7 @@ export type ISocketDataOrder = {
     _id: string;
     status: string;
     number: number;
-    createdAt: string;
+    createdAt: string ;
     name: string;
     updatedAt: string;
 };
@@ -146,3 +148,31 @@ export function useLocation<T>() {
 
   return router.useLocation() as L;
 }
+export type TwsMessage = {
+    success: false
+    message: string
+} | {
+    success: true
+    orders: []
+    total: number
+    totalToday: number
+}
+export type TOrderData = {
+    ingredients: string[];
+    _id: string;
+    name: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+    owner?: string; //?
+    _v?: number;
+}
+
+export type TOrdersFeed = {
+    orders: TOrderData[]
+    total: number
+    totalToday: number
+}
+
+export type TOrdersHistory = TOrdersFeed;

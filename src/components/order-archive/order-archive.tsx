@@ -5,18 +5,19 @@ import {WS_ORDER_HANDSHAKE_START, WS_FEED_HANDSHAKE_START} from "../utils/wsType
 import {useLocation} from "react-router";
 import {IItem, ISocketDataOrder} from "../utils/types";
 import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {getOrderDate, getOrderPrice} from "../servicies/jwt";
+import {getCookie, getOrderDate, getOrderPrice} from "../servicies/jwt";
+import {WS_FEED, WS_HISTORY} from "../servicies/api";
 
 const OrderArchive: FC = () => {
     const dispatch = useDispatch();
     const { orders } = useSelector((state) => state.ordersHistory);
     const location = useLocation();
     const allIngridients = useSelector((state) => state.productsData.orders);
-
+    const accessToken =getCookie('access')
     useEffect(() => {
         if (orders.length === 0 && location.pathname.includes('feed')) {
             dispatch(
-                { type: WS_FEED_HANDSHAKE_START }
+                { type: WS_FEED_HANDSHAKE_START , payload:WS_FEED}
             );
 
         }
@@ -24,7 +25,7 @@ const OrderArchive: FC = () => {
         if (orders.length === 0 && location.pathname.includes('profile')) {
 
             dispatch(
-                { type: WS_ORDER_HANDSHAKE_START }
+                { type: WS_ORDER_HANDSHAKE_START, payload: `${WS_HISTORY}?token=${accessToken}`  }
             );
 
         }
@@ -44,7 +45,7 @@ const OrderArchive: FC = () => {
         return [...acc, item];
     }, []);
 
-    const getCount = (ingredients: string[]) => {
+    const getCount = (ingredients: string[]| undefined) => {
         const quantityItems = {};
         ingredients?.reduce((item: { [key: string]: number }, el: string) => {
             item[el] = (item[el] || 0) + 1;
@@ -88,9 +89,9 @@ const OrderArchive: FC = () => {
                         ))}
             </ul>
             <div className={`mt-10 ${styles.order_info_footer}`}>
-                <p className="text text_type_main-default text_color_inactive">{getOrderDate(currentOrder?.createdAt)}</p>
+                <p className="text text_type_main-default text_color_inactive">{getOrderDate(currentOrder?.createdAt ?? '')}</p>
                 <div className={`text text_type_digits-default ${styles.order_item_price}`}>
-                    {getOrderPrice(ingredientsObjects)}
+                    {getOrderPrice(ingredientsObjects  ?? [])}
                     <div className={`ml-2 pt-2`}>
                         <CurrencyIcon type="primary" />
                     </div>

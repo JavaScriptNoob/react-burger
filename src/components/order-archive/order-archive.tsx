@@ -15,7 +15,7 @@ const OrderArchive: FC = () => {
 
     const location = useLocation();
     const allIngridients = useSelector((state) => state.productsData.orders);
-    let accessToken : string| undefined =getCookie('access');
+    let accessToken : string| undefined =getCookie('withoutBearer');
     useEffect(() => {
         const orderId = location.pathname.replace('/feed/', '').replace('/profile/orders/', '');
 
@@ -30,7 +30,7 @@ const OrderArchive: FC = () => {
         if (ordersOrdersHistory.length === 0 && location.pathname.includes('profile')) {
 
             dispatch(
-                { type: WS_ORDER_HANDSHAKE_START, payload: `${WS_HISTORY}?token=${accessToken?.replace("Bearer","")}`  }
+                { type: WS_ORDER_HANDSHAKE_START, payload: `${WS_HISTORY}?token=${accessToken}`  }
             );
 
         }

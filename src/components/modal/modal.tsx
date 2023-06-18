@@ -22,6 +22,7 @@ const Modal: FC<IModal> = ({onClose, ...props}) => {
         } else {
             if (onClose) {
                 onClose()
+
             }
         }
     }

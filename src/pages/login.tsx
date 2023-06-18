@@ -1,10 +1,10 @@
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent,   useState} from "react";
 import {login} from "../components/servicies/actions/login-action";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "../components/servicies/customHooks/typeHooks";
 import styles from './login.module.css'
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../components/servicies/customHooks/typeHooks";
+import {useDispatch} from "../components/servicies/customHooks/typeHooks";
 const Login = () => {
     const [authDetails, setAuthDetails] = useState({
         login: '',
@@ -15,7 +15,7 @@ const Login = () => {
 
     const loginSuccess = useSelector((state:any )=> state.user.loginSuccess)
     const navigate = useNavigate();
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
 

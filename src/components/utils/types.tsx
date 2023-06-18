@@ -1,6 +1,20 @@
 import {ChangeEvent} from "react";
-import { ADD_BUN,ADD_ITEM_TO_CURRENT_LIST,
-CLEAR_CURRENT_LIST,DECREMENT_CURRENT_CONSTRUCTOR_LIST, DRAG_INSIDE_CONTAINER} from "../servicies/reducers/index-reducer";
+import * as router from 'react-router-dom';
+import {
+    ADD_BUN, ADD_ITEM_TO_CURRENT_LIST,
+    CLEAR_CURRENT_LIST, DECREMENT_CURRENT_CONSTRUCTOR_LIST, DRAG_INSIDE_CONTAINER, RootState
+} from "../servicies/reducers/index-reducer";
+import {TBurgerConstructorAction} from "./action-types";
+import {TAuthActions} from "../servicies/reducers/user-reducer";
+import {TModalStatus, TOrderDataAction} from "../servicies/actions/order-actions";
+import {TIngredientsPopUpAction} from "../servicies/actions/ingredient-modal-action";
+import {TProductDataAction} from "../servicies/actions/get-ingredient-actions";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {ActionCreator} from "redux";
+
+import {TFeedSocketsAction} from "../servicies/actions/feed-action";
+import {TOrderSocketsAction} from "../servicies/actions/order-archive-actions";
+import {TWsActiontypes} from "./wsTypes";
 
 export interface IItem {
     calories: number,
@@ -29,7 +43,7 @@ export interface IUser {
     loginRequest: boolean,
     loginSuccess:boolean,
     loginFailed: boolean,
-    refreshToken: '',
+    refreshToken: string,
     resetRequest: boolean,
     resetSuccess: boolean,
     resetFailed: boolean,
@@ -51,14 +65,8 @@ export interface IData {
     data: IItem,
 
 }
-export interface IProductsState {
-    productsHaveBeenRecieved: boolean;
-    productsRequestConfirmed: boolean;
-    productsRequest: boolean;
-    orders: IItem[]; // Replace 'any' with the appropriate type for 'orders'
-    productsRequestFailed: boolean;
-    productErrBody: any[]; // Replace 'any' with the appropriate type for 'productErrBody'
-}
+
+
 type TJSONValue =
     | string
     | number
@@ -104,32 +112,67 @@ export type FormEvent = ChangeEvent<HTMLInputElement>;
 export interface ICurrentList {
     currentConstructorList: IItem[];
 }
-interface IDecrementCurrentConstructorListAction {
-    type: typeof DECREMENT_CURRENT_CONSTRUCTOR_LIST;
-    payload: IItem[]; // Replace `any` with the appropriate payload type
+export type TAppActions =
+    |TBurgerConstructorAction
+    |TAuthActions
+    |TOrderDataAction
+    |TModalStatus
+    |TIngredientsPopUpAction
+    |TProductDataAction
+    |TFeedSocketsAction
+    |TOrderSocketsAction
+  ;
+
+export type AppDispatch<TReturnType = void> = ThunkDispatch<RootState, never, TAppActions>;
+export type AppThunk<TReturn = void> = ActionCreator<
+    ThunkAction<Promise<TReturn>, RootState, never, TAppActions>
+>;
+export type ISocketDataOrder = {
+    ingredients: string[];
+    _id: string;
+    status: string;
+    number: number;
+    createdAt: string ;
+    name: string;
+    updatedAt: string;
+};
+export interface ILocation {
+    from?: Location;
+    background?: Location;
+    pathname?: string;
+    id?: string;
+}
+//// Router bones import * as router from 'react-router-dom';
+export function useLocation<T>() {
+  type L = router.Location & { state: T };
+
+  return router.useLocation() as L;
+}
+export type TwsMessage = {
+    success: false
+    message: string
+} | {
+    success: true
+    orders: []
+    total: number
+    totalToday: number
+}
+export type TOrderData = {
+    ingredients: string[];
+    _id: string;
+    name: string;
+    status: string;
+    number: number;
+    createdAt: string;
+    updatedAt: string;
+    owner?: string; //?
+    _v?: number;
 }
 
-interface IDragInsideContainerAction {
-    type: typeof DRAG_INSIDE_CONTAINER;
-    afterDrag: IItem[]; // Replace `any` with the appropriate payload type
+export type TOrdersFeed = {
+    orders: TOrderData[]
+    total: number
+    totalToday: number
 }
 
-interface IAddItemToCurrentListAction {
-    type: typeof ADD_ITEM_TO_CURRENT_LIST;
-    payload: any; // Replace `any` with the appropriate payload type
-}
-
-interface IAddBunAction {
-    type: typeof ADD_BUN;
-    payload: IItem; // Replace `any` with the appropriate payload type
-}
-
-interface IClearCurrentListAction {
-    type: typeof CLEAR_CURRENT_LIST;
-}
-export type TBurgerConstructorActionTypes =
-    | IDecrementCurrentConstructorListAction
-    | IDragInsideContainerAction
-    | IAddItemToCurrentListAction
-    | IAddBunAction
-    | IClearCurrentListAction;
+export type TOrdersHistory = TOrdersFeed;

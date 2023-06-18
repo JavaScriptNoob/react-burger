@@ -3,7 +3,7 @@ import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-devel
 import styles from './app-header.module.css'
 import {NavLink, useLocation} from "react-router-dom";
 
-const AppHeader: FC = () => {
+export const AppHeader  :FC= () => {
 
     const location = useLocation()
 
@@ -19,7 +19,7 @@ const AppHeader: FC = () => {
                         </span>
                 </li>
             </NavLink>
-            <NavLink to="/feed/" className={({isActive, isPending}) =>
+            <NavLink to="/feed" className={({isActive, isPending}) =>
                 isActive ? "text_active" : "text_color_inactive"
             }>
                 <li className="pl-4">
@@ -50,4 +50,4 @@ const AppHeader: FC = () => {
 
 }
 
-export default AppHeader;
+

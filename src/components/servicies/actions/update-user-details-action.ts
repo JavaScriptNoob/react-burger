@@ -1,9 +1,35 @@
-import {CHANGE_DETAILS_FAILED, CHANGE_DETAILS_REQUEST, CHANGE_DETAILS_SUCCESS} from "../reducers/index-reducer";
+
 import {fetchWithRefresh, getCookie} from "../jwt";
-import {getUser, refreshToken} from "./update-token-action";
+import {getUser, IGetUserFailed, IGetUserRequest, IGetUserSuccess, refreshToken} from "./update-token-action";
 import {_QUERY} from "../api";
-import {AppDispatch} from "../../../index";
-import {FormValues} from "../../utils/types";
+import {AppDispatch} from "../../utils/types";
+import {FormValues, IUser} from "../../utils/types";
+import {CHANGE_DETAILS_SUCCESS, CHANGE_DETAILS_FAILED, CHANGE_DETAILS_REQUEST } from "../reducers/index-reducer";
+
+interface IChangeDetailsRequest {
+    type: typeof CHANGE_DETAILS_REQUEST;
+}
+
+interface IChangeDetailsSuccess {
+    type: typeof CHANGE_DETAILS_SUCCESS;
+    user: IUser;
+}
+
+interface IChangeDetailsFailed {
+    type: typeof CHANGE_DETAILS_FAILED;
+    payload: string;
+}
+
+
+export type TChangeUserDetailsActions =
+    | IChangeDetailsFailed
+    | IChangeDetailsSuccess
+    | IChangeDetailsRequest;
+
+
+
+
+
 
 export function changeUserDetails(values: FormValues) {
 

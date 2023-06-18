@@ -1,9 +1,24 @@
 
 
 import {RESET_FAILED,RESET_SUCCESS,RESET_REQUEST} from "../reducers/index-reducer";
-import {_QUERY, errorHandling} from "../api";
-import {AppDispatch} from "../../../index";
+import {_QUERY} from "../api";
+import {errorHandling} from "../error";
+import {AppDispatch} from "../../utils/types";
+interface IResetRequest {
+    type: typeof RESET_REQUEST;
+}
 
+interface IResetSuccess {
+    type: typeof RESET_SUCCESS;
+}
+
+interface IResetFailed {
+    type: typeof RESET_FAILED;
+}
+
+export type TResetDetailsAction = IResetRequest
+    | IResetSuccess
+    | IResetFailed;
 export function reset(password:string, token:string) {
     return function (dispatch:AppDispatch) {
         dispatch({

@@ -16,22 +16,23 @@ import {
     DRAG_INSIDE_CONTAINER,
     OPEN_MODAL
 } from "../servicies/reducers/index-reducer";
-import {postProductData} from "../servicies/actions/order-actions"
-import {useDispatch, useSelector} from "react-redux";
+import {postProductData} from "../servicies/actions/order-actions";
 import {useDrop} from "react-dnd";
 import ConstructorItems from "./constructor-items";
+import {IItem, QueryObject} from "../utils/types";
+import {AppDispatch} from "../utils/types";
 import {
     selectorBun,
-     selectorCurrentConstructorList,
+    selectorCurrentConstructorList,
     selectorCurrentList,
     selectorModal,
     selectorUser
 } from "../servicies/reducers/selectors";
-import {ICurrentList, IItem, QueryObject} from "../utils/types";
-import {Dispatch} from "redux";
+import {} from "react-redux";
+import {useSelector, useDispatch} from "../servicies/customHooks/typeHooks";
 
 
-const BurgerConstructor: FC = () => {
+export const BurgerConstructor: FC = () => {
     const dispatch: any = useDispatch();
     const priceListener = useSelector(selectorCurrentList)
     const currentList : IItem[]  = useSelector(selectorCurrentConstructorList)
@@ -76,7 +77,7 @@ const BurgerConstructor: FC = () => {
 
     }, [currentList, dispatch])
     const removeIngredientFromCurrentList = (id: string, currentlist: IItem[]) => {
-        return function (dispatch: Dispatch) {
+        return function (dispatch: AppDispatch) {
             let found = false;
             const arr = currentList.filter(((v: IItem) => found || !(found = v._id === id)))
             return dispatch({
@@ -194,7 +195,7 @@ const BurgerConstructor: FC = () => {
                 <Button htmlType="button"
                         type="primary"
                         size="large"
-                        disabled={currentPrice < 1 || user.name === ""}
+                        disabled={currentPrice < 1 || user['name'] === ""}
                         onClick={
                             (e) => enter()
                         }>
@@ -204,4 +205,4 @@ const BurgerConstructor: FC = () => {
         </div>
     )
 }
-export default BurgerConstructor;
+

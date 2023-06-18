@@ -1,8 +1,9 @@
-import React from "react";
-import { storeCookie } from "./jwt";
+
 
 export const _QUERY = "https://norma.nomoreparties.space/api/";
 
-export const errorHandling = (res: Response) => {
-    return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-};
+export const WS_QUERY = 'wss://norma.nomoreparties.space/';
+
+export  const  WS_FEED =`${WS_QUERY}orders/all`
+
+export const WS_HISTORY =`${WS_QUERY}orders`

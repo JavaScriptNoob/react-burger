@@ -4,11 +4,65 @@ import {
     POST_ORDER_REQUEST,
     CLOSE_MODAL,
     CLEAR_CURRENT_LIST,
-    ORDER_NUMBER_CLEAR
+    ORDER_NUMBER_CLEAR, OPEN_MODAL
 } from "../reducers/index-reducer";
-import {errorHandling} from "../api";
-import {AppDispatch} from "../../../index";
+import {errorHandling} from "../error";
+import {AppDispatch} from "../../utils/types";
 import {QueryObject} from "../../utils/types";
+import {getCookie} from "../jwt";
+
+
+interface IPostOrderRequest {
+    type: typeof POST_ORDER_REQUEST;
+    text: string;
+}
+
+interface IPostSuccess {
+    type: typeof POST_SUCCESS;
+    text: string;
+    orderNumber: string;
+    openModal: boolean;
+}
+
+interface IPostFailed {
+    type: typeof POST_FAILED;
+    text: string;
+    postFailed: any;
+    orderNumber: null;
+}
+
+export interface ICloseModal {
+    type: typeof CLOSE_MODAL;
+    openModal: boolean;
+    orderNumber: null| number;
+}
+export interface IOpenModal {
+    type: typeof OPEN_MODAL;
+    openModal: boolean;
+
+}
+
+
+interface IOrderNumberClear {
+    type: typeof ORDER_NUMBER_CLEAR;
+}
+
+interface IClearCurrentList {
+    type: typeof CLEAR_CURRENT_LIST;
+}
+
+export type TOrderDataAction =
+    | IPostOrderRequest
+    | IPostSuccess
+    | IPostFailed
+
+    | IOrderNumberClear
+    | IClearCurrentList;
+
+export  type TModalStatus =
+    | ICloseModal
+    |IOpenModal
+
 
 export const postProductData =  (arr: QueryObject) => {
     return function (dispatch:AppDispatch){
@@ -18,7 +72,11 @@ export const postProductData =  (arr: QueryObject) => {
 
         })
         fetch("https://norma.nomoreparties.space/api/orders", {
-            method: "post", headers: {"Content-Type": 'application/json'}, body: JSON.stringify(arr)
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `${getCookie("access")}`,
+            }, body: JSON.stringify(arr)
         })
             .then(errorHandling).then((item) => {
 

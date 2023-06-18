@@ -1,8 +1,7 @@
 import React, {FC} from "react";
 import styles from "./order-details.module.css";
 import image from "../img/done.png"
-
-import {useSelector} from "react-redux";
+import {useSelector} from "../servicies/customHooks/typeHooks";
 
 
 const OrderDetails: FC = () => {

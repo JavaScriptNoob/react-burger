@@ -1,9 +1,25 @@
 
-import {
-    SENT_EMAIL, SENT_EMAIL_FAILED, SENT_EMAIL_SUCCESS
-} from "../reducers/index-reducer";
-import {_QUERY, errorHandling} from "../api";
-import {AppDispatch} from "../../../index";
+import {SENT_EMAIL, SENT_EMAIL_FAILED, SENT_EMAIL_SUCCESS} from "../reducers/index-reducer";
+import {_QUERY} from "../api";
+import {AppDispatch} from "../../utils/types";
+import {errorHandling} from "../error";
+
+interface ISentEmail {
+    type: typeof SENT_EMAIL;
+}
+
+interface ISentEmailSuccess {
+    type: typeof SENT_EMAIL_SUCCESS;
+}
+
+interface ISentEmailFailed {
+    type: typeof SENT_EMAIL_FAILED;
+}
+
+export type TForgotPasswordAction =
+    ISentEmail
+    | ISentEmailSuccess
+    | ISentEmailFailed;
 
 export function forgotPassword( email:string) {
     return function (dispatch:AppDispatch) {

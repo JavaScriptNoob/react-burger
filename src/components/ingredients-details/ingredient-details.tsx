@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import styles from "./ingredient-details.module.css";
 
-import {useSelector} from "react-redux";
+import {useSelector} from "../servicies/customHooks/typeHooks";
 import {selectorProducts} from "../servicies/reducers/selectors";
 import {useParams} from "react-router-dom";
 

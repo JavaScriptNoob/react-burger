@@ -21,10 +21,27 @@ import {
     GET_USER_SUCCESS,
     GET_USER_FAILED
 } from "./index-reducer";
+import {IUser} from "../../utils/types";
+import {TChangeUserDetailsActions} from "../actions/update-user-details-action";
+import {TGetUserActions} from "../actions/update-token-action";
+import {TSignOutActions} from "../actions/sign-out-action";
+import {TAuthRegistrationActions} from "../actions/register-action";
+import {TResetDetailsAction} from "../actions/reset-password-action";
+import {TLoginUserAction} from "../actions/login-action";
+import {TIngredientsPopUpAction} from "../actions/ingredient-modal-action";
+import { TForgotPasswordAction} from "../actions/forgot-password-action";
+export type TAuthActions =
+    TChangeUserDetailsActions|
+    TGetUserActions|
+    TSignOutActions|
+    TResetDetailsAction|
+    TAuthRegistrationActions|
+    TLoginUserAction|
+    TIngredientsPopUpAction|
+    TForgotPasswordAction
 
-import {TUserAction} from "../../utils/action-types";
-const initialState = {
-    userToken: "",
+const initialState :IUser= {
+    userToken: '',
     requestProcessing: false,
     requestSuccess: false,
     requestFailed: false,
@@ -52,7 +69,7 @@ const initialState = {
     forgotPasswordSuccess: false,
     forgotPasswordFailed: false
 }
-export const userReducer = (state = initialState, action:TUserAction) => {
+export const userReducer = (state= initialState, action:TAuthActions) => {
     switch (action.type) {
 
         case REGISTER_USER_REQUEST:

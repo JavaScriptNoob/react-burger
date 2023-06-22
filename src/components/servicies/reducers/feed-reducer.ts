@@ -11,7 +11,7 @@ type TWSFeedState = {
     error?: string;
 }
 
-const initialState: TWSFeedState = {
+export const initialState: TWSFeedState = {
     wsConnected: false,
     orders: [],
     total: 0,

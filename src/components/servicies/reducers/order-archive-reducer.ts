@@ -16,7 +16,7 @@ type TWSOrderState = {
     error?: string;
 }
 
-const initialState: TWSOrderState = {
+export const initialState: TWSOrderState = {
     wsConnected: false,
     orders: [],
     total: 0,

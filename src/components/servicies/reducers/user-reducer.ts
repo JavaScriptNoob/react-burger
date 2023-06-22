@@ -40,7 +40,7 @@ export type TAuthActions =
     TIngredientsPopUpAction|
     TForgotPasswordAction
 
-const initialState :IUser= {
+export const initialState :IUser= {
     userToken: '',
     requestProcessing: false,
     requestSuccess: false,

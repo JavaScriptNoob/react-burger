@@ -15,7 +15,7 @@ export interface IProductsState {
 }
 
 
-const initialState :IProductsState ={
+export  const initialState :IProductsState ={
     productsHaveBeenRecieved:false,
     productsRequestConfirmed:false,
     productsRequest:false,

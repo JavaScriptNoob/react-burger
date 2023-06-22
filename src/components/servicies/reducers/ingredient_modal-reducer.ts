@@ -1,7 +1,7 @@
 import {OPEN_INGREDIENTS_POP_UP, CLOSE_INGREDIENTS_POP_UP} from "./index-reducer";
 
 import {TIngredientsPopUpAction} from "../actions/ingredient-modal-action";
-const initialState={
+export const initialState={
     ingredientsModal:false,
     currentIngredient: {}
 }

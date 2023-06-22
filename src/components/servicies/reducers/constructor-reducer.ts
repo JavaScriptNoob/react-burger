@@ -15,7 +15,7 @@ type BurgerConstructorState = {
     bun: IBun ;
 };
 
-const initialState:BurgerConstructorState ={
+export const initialState:BurgerConstructorState ={
 
     currentConstructorList:[],
     bun:{}

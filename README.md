@@ -53,4 +53,4 @@
 
 Приложение будет доступно по адресу http://localhost:3000 в вашем браузере.
 
-Деплой проекта доступен по адресу: https://javascriptnoob.github.io/
+Деплой проекта доступен по адресу: https://javascriptnoob.github.io/react-burger

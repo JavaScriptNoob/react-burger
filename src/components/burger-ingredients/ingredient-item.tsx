@@ -34,6 +34,7 @@ export const IngredientItem: FC<IData> = ({data}) => {
             <Link
                 to={`/ingredients/${data._id}`}
                 state={{background: location}}
+                data-testid="ingredientItem"
             >
                 <div className={styles.element}   // onClick={(e) => openModal(data)}//
                 >

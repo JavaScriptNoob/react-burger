@@ -45,9 +45,9 @@ describe('Burger Constructor', () => {
         cy.get('button')
             .contains('Оформить заказ')
             .click()
-        cy.get('[data-testid=number]', { timeout: 100000 })
+        cy.get('li > h1', { timeout: 20000 })
             .should(($item) => {
-                expect($item.text()).not.to.equal("")
+                expect($item.text()).not.equal("")
             })
     })
 })

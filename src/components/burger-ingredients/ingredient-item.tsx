@@ -3,7 +3,7 @@ import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-com
 import React, {FC} from "react";
 import {useDrag} from "react-dnd";
 import {useSelector} from "../servicies/customHooks/typeHooks";
-import {selectorCurrentList} from "../servicies/reducers/selectors";
+import {selectorCurrentList} from "../servicies/selectors";
 import {Link, useLocation} from "react-router-dom";
 
 import {IData} from "../utils/types";

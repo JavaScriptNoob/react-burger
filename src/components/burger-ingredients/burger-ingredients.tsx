@@ -8,7 +8,7 @@ import IngredientDetails from "../ingredients-details/ingredient-details";
 import {useSelector} from "../servicies/customHooks/typeHooks";
 import {IngredientItem} from "./ingredient-item";
 import {coordAxel} from "../utils/coordAxel";
-import {selectorModalIngredients, selectorProducts} from "../servicies/reducers/selectors";
+import {selectorModalIngredients, selectorProducts} from "../servicies/selectors";
 import { IItem} from "../utils/types";
 const BurgerIngredients: FC = () => {
     const data = useSelector(selectorProducts)

@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import styles from './modal-overlay.module.css';
 
 import {useSelector} from "../servicies/customHooks/typeHooks";
-import {selectorModal} from "../servicies/reducers/selectors";
+import {selectorModal} from "../servicies/selectors";
 import {closeOrderModal} from "../servicies/actions/order-actions";
 import {IModalOverlayProps} from "../utils/types";
 import {useDispatch} from "../servicies/customHooks/typeHooks";

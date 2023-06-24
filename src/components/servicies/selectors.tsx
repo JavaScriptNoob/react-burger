@@ -1,5 +1,5 @@
-import {RootState} from "./index-reducer";
-import {IItem, IUser} from "../../utils/types";
+import {RootState} from "./reducers/index-reducer";
+import {IItem, IUser} from "../utils/types";
 
 
 

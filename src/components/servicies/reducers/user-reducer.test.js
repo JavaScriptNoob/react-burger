@@ -160,6 +160,21 @@ describe("It is tect that cover functionality of USER REDUCER and trying to exec
             changeDetailFailed: false,
         });
     });
+    it("should handle CHANGE_DETAILS_FAILED correctly", () => {
+        const action = {
+            type: CHANGE_DETAILS_FAILED,
+        };
+
+        const nextState = userReducer(initialState, action);
+
+        expect(nextState).toEqual({
+            ...initialState,
+            changeDetailSuccess: false,
+            changeDetailRequest: false,
+            changeDetailFailed: true
+        });
+    });
+
     it("should handle SIGN_OUT_FAILED correctly", () => {
         const action = {
             type: SIGN_OUT_FAILED,
@@ -270,6 +285,97 @@ describe("It is tect that cover functionality of USER REDUCER and trying to exec
             getUserRequest: false,
             getUserSuccess: false,
             getUserFailed: true,
+        });
+    });
+    it("should handle RESET_REQUEST correctly", () => {
+        const action = {
+            type: RESET_REQUEST,
+        };
+
+        const nextState = userReducer(initialState, action);
+
+        expect(nextState).toEqual({
+            ...initialState,
+            resetRequest: true,
+            resetSuccess: false,
+            resetFailed: false
+        });
+    });
+    it("should handle RESET_SUCCESS correctly", () => {
+        const action = {
+            type:RESET_SUCCESS,
+        };
+
+        const nextState = userReducer(initialState, action);
+
+        expect(nextState).toEqual({
+            ...initialState,
+            resetRequest: false,
+            resetSuccess: true,
+            resetFailed: false
+        });
+    });
+    it("should handle RESET_FAILED correctly", () => {
+        const action = {
+            type:RESET_FAILED,
+        };
+
+        const nextState = userReducer(initialState, action);
+
+        expect(nextState).toEqual({
+            ...initialState,
+            resetRequest: false,
+            resetSuccess: false,
+            resetFailed: true
+        });
+    });
+    it("should handle SIGN_OUT_REQUEST correctly", () => {
+        const action = {
+            type: SIGN_OUT_REQUEST,
+        };
+
+        const nextState = userReducer(initialState, action);
+
+        expect(nextState).toEqual({
+            ...initialState,
+            resetRequest: false,
+            resetSuccess: false,
+            resetFailed: true
+        });
+    });
+    it("should handle SIGN_OUT_SUCCESS correctly", () => {
+        const action = {
+            type: SIGN_OUT_SUCCESS,
+        };
+
+        const nextState = userReducer(initialState, action);
+
+        expect(nextState).toEqual({
+            ...initialState,
+            userToken: "",
+            requestProcessing: false,
+            requestSuccess: false,
+            requestFailed: false,
+            responseBody: [],
+            errBody: [],
+            email: '',
+            name: '',
+            loginRequest: false,
+            loginSuccess: false,
+            loginFailed: false,
+            refreshToken: '',
+            resetRequest: false,
+            resetSuccess: false,
+            resetFailed: false,
+            exitRequest:false,
+            exitSucess:false,
+            exitFailed:false,
+            refetchRequest: false,
+            rerefetchSuccess: false,
+            refetchFailed: false,
+            changeDetailRequest:false,
+            changeDetailSuccess:false,
+            changeDetailFailed:false,
         });
     });
 });

@@ -27,7 +27,7 @@ import {
     selectorCurrentList,
     selectorModal,
     selectorUser
-} from "../servicies/reducers/selectors";
+} from "../servicies/selectors";
 import {} from "react-redux";
 import {useSelector, useDispatch} from "../servicies/customHooks/typeHooks";
 

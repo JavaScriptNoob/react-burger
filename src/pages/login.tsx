@@ -56,7 +56,7 @@ const Login = () => {
                 <Button style={{width:'200px'}} htmlType="submit" type="primary" size="large">
                     Войти
                 </Button>
-                {!loginSuccess&& submit?<p className={styles.alert}>Все пошло не по плану</p>:null}
+                {!loginSuccess && submit ?<p className={styles.alert}>Все пошло не по плану</p>:null}
             </form>
             <div>
                 <a href="/register.tsx"><p>Вы - новый пользователь <Button htmlType="button" type="secondary" size="small">

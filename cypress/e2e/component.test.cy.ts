@@ -1,3 +1,5 @@
+import {carryValue} from "@testing-library/user-event/dist/keyboard/shared";
+
 describe('Burger Constructor', () => {
 // eslint-disable testing-library/await-async-utils
     it('Open and close modal', () => {
@@ -22,6 +24,7 @@ describe('Burger Constructor', () => {
         dNd(1)
         dNd(2)
         dNd(2)
+        cy.get('.constructor-element__text').contains('булка')
     })
 
     it('Order', () => {
@@ -31,16 +34,17 @@ describe('Burger Constructor', () => {
         dNd(1)
         dNd(2)
         dNd(3)
+
         cy.get('button')
             .contains('Оформить заказ')
             .should('be.disabled')
         cy.get('span').contains("Личный кабинет").click()
-        cy.location('pathname', { timeout: 50000 })
+        cy.location('hash', { timeout: 5000 })
             .should('include', '/login')
         cy.get('input[name=login]').type('grustniiii@gmail.com')
         cy.get('input[name=password]').type('neznaika')
         cy.get('button').contains('Войти').click()
-        cy.location('pathname', { timeout: 50000 })
+        cy.location('hash', { timeout: 50000 })
             .should('not.include', '/login')
         cy.get('button')
             .contains('Оформить заказ')

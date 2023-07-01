@@ -5,7 +5,7 @@ interface IModalViewState {
     openModal: boolean;
 }
 
-const initialState :IModalViewState={
+export const initialState :IModalViewState={
     openModal:false
 }
 export const modalViewReducer = (state:IModalViewState = initialState, action:TModalStatus ) => {

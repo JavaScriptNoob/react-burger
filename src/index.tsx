@@ -5,7 +5,7 @@ import './index.css';
 import thunk from 'redux-thunk';
 import App from './components/app/App';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter as Router} from "react-router-dom";
+import {HashRouter as Router} from "react-router-dom";
 import {Provider, TypedUseSelectorHook, useSelector as selectorHooks} from "react-redux";
 import {rootReducer} from "./components/servicies/reducers/index-reducer";
 import {socketMiddleware} from "./components/servicies/middleware/socket-middleware";

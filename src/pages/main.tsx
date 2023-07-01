@@ -15,7 +15,7 @@ const Main =()=>{
         <div style={{display: "flex"}}>
             <DndProvider backend={HTML5Backend}>
         { confirmed?(<><BurgerIngredients />
-            <BurgerConstructor /></>) :<BurgerIngredients/>
+          <div  data-testid="wrapper" >  <BurgerConstructor  /></div></>) :<BurgerIngredients/>
 
         }
     </DndProvider >

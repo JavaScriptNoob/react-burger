@@ -4,7 +4,7 @@ import {useSelector} from "../components/servicies/customHooks/typeHooks";
 import {FormEvent, useEffect, useState} from "react";
 import {forgotPassword} from "../components/servicies/actions/forgot-password-action";
 import styles from "./forgot-password.module.css"
-import {selectorUser} from "../components/servicies/reducers/selectors";
+import {selectorUser} from "../components/servicies/selectors";
 import {useDispatch} from "../components/servicies/customHooks/typeHooks";
 const ForgotPassword = () => {
 

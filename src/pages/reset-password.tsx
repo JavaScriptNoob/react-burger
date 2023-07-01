@@ -2,7 +2,7 @@ import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-deve
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {reset} from "../components/servicies/actions/reset-password-action";
 import {useNavigate} from "react-router-dom";
-import {selectorUser} from "../components/servicies/reducers/selectors";
+import {selectorUser} from "../components/servicies/selectors";
 import styles from "./reset-password.module.css"
 import {useDispatch,useSelector} from "../components/servicies/customHooks/typeHooks";
 

@@ -7,7 +7,7 @@ import {changeUserDetails} from "../components/servicies/actions/update-user-det
 import styles from "./profile.module.css"
 import {exit} from "../components/servicies/actions/sign-out-action";
 
-import {selectorUser} from "../components/servicies/reducers/selectors";
+import {selectorUser} from "../components/servicies/selectors";
 import {useForm} from "../components/servicies/customHooks/useForm";
 import {useDispatch,useSelector} from "../components/servicies/customHooks/typeHooks";
 import {useLocation} from "../components/utils/types";

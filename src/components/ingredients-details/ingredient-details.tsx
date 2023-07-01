@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import styles from "./ingredient-details.module.css";
 
 import {useSelector} from "../servicies/customHooks/typeHooks";
-import {selectorProducts} from "../servicies/reducers/selectors";
+import {selectorProducts} from "../servicies/selectors";
 import {useParams} from "react-router-dom";
 
 import {IItem} from "../utils/types";

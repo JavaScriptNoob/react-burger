@@ -3,7 +3,7 @@ import  { PayloadAction} from "@reduxjs/toolkit";
 import {TOrderDataAction} from "../actions/order-actions";
 
 
-const initialState ={
+export const initialState ={
 
     orderNumber:null,
     postHaveBeenRecieved:false,

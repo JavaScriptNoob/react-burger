@@ -3,7 +3,7 @@ import styles from './modal.module.css';
 import ModalOverlay from "../modal-overlay/modal-overlay";
 import ReactDOM from 'react-dom';
 import {useSelector} from "../servicies/customHooks/typeHooks";
-import {selectorModal} from "../servicies/reducers/selectors";
+import {selectorModal} from "../servicies/selectors";
 import {closeOrderModal} from "../servicies/actions/order-actions";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {IModal} from "../utils/types";
@@ -22,6 +22,7 @@ const Modal: FC<IModal> = ({onClose, ...props}) => {
         } else {
             if (onClose) {
                 onClose()
+
             }
         }
     }
